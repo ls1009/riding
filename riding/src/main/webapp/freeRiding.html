@@ -34,76 +34,64 @@ th {
 </head>
 
 <body>
-	<header>
-		<span><object id="mainbike" data="img/main.swf"
-				onclick="location.href='main.html'"></object></span>
+  <header>
+    <span><object id="mainbike" data="img/main.swf"
+        onclick="location.href='main.html'"></object></span>
 
-		<div class="upmenu">
-			<body onload="menuinit();">
-				<span><img id="home" src="img/b1.JPG"
-					onclick="location.href='main.html'"></span>
-				<span id="login" onclick="location.href='login.html'">login</span>
-				<span color="gray"> |</span>
-				<span id="logout" font-color="blue">logout</span>
+    <div class="upmenu">
+      <body onload="menuinit();">
+        <span><img id="home" src="img/b1.JPG"
+          onclick="location.href='main.html'"></span>
+        <span id="login" onclick="location.href='login.html'">login</span>
+        <span color="gray"> |</span>
+        <span id="logout" font-color="blue">logout</span>
 
-				<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-					onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-					<div id="sub1" float="left">
-						<ul>
-							<li id="s1l1">MY INFO</a></li>
-							<li id="s1l2" onclick="location.href='myList.html'">MY
-								RIDING LIST</li>
-						</ul>
-					</div>
-				</li>
-			<body onload="menuinit();">
-				<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-					onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-					<div id="sub2" float="left">
-						<ul>
-							<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-								RIDING</a>
-							</li>
-							<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-								RIDING</a>
-							</li>
-						</ul>
-					</div>
-				</li>
+        <li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
+          onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
+          <div id="sub1" float="left">
+            <ul>
+              <li id="s1l1">MY INFO</a></li>
+              <li id="s1l2" onclick="location.href='myList.html'">MY
+                RIDING LIST</li>
+            </ul>
+          </div>
+        </li>
+      <body onload="menuinit();">
+        <li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
+          onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
+          <div id="sub2" float="left">
+            <ul>
+              <li id="s2l1" onclick="location.href='freeLocation.html'">FREE
+                RIDING</a>
+              </li>
+              <li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
+                RIDING</a>
+              </li>
+            </ul>
+          </div>
+        </li>
 
-				<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-					onmouseout="subMenuCloseBox('menu3','sub3')"
-					onclick="location.href='course.html'">
-					COURSE
-					<div id="sub3" float="left"></div>
-				</div>
-		</div>
-		<br> <br>
+        <div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
+          onmouseout="subMenuCloseBox('menu3','sub3')"
+          onclick="location.href='course.html'">
+          COURSE
+          <div id="sub3" float="left"></div>
+        </div>
+    </div>
+    <br> <br>
 
-		<center id="boadLocationText">SEOUL</center>
-		<hr width=100px>
-	</header>
+    <center id="boadLocationText">SEOUL</center>
+    <hr width=100px>
+  </header>
 
-	<div class="container">
-<table class="table table-hover">
+  <div class="container">
+<table id="boardTable" class="table table-hover">
 <caption>Riding List</caption>
 <thead>
-<tr> <th>번호</th> <th>이름</th> <th>제목</th> <th>날짜</th> <th>맵</th> </tr>
+<tr> <th>제목</th> <th>날짜</th> <th>맵</th> </tr>
 </thead>
 
 <tbody>
-<tr> <td>6</td> <td>홍길동</td> <td>오이도 9:00~15:00시 70km라이딩 하실분</td> <td>2016-06-07</td> 
-<td><img id="map" src="mapImg/minimap.png" onclick='popup("mapImg/map1.JPG")'></td></tr>
-<tr> <td>5</td> <td>홍길동</td> <td>오이도 9:00~15:00시 70km라이딩 하실분</td> <td>2016-06-07</td> 
-<td><img id="map" src="mapImg/minimap.png" onclick='popup("mapImg/map1.JPG")'></td></tr>
-<tr> <td>4</td> <td>홍길동</td> <td>오이도 9:00~15:00시 70km라이딩 하실분</td> <td>2016-06-07</td> 
-<td><img id="map" src="mapImg/minimap.png" onclick='popup("mapImg/map1.JPG")'></td></tr>
-<tr> <td>3</td> <td>홍길동</td> <td>오이도 9:00~15:00시 70km라이딩 하실분</td> <td>2016-06-07</td> 
-<td><img id="map" src="mapImg/minimap.png" onclick='popup("mapImg/map1.JPG")'></td></tr>
-<tr> <td>2</td> <td>홍길동</td> <td>오이도 9:00~15:00시 70km라이딩 하실분</td> <td>2016-06-07</td> 
-<td><img id="map" src="mapImg/minimap.png" onclick='popup("mapImg/map1.JPG")'></td></tr>
-<tr> <td>1</td> <td>홍길동</td> <td>오이도 9:00~15:00시 70km라이딩 하실분</td> <td>2016-06-07</td> 
-<td><img id="map" src="mapImg/minimap.png" onclick='popup("mapImg/map1.JPG")'></td></tr>
 </tbody>
 </table>
 </div>
@@ -115,12 +103,30 @@ onclick="location.href='freeWrite.html'">WRITE</button><br><br><br>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/handlebars/handlebars.min.js"></script>
 <script type="text/javascript">
+loadBoardList();
+
+function loadBoardList() {
+  $.getJSON("ajax/board/freeList.do", function(result) {
+      var list = result.list;
+      var tbody = $("#boardTable tbody");
+      for (var i in list) {
+      list[i].imglo="mapImg/map1.JPG";
+      console.log(list[i].imglo);
+        $("<tr>")
+          .html(
+            "<td>" + list[i].title + "</td>" +
+            "<td>" + list[i].createdDate + "</td>" +
+            "<td>"+"<img id='map' src='mapImg/minimap.png' onclick='popup("+"\"" +list[i].imglo+ "\""+")'>"+"</td>")
+          .appendTo(tbody);
+      }
+  });
+}
 
 function popup(url) {
-	  window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
-	}
+    window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
+  }
 
 </script>
-
+<!--  -->
 </body>
 </html>

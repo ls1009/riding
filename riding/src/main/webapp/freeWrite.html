@@ -3,150 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+  href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/menu.css" type="text/css">
 <script type="text/javascript" src="js/menu.js"></script>
 
 <title>Free Riding Write</title>
 <style>
 .container {
-	width: 90%;
-	font-size: 15px;
+  width: 90%;
+  font-size: 15px;
 }
 
 #locationText {
-	font-weight: lighter;
-	font-size: 40px;
-	letter-spacing: 10px;
-	margin-bottom: 7px;
+  font-weight: lighter;
+  font-size: 40px;
+  letter-spacing: 10px;
+  margin-bottom: 7px;
 }
 
 th {
-	margin-right: 500px;
+  margin-right: 500px;
 }
 
 .profile {
-	border-radius: 80%;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
+  border-radius: 80%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 
 .profile2 {
-	border-radius: 80%;
-	width: 200px;
-	height: 200px;
-	cursor: pointer;
-	margin-top: 50px;
+  border-radius: 80%;
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  margin-top: 50px;
 }
 
 .profilename {
-	margin-left: 50px;
+  margin-left: 50px;
 }
 
 .col-xs-5 {
-	margin-left: 250px;
+  margin-left: 250px;
 }
 
 #register {
-	margin-right: 30px;
-	margin-top: 10px;
+  margin-right: 30px;
+  margin-top: 10px;
 }
 
 #cancle {
-	margin-right: 20px;
-	margin-top: 10px;
+  margin-right: 20px;
+  margin-top: 10px;
 }
 </style>
 </head>
 
 <body onload="menuinit();">
-	<header>
-		<span><object id="mainbike" data="img/main.swf"
-				onclick="location.href='main.html'"></object></span>
+  <header>
+    <span><object id="mainbike" data="img/main.swf"
+        onclick="location.href='main.html'"></object></span>
 
-		<div class="upmenu">
-			<body onload="menuinit();">
-				<span><img id="home" src="img/b1.JPG"
-					onclick="location.href='main.html'"></span>
-				<span id="login" onclick="location.href='login.html'">login</span>
-				<span color="gray"> |</span>
-				<span id="logout" font-color="blue">logout</span>
+    <div class="upmenu">
+      <body onload="menuinit();">
+        <span><img id="home" src="img/b1.JPG"
+          onclick="location.href='main.html'"></span>
+        <span id="login" onclick="location.href='login.html'">login</span>
+        <span color="gray"> |</span>
+        <span id="logout" font-color="blue">logout</span>
 
-				<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-					onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-					<div id="sub1" float="left">
-						<ul>
-							<li id="s1l1">MY INFO</a></li>
-							<li id="s1l2" onclick="location.href='myList.html'">MY
-								RIDING LIST</li>
-						</ul>
-					</div>
-				</li>
-			<body onload="menuinit();">
-				<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-					onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-					<div id="sub2" float="left">
-						<ul>
-							<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-								RIDING</a>
-							</li>
-							<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-								RIDING</a>
-							</li>
-						</ul>
-					</div>
-				</li>
+        <li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
+          onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
+          <div id="sub1" float="left">
+            <ul>
+              <li id="s1l1">MY INFO</a></li>
+              <li id="s1l2" onclick="location.href='myList.html'">MY
+                RIDING LIST</li>
+            </ul>
+          </div>
+        </li>
+      <body onload="menuinit();">
+        <li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
+          onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
+          <div id="sub2" float="left">
+            <ul>
+              <li id="s2l1" onclick="location.href='freeLocation.html'">FREE
+                RIDING</a>
+              </li>
+              <li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
+                RIDING</a>
+              </li>
+            </ul>
+          </div>
+        </li>
 
-				<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-					onmouseout="subMenuCloseBox('menu3','sub3')"
-					onclick="location.href='course.html'">
-					COURSE
-					<div id="sub3" float="left"></div>
-				</div>
-		</div>
-		<br> <br>
-	</header>
+        <div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
+          onmouseout="subMenuCloseBox('menu3','sub3')"
+          onclick="location.href='course.html'">
+          COURSE
+          <div id="sub3" float="left"></div>
+        </div>
+    </div>
+    <br> <br>
+  </header>
 
-	<div class="container">
-		<table class="table table-hover">
+  <div class="container">
+    <table class="table table-hover">
 
-			<center>
-				<img class="profile" src="img/4.jpg" align="left">
-				<p class="profilename" align="left">KyeongHun-Min</p>
-			</center>
-			</div>
+      <center>
+        <img class="profile" src="img/4.jpg" align="left">
+        <p class="profilename" align="left">KyeongHun-Min</p>
+      </center>
+      </div>
 
-			<h2 align="center">Free Riding Write</h2>
-			<hr width=100px margin-top=0px>
-
-
-			<div class="col-xs-5">
-				<input class="form-control" type="text" placeholder="KyeongHun-Min"
-					disabled><br> 
-				<input id="title" type="text" class="form-control"	placeholder="제목"><br> 
-				<input id="mloca" type="text" class="form-control" placeholder="장소"><br> 
-				<input id="mtime" type="text" class="form-control" placeholder="시간"><br>
-				<input id="distance" type="text" class="form-control" placeholder="총거리"><br>
-				<input id="time" type="text" class="form-control" placeholder="예상소요시간"><br>
-				<input id="pnum" type="text" class="form-control" placeholder="모집인원"><br>
-				<input id="ph" type="text" class="form-control" placeholder="연락처"><br>
-			</div>
-			<img class="map" src="mapImg/write.png" align="left">
+      <h2 align="center">Free Riding Write</h2>
+      <hr width=100px margin-top=0px>
 
 
-			<button id="addBtn" type="button"
-				class="btn btn-default btn pull-right"
-				>REGISTER</button>
-				
-			<button id="cancle" type="button"
-				class="btn btn-default btn pull-right">CANCLE</button>
+      <div class="col-xs-5">
+        <input class="form-control" type="text" placeholder="KyeongHun-Min"
+          disabled><br> 
+        <input id="title" type="text" class="form-control"  placeholder="제목"><br> 
+        <input id="mloca" type="text" class="form-control" placeholder="장소"><br> 
+        <input id="mtime" type="text" class="form-control" placeholder="시간"><br>
+        <input id="distance" type="text" class="form-control" placeholder="총거리"><br>
+        <input id="time" type="text" class="form-control" placeholder="예상소요시간"><br>
+        <input id="pnum" type="text" class="form-control" placeholder="모집인원"><br>
+        <input id="ph" type="text" class="form-control" placeholder="연락처"><br>
+      </div>
+      <img class="map" src="mapImg/write.png" align="left">
 
-			<script src="bower_components/jquery/dist/jquery.js"></script>
-			<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-			<script src="bower_components/handlebars/handlebars.min.js"></script>
+
+      <button id="addBtn" type="button"
+        class="btn btn-default btn pull-right"
+        >REGISTER</button>
+        
+      <button id="cancle" type="button"
+        class="btn btn-default btn pull-right">CANCLE</button>
+
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="bower_components/handlebars/handlebars.min.js"></script>
 <script type="text/javascript">
 
 $("#addBtn").click(function(event) {

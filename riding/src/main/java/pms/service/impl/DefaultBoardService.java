@@ -26,7 +26,7 @@ public class DefaultBoardService implements BoardService {
     return boardDao.selectOne(no);
   }
   
-  public List<Board> list(int pageNo, int pageSize) {
+  public List<Board> freeList(int pageNo, int pageSize) {
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("startIndex", (pageNo - 1) * pageSize);
     paramMap.put("length", pageSize);

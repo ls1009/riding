@@ -38,9 +38,10 @@
   </delete>
 
   <select id="selectList" resultMap="BoardMap" parameterType="map">
-    select BNO, TITLE, VWCNT, CDT 
-    from BOARDS
-    order by BNO DESC
+    select  BNO,TITLE,MLOCA,MTIME,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
+    from RIDINGBOARD 
+    where RBTYPE=#{free}
+    order by CDT DESC
     limit #{startIndex}, #{length}
   </select>
   
@@ -52,7 +53,7 @@
   
   <select id="countAll" resultType="int">
     select count(*) 
-    from BOARDS
+    from RIDINGBOARD
   </select>
 </mapper>
 

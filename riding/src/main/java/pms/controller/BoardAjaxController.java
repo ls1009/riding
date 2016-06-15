@@ -75,11 +75,11 @@ public class BoardAjaxController {
     return new Gson().toJson(board);
   }
   
-  @RequestMapping(value="list", produces="application/json;charset=UTF-8")
+  @RequestMapping(value="freeList", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String list(
       @RequestParam(defaultValue="1") int pageNo, 
-      @RequestParam(defaultValue="3") int pageSize) 
+      @RequestParam(defaultValue="5") int pageSize) 
       throws ServletException, IOException {
     
     // 페이지 번호와 페이지 당 출력 개수의 유효성 검사
@@ -92,13 +92,13 @@ public class BoardAjaxController {
       pageNo = totalPage;
     }
     
-    if (pageSize < 3) { // 최소 3개
-      pageSize = 3; 
+    if (pageSize < 5) { // 최소 3개
+      pageSize = 5; 
     } else if (pageSize > 50) { // 최대 50개 
       pageSize = 50;
     }
     
-    List<Board> list = boardService.list(pageNo, pageSize);
+    List<Board> list = boardService.freeList(pageNo, pageSize);
     
     HashMap<String,Object> result = new HashMap<>();
     result.put("pageNo", pageNo);
@@ -109,7 +109,7 @@ public class BoardAjaxController {
     return new Gson().toJson(result);
   }
   
-  @RequestMapping(value="FreeUpdate",
+  @RequestMapping(value="update",
       method=RequestMethod.POST,
       produces="application/json;charset=UTF-8")
   @ResponseBody
