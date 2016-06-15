@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="js/menu.js"></script>
+
+<title>로그인</title>
+
+<link rel="stylesheet" href="css/menu.css" type="text/css">
+
+<style>
+.form-horizontal {
+	padding-top: 0%;
+	margin-left: 200px;
+}
+
+.col-sm-10 {
+	width: 400px
+}
+
+#LOGIN {
+	font-weight: lighter;
+	font-size: 40px;
+	letter-spacing: 10px;
+	padding-top: 10%;
+	color: black;
+}
+
+#signup {
+	margin-right: 20px;
+}
+
+button {
+	width: 80px;
+}
+</style>
+</head>
+
+<body>
+	<header>
+		<span><object id="mainbike" data="img/main.swf"
+				onclick="location.href='main.html'"></object></span>
+
+		<div class="upmenu">
+			<body onload="menuinit();">
+				<span><img id="home" src="img/b1.JPG"
+					onclick="location.href='main.html'"></span>
+				<span id="login" onclick="location.href='login.html'">login</span>
+				<span color="gray"> |</span>
+				<span id="logout" font-color="blue">logout</span>
+
+				<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
+					onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
+					<div id="sub1" float="left">
+						<ul>
+							<li id="s1l1">MY INFO</a></li>
+							<li id="s1l2" onclick="location.href='myList.html'">MY
+								RIDING LIST</li>
+						</ul>
+					</div>
+				</li>
+			<body onload="menuinit();">
+				<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
+					onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
+					<div id="sub2" float="left">
+						<ul>
+							<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
+								RIDING</a>
+							</li>
+							<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
+								RIDING</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+				<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
+					onmouseout="subMenuCloseBox('menu3','sub3')"
+					onclick="location.href='course.html'">
+					COURSE
+					<div id="sub3" float="left"></div>
+				</div>
+		</div>
+		<br> <br>
+	</header>
+
+	<center id="LOGIN">LOGIN</center>
+	<hr width=100px margin-top=0px>
+	<br>
+
+	<form class="form-horizontal">
+		<div class="form-group">
+			<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+			<div class="col-sm-10">
+				<input type="email" class="form-control" id="inputEmail3"
+					placeholder="Email">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="inputPassword3"
+					placeholder="Password">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<div class="checkbox">
+					<label> <input type="checkbox"> Remember me
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button id="signup" type="button" class="btn btn-info">LOGIN</button>
+				<button type="button" class="btn btn-info"
+					onclick="location.href='signup.html'">SIGN UP</button>
+			</div>
+		</div>
+	</form>
+</body>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/handlebars/handlebars.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script>
+
+
+
+</script>
+</body>
+</html>

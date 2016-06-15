@@ -1,0 +1,22 @@
+{
+  "name": "web03",
+  "authors": [
+    "'Jinyoung' <'jinyoung.eom@gmail.com'>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "1.12.4",
+    "bootstrap": "^3.3.6",
+    "handlebars": "^4.0.5"
+  }
+}

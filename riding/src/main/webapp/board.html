@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>게시판</title>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+<style>
+.container {
+  width: 800px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>게시판-목록</h1>
+<p><button id="newBtn" type="button" class="btn btn-primary btn-sm">새 글</button></p>
+<table id="boardTable" class="table table-hover">
+<thead>
+<tr>
+  <th>번호</th>
+  <th>제목</th>
+  <th>등록일</th>
+  <th>조회수</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<p> 이 예제는 비트캠프 "자바80"기의 훈련내용입니다.</p>
+</div>
+
+<script id="temp1" type="text/x-handlebars-template">
+{{#each list}}
+<tr>
+	<td>{{no}}</td>
+	<td><a href="#" onclick="onclickDetail(event)" data-no="{{no}}">{{title}}</a></td>
+	<td>{{createdDate}}</td>
+	<td>{{views}}</td>
+</tr>
+{{/each}}
+</script>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/handlebars/handlebars.min.js"></script>
+
+<script>
+loadBoardList();
+
+function loadBoardList() {
+	$.getJSON("ajax/board/list.do", function(result) {
+      var list = result.list;
+      var templateDate = $('#temp1').html();
+      var template = Handlebars.compile(templateDate);
+      var html = template(result);
+      $("#boardTable tbody").append(html);
+	});
+}
+
+// 태그에 선언된 onclick 속성에서 호출한 것이기 때문에
+// 다음 함수는 이벤트 리스너가 아니다.
+function onclickDetail(event) {
+	location.href = "detail.html?no=" + event.target.getAttribute("data-no");
+	event.preventDefault(); // 원래 a 태그의 행위를 막는다.
+}
+
+$("#newBtn").click(function(event) {
+	location.href = "detail.html";
+});
+
+</script>
+
+
+</body>
+</html>

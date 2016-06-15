@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+	integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+	crossorigin="anonymous">
+<script type="text/javascript" src="js/menu.js"></script>
+<title>메인</title>
+
+<style>
+iframe {
+	width: 100%;
+	height: 757px;
+	position: relative;
+}
+header{
+  width:1024px;
+  margin:auto;
+  }
+*{
+  font-family: Dosis;
+}
+home {
+  margin-left: 60%;
+  color:gray;
+  cursor:pointer;
+  margin-bottom:0px;
+  padding-bottom:0px;
+}
+#login {
+  margin-bottom:0px;
+  margin-top:0px;
+  margin-right:10px;
+  padding-bottom:0px;
+  color:gray;
+  cursor:pointer;
+}
+#logout {
+  margin-bottom:0px;
+  margin-top:0px;
+  margin-right:0px;
+  margin-left:10px;
+  padding-bottom:0px;
+  color:gray;
+  cursor:pointer;
+}
+.upmenu {
+  float:right;
+  cursor:pointer;
+  margin-top:40px;
+}
+#menu1 {
+  margin-left: 30%;
+}
+#menu1, #menu2, #menu3 {
+  display: inline-block;
+  font-size: 25px;
+  margin-right: 40px;
+}
+
+#mainbike {
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 0px;
+  cursor:pointer;
+}
+#sub1, #sub2 {
+  position: absolute;
+  width: 300px;
+  text-align: left;
+  color:gray;
+  line-height: 170%;
+  background-color: white;
+  z-index:100;
+  border: 1px solid gray;
+  padding:0%;
+}
+ul {
+  list-style: none;
+}
+</style>
+</head>
+
+<body onload="menuinit();">
+	<header>
+   <span><object id="mainbike" data="img/main.swf"
+   onclick="location.href='main.html'"></object></span>
+
+    <div class="upmenu">
+      <body onload="menuinit();">
+        <span><img id="home" src="img/b1.JPG"
+          onclick="location.href='main.html'"></span>
+        <span id="login" onclick="location.href='login.html'">login</span>
+        <span color="gray"> |</span>
+        <span id="logout" font-color="blue">logout</span>
+
+        <li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
+          onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
+          <div id="sub1" float="left">
+            <ul>
+              <li id="s1l1">MY INFO</a></li>
+              <li id="s1l2" onclick="location.href='myList.html'">MY
+                RIDING LIST</li>
+            </ul>
+          </div>
+        </li>
+      <body onload="menuinit();">
+        <li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
+          onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
+          <div id="sub2" float="left">
+            <ul>
+              <li id="s2l1" onclick="location.href='freeLocation.html'">FREE
+                RIDING</a>
+              </li>
+              <li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
+                RIDING</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
+          onmouseout="subMenuCloseBox('menu3','sub3')"
+          onclick="location.href='course.html'">
+          COURSE
+          <div id="sub3" float="left"></div>
+        </div>
+    </div>
+    <br>
+    <br>
+  </header>
+
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+			<div class="item active">
+			 <center>
+				<iframe src="https://www.youtube.com/embed/W3JRSIusFp4?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1&loop=1" frameborder="0" allowFullScreen></iframe>
+			 
+			<!-- <iframe width="854" height="480" src="https://www.youtube.com/embed/lSk09oXHfeA?rel=0&amp;controls=0&amp;showinfo=0&autoplay=1&loop=1" frameborder="0" allowfullscreen></iframe>
+			 -->
+			</center>
+			</div>
+		</div>
+		<!-- Controls -->
+	</div>
+
+<script type="text/javascript" src="js/menu.js"></script>
+	<script>
+
+
+</script>
+</body>
+</html>
