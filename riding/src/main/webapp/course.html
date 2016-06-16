@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/menu.css" type="text/css">
 <script type="text/javascript" src="js/menu.js"></script>
 
-<title>메인</title>
+<title>코스</title>
 
 
   <!-- FlexSlider pieces -->
@@ -17,12 +17,11 @@
 #d1 {
   text-align:center;
   font-weight: lighter;
-  font-size: 31px;
+  font-size: 30px;
   letter-spacing: 10px;
   margin-bottom: 7px;
   margin-top: 5%;
   color: black;
-  
 }
 
 .slides li {
@@ -35,7 +34,7 @@
 
 <body>
 <body>
-	<header>
+  <header>
    <span><object id="mainbike" data="img/main.swf"
    onclick="location.href='main.html'"></object></span>
 
@@ -119,15 +118,13 @@
   </div>
   <span id="responsiveFlag"></span><br><br><br><br>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="slide/jquery.flexslider-min.js"></script>
-	<script src="slide/css3-mediaqueries.js"></script>
-	<script src="slide/kwiks.js"></script>
-	
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-	<script>
-	var Main = Main || {};
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="slide/jquery.flexslider-min.js"></script>
+  <script src="slide/css3-mediaqueries.js"></script>
+  <script src="slide/kwiks.js"></script>
+  
+  <script>
+  var Main = Main || {};
 
     jQuery(window).load(function() {
       window.responsiveFlag = jQuery('#responsiveFlag').css('display');
@@ -176,6 +173,6 @@
     function popup(url) {
         window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
       }
-	</script>
+  </script>
 </body>
 </html>
