@@ -23,11 +23,11 @@ import pms.vo.Board;
 public class BoardAjaxController {
   @Autowired BoardService boardService;
   
-  @RequestMapping(value="freeAdd", produces="application/json;charset=UTF-8")
+  @RequestMapping(value="Add", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String add
   (String title, String mloca, String mtime, String distance, String time,
-		  String pnum, String ph)
+		  String pnum, String ph, String loca, String rbtype)
   throws ServletException, IOException {
     Board board = new Board();
     board.setTitle(title);
@@ -38,10 +38,10 @@ public class BoardAjaxController {
     board.setPnum(pnum);
     board.setPh(ph);
     
-    board.setRbtype("free");
+    board.setRbtype(rbtype);
     board.setMno(1);
-    board.setLoca("서울");
-    
+    board.setLoca(loca);
+    System.out.println(loca);
     HashMap<String,Object> result = new HashMap<>();
     try {
       boardService.add(board);
@@ -114,7 +114,7 @@ public class BoardAjaxController {
       produces="application/json;charset=UTF-8")
   @ResponseBody
   public String update(int bno, String title, String mloca, String mtime, String distance, String time,
-		  String pnum, String ph) throws ServletException, IOException {
+		  String pnum, String ph, String rbtype) throws ServletException, IOException {
     
     Board board = new Board();
     board.setBno(bno);
@@ -126,7 +126,7 @@ public class BoardAjaxController {
     board.setPnum(pnum);
     board.setPh(ph);
     
-    board.setRbtype("free");
+    board.setRbtype(rbtype);
     board.setMno(1);
     board.setMloca("서울");
     

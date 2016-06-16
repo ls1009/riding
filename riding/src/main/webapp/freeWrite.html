@@ -34,14 +34,6 @@ th {
   cursor: pointer;
 }
 
-.profile2 {
-  border-radius: 80%;
-  width: 200px;
-  height: 200px;
-  cursor: pointer;
-  margin-top: 50px;
-}
-
 .profilename {
   margin-left: 50px;
 }
@@ -51,13 +43,10 @@ th {
 }
 
 #register {
-  margin-right: 30px;
-  margin-top: 10px;
 }
 
 #cancle {
   margin-right: 20px;
-  margin-top: 10px;
 }
 </style>
 </head>
@@ -133,31 +122,54 @@ th {
         <input id="time" type="text" class="form-control" placeholder="예상소요시간"><br>
         <input id="pnum" type="text" class="form-control" placeholder="모집인원"><br>
         <input id="ph" type="text" class="form-control" placeholder="연락처"><br>
-      </div>
-      <img class="map" src="mapImg/write.png" align="left">
-
-
-      <button id="addBtn" type="button"
-        class="btn btn-default btn pull-right"
-        >REGISTER</button>
         
-      <button id="cancle" type="button"
+        <button id="addBtn" type="button"
+        class="btn btn-default btn pull-right">REGISTER</button>
+        
+        <button id="cancle" type="button"
         class="btn btn-default btn pull-right">CANCLE</button>
+      </div>
+      
+      <!-- 
+      <img class="map" src="mapImg/write.png" align="left"><br>
+       -->
+
+      
 
       <script src="bower_components/jquery/dist/jquery.js"></script>
       <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
       <script src="bower_components/handlebars/handlebars.min.js"></script>
+      <script type="text/javascript" src="js/menu.js"></script>
 <script type="text/javascript">
+$.extend({
+    getUrlVars: function(){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    },
+    getUrlVar: function(name) {
+        return $.getUrlVars()[name];
+    }
+});
+
+
 
 $("#addBtn").click(function(event) {
-    $.post("ajax/board/freeAdd.do", {
+    $.post("ajax/board/Add.do", {
         title: $("#title").val(),
         mloca: $("#mloca").val(),
         mtime: $("#mtime").val(),
         distance: $("#distance").val(),
         time: $("#time").val(),
         pnum: $("#pnum").val(),
-        ph: $("#ph").val()       
+        ph: $("#ph").val(),
+        loca: $.getUrlVar('loca'),
+        rbtype: $.getUrlVar('rbtype')
       }, function(result) {
         if (result.status == "success") {
           location.href = "freeRiding.html";
@@ -167,7 +179,7 @@ $("#addBtn").click(function(event) {
       }, "json"
     );
   });
-
+  
 </script>
 </body>
 </html>

@@ -30,6 +30,7 @@ public class DefaultBoardService implements BoardService {
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("startIndex", (pageNo - 1) * pageSize);
     paramMap.put("length", pageSize);
+    paramMap.put("free", "free");
     
     return boardDao.selectList(paramMap);
   }

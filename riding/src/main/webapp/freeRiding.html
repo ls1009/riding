@@ -5,8 +5,11 @@
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/menu.css" type="text/css">
-<script type="text/javascript" src="js/menu.js"></script>
 
+<link href="css/simple-lightbox.min.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/menu.js"></script>
+  
 <title>Free Riding</title>
 <style>
 .container {
@@ -97,12 +100,48 @@ th {
 </div>
 
 <button type="button" class="btn btn-default btn pull-right" 
-onclick="location.href='freeWrite.html'">WRITE</button><br><br><br>
+id="write">WRITE</button><br><br><br>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/handlebars/handlebars.min.js"></script>
+
+<script type="text/javascript" src="js/simple-lightbox.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
 <script type="text/javascript">
+$.extend({
+    getUrlVars: function(){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    },
+    getUrlVar: function(name) {
+        return $.getUrlVars()[name];
+    }
+});
+
+var ploca = $.getUrlVar('loca');
+var prbtype = $.getUrlVar('rbtype');
+var tempimg;
+
 loadBoardList();
 
 function loadBoardList() {
@@ -111,20 +150,30 @@ function loadBoardList() {
       var tbody = $("#boardTable tbody");
       for (var i in list) {
       list[i].imglo="mapImg/map1.JPG";
-      console.log(list[i].imglo);
         $("<tr>")
           .html(
             "<td>" + list[i].title + "</td>" +
             "<td>" + list[i].createdDate + "</td>" +
-            "<td>"+"<img id='map' src='mapImg/minimap.png' onclick='popup("+"\"" +list[i].imglo+ "\""+")'>"+"</td>")
+            "<td>"+"<img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' >"+"</td>")
           .appendTo(tbody);
+        $(document).ready(function () {
+            $("img").simpleLightBox();
+        }); 
       }
   });
 }
 
 function popup(url) {
     window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
-  }
+}
+$("#write").click(function(event) {location.href = 
+  "freeWrite.html?loca="+ploca+"&rbtype="+prbtype});
+  
+  
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').focus()
+});
+
 
 </script>
 <!--  -->
