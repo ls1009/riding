@@ -152,12 +152,13 @@ function loadBoardList() {
       list[i].imglo="mapImg/map1.JPG";
         $("<tr>")
           .html(
-            "<td>" + list[i].title + "</td>" +
-            "<td>" + list[i].createdDate + "</td>" +
+            "<td onclick=\"location.href='freeRead.html?no=" + list[i].bno + "'\""+
+                "style=\"cursor:pointer\">" + list[i].title + "</td>" +
+            "<td>" + list[i].createdDate.toString() + "</td>" +
             "<td>"+"<img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' >"+"</td>")
           .appendTo(tbody);
         $(document).ready(function () {
-            $("img").simpleLightBox();
+            $("img").simpleLightBox(); 
         }); 
       }
   });
