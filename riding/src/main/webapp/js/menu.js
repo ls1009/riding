@@ -1,3 +1,14 @@
+$.post("auth/log.do", {
+}, function(result) {
+	if (result.status == "success") {
+		$('#logout').css("display", "");
+		$('#login').css("display", "none");
+	} else {
+		$('#logout').css("display", "none");
+		$('#login').css("display", "");
+	}
+}, "json");	
+
 function menuinit(){
  document.getElementById("sub1").style.display="none"; 
  document.getElementById("sub2").style.display="none"; 

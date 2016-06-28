@@ -45,6 +45,15 @@
     limit #{startIndex}, #{length}
   </select>
   
+  <select id="memberList" resultMap="MemberMap">
+    select m.MNO, m.MNM, m.EMAIL, m.PW, m.PH, m.POSI, m.GEN 
+    from MEMBERS m inner join MEMBERLIST ml
+    on  m.MNO=ml.MNO
+    where ml.BNO=#{bno}
+    order by MNM asc
+    limit #{startIndex}, #{length}
+  </select>
+  
   <select id="selectOne" parameterType="map" resultMap="MemberMap">
     <include refid="select01"/>
     where 

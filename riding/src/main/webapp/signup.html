@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-  href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
-  href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+	href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 <script type="text/javascript" src="js/menu.js"></script>
 
 <title>회원가입</title>
@@ -14,122 +14,189 @@
 
 <style>
 .row {
-  padding-top: 10%;
-  margin-left: 30%;
+	padding-top: 10%;
+	margin-left: 30%;
 }
 
 input {
-  display: inline-block;
+	display: inline-block;
 }
 
 span .bi {
-  display: inline-block;
-  margin-right: 30px;
+	display: inline-block;
+	margin-right: 30px;
 }
 
 input {
-  background-color: gray;
+	background-color: gray;
 }
 </style>
 </head>
 
-<body>
-  <header>
-    <span><object id="mainbike" data="img/main.swf"
-        onclick="location.href='main.html'"></object></span>
+<body onload="menuinit();">
+	<header>
+		<span><object id="mainbike" data="img/main.swf"
+				onclick="location.href='main.html'"></object></span>
 
-    <div class="upmenu">
-      <body onload="menuinit();">
-        <span><img id="home" src="img/b1.JPG"
-          onclick="location.href='main.html'"></span>
-        <span id="login" onclick="location.href='login.html'">login</span>
-        <span color="gray"> |</span>
-        <span id="logout" font-color="blue">logout</span>
+		<div class="upmenu">
+			<span><img id="home" src="img/b1.JPG"
+				onclick="location.href='main.html'"></span> <span id="login"
+				onclick="location.href='login.html'">login</span> <span id="logout"
+				onclick="location.href='auth/logout.do'">logout</span>
+			<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
+				onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
+				<div id="sub1" float="left">
+					<ul>
+						<li id="s1l1" onclick="location.href='myInfo.html'">MY INFO</a></li>
+						<li id="s1l2" onclick="location.href='myList.html'">MY RIDING
+							LIST</li>
+					</ul>
+				</div>
+			</li>
+			<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
+				onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
+				<div id="sub2" float="left">
+					<ul>
+						<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
+							RIDING</a>
+						</li>
+						<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
+							RIDING</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
+				onmouseout="subMenuCloseBox('menu3','sub3')"
+				onclick="location.href='course.html'">
+				COURSE
+				<div id="sub3" float="left"></div>
+			</div>
 
-        <li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-          onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-          <div id="sub1" float="left">
-            <ul>
-              <li id="s1l1">MY INFO</a></li>
-              <li id="s1l2" onclick="location.href='myList.html'">MY
-                RIDING LIST</li>
-            </ul>
-          </div>
-        </li>
+		</div>
+		<br> <br>
+	</header>
+<div class="row">
 
+      <legend>회원가입</legend>
+      <div class="col-xs-6 col-md-6">
+        <span><img class="bi" src="img/b1.JPG"></span> 
+        <input
+          type="text" id="sname" name="name" class="form-control input-lg"
+          placeholder="이름" />
+          <font  name="nameCheck" size="2" color="red"></font><br><br> 
+          
+        <input type="text" id="semail"
+          name="email" class="form-control input-lg" placeholder="email" />
+          <font  name="emailCheck" size="2" color="red"></font><br><br>
+          
+        <input type="password" id="password" name="password"
+          class="form-control input-lg" placeholder="패스워드" />
+          <font  name="passwordCheck" size="2" color="red"></font><br><br> 
+          
+        <input type="password" id="confirm_password" name="confirm_password"
+          class="form-control input-lg" placeholder="패스워드 재입력" /> 
+        <font name="check" size="2" color="red"></font> <br><br> 
+        
+        <input type="phonenumber" id="phonenumber" name="phonenumber"
+          class="form-control input-lg" placeholder="전화번호" /> 
+          <font  name="phonenumberCheck" size="2" color="red"></font><br><br>
+          
+        <label for="sel1">역할</label> 
+        <select class="form-control" id="position">
+          <option>일반</option>
+          <option>인솔자</option>
+        </select> 
+        
+        <label for="sel2">성별</label> 
+        <select class="form-control" id="gender">
+          <option>남자</option>
+          <option>여자</option>
+        </select> <br>
+        <br>
+        <br>
+        <br>
+        <button type="button" id="addBtn"
+          class="btn btn-info btn-block signup-btn">회원가입</button>
+        <br> <br> <br>
+      </div>
+      <br>
+    </div>
 
-        <body onload="menuinit();">
-  <li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-    onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-          <div id="sub2" float="left">
-            <ul>
-              <li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-                RIDING</a>
-              </li>
-              <li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-                RIDING</a>
-              </li>
-            </ul>
-          </div>
-        </li>
+		
+		
+		
+</body>
 
-        <div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-    onmouseout="subMenuCloseBox('menu3','sub3')"
-    onclick="location.href='course.html'">
-          COURSE
-          <div id="sub3" float="left"></div>
-        </div>
-    
-</div>
-    <br>
-    <br>
-  </header>
-<form name="signUpForm" class="form" role="form">
-          <div class="row">
+<script src="bower_components/jquery/dist/jquery.js"></script>
+			<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+			<script src="bower_components/handlebars/handlebars.min.js"></script>
+			<script type="text/javascript" src="js/menu.js"></script>
+			<script type="text/javascript">
+			$("#addBtn").click(function(event) {
+				  $.post("ajax/member/add.do", {
+				      name: $("#sname").val(),
+				      email: $("#semail").val(),
+				      pw: $("#password").val(),
+				      ph: $("#phonenumber").val(),
+				      position: $("#position").val(),
+				      gender: $("#gender").val()
+				    }, function(result) {
+				      if (result.status == "success") {
+				        location.href = "login.html";
+				      } else {
+				        window.alert("등록 실패입니다!");
+				      }
+				    }, "json"
+				  );
+				});
+			
+       $('input[name=name]').keyup(function() {
+           if ($('input[name=name]').val() == '') {
+             $('font[name=nameCheck]').html("필수 입력 사항입니다");
+           } else {
+             $('font[name=nameCheck]').html("");
+           }
+         });
+         $('input[name=email]').keyup(function() {
+           if ($('input[name=email]').val() == '') {
+             $('font[name=emailCheck]').html("필수 입력 사항입니다");
+           } else {
+             $('font[name=emailCheck]').html("");
+           }
+         });
+         $('input[name=password]').keyup(function() {
+           if ($('input[name=password]').val() == '') {
+             $('font[name=passwordCheck]').html("필수 입력 사항입니다");
+           } else {
+             $('font[name=passwordCheck]').html("");
+           }
+         });
+         $('input[name=phonenumber]').keyup(function() {
+           if ($('input[name=phonenumber]').val() == '') {
+             $('font[name=phonenumberCheck]').html("필수 입력 사항입니다");
+           } else {
+             $('font[name=phonenumberCheck]').html("");
+           }
+         });
 
-            <legend>회원가입</legend>
-            <div class="col-xs-6 col-md-6">
-              <span><img class="bi" src="img/b1.JPG"></span>
-              <input type="text" id="sname" name="name" class="form-control input-lg" placeholder="이름" /><br> 
-              <input type="text" id="semail" name="email" class="form-control input-lg" placeholder="email" /><br> 
-              <input type="password" id="spassword" name="password" class="form-control input-lg" placeholder="패스워드" /><br> 
-              <input type="password" name="confirm_password" class="form-control input-lg" placeholder="패스워드 재입력" /><br> 
-              <input type="phonenumber" id="sphonenumber" name="phonenumber" class="form-control input-lg" placeholder="전화번호" /><br>
-              <input type="radio"  id="sposition" name="position" value="일반">일반
-              <input type="radio" id="sposition" name="position" value="인솔자">인솔자 <br> <br>
-              <input type="radio" id="sgender" name="gender" value="M">남자
-              <input type="radio" id="sgender" name="gender" value="F">여자 <br>
-              <br>
-              <button type="button" id="addBtn" class="btn btn-info btn-block signup-btn" >회원가입</button>
-              <br>
-              <br>
-              <br>
-            </div>
-            <br>
-          </div>
-      </body>
+			$(function(){
+				  $('#password').keyup(function(){
+				   $('font[name=check]').text('');
+				  }); //#user_pass.keyup
 
-      <script src="bower_components/jquery/dist/jquery.js"></script>
-      <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script src="bower_components/handlebars/handlebars.min.js"></script>
-      <script type="text/javascript">
-      $("#addBtn").click(function(event) {
-          $.post("ajax/member/add.do", {
-              name: $("#sname").val(),
-              email: $("#semail").val(),
-              pw: $("#spassword").val(),
-              ph: $("#sphonenumber").val(),
-              position: $("#sposition").val(),
-              gender: $("#sgender").val()
-            }, function(result) {
-              if (result.status == "success") {
-                location.href = "login.html";
-              } else {
-                window.alert("등록 실패입니다!");
-              }
-            }, "json"
-          );
-        });
-      </script>
+				  $('#confirm_password').keyup(function(){
+				   if($('#password').val()!=$('#confirm_password').val()){
+				    $('font[name=check]').text('');
+				    $('font[name=check]').html("암호 불일치");
+				    $('font[name=check]').css('coloc','red');
+				   }else {
+				    $('font[name=check]').text('');
+				    $('font[name=check]').html("암호 일치");
+				    $('font[name=check]').css('color','green');
+				   }
+				  }); //#chpass.keyup
+				 });
+			</script>
 </body>
 </html>

@@ -68,6 +68,16 @@ public class DefaultMemberService implements MemberService {
       pages++;
     return pages;
   }
+
+  @Override
+  public List<Member> memberList(int pageNo, int pageSize, int bno) {
+	  HashMap<String,Object> paramMap = new HashMap<>();
+	    paramMap.put("startIndex", (pageNo - 1) * pageSize);
+	    paramMap.put("length", pageSize);
+	    paramMap.put("bno", bno);
+	    
+	    return memberDao.memberList(paramMap);
+  }
 }
 
 /*

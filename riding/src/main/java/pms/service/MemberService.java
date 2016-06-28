@@ -13,5 +13,6 @@ public interface MemberService {
   void change(Member member);
   boolean exist(String email, String password);
   int countPage(int pageSize);
+  List<Member> memberList(int pageNo, int pageSize, int bno);
 }
 

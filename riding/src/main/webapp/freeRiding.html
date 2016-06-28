@@ -36,92 +36,96 @@ th {
 
 </head>
 
-<body>
-  <header>
-    <span><object id="mainbike" data="img/main.swf"
-        onclick="location.href='main.html'"></object></span>
+<body onload="menuinit();">
+	<header>
+		<span><object id="mainbike" data="img/main.swf"
+				onclick="location.href='main.html'"></object></span>
 
-    <div class="upmenu">
-      <body onload="menuinit();">
-        <span><img id="home" src="img/b1.JPG"
-          onclick="location.href='main.html'"></span>
-        <span id="login" onclick="location.href='login.html'">login</span>
-        <span color="gray"> |</span>
-        <span id="logout" font-color="blue">logout</span>
+		<div class="upmenu">
 
-        <li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-          onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-          <div id="sub1" float="left">
-            <ul>
-              <li id="s1l1">MY INFO</a></li>
-              <li id="s1l2" onclick="location.href='myList.html'">MY
-                RIDING LIST</li>
-            </ul>
-          </div>
-        </li>
-      <body onload="menuinit();">
-        <li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-          onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-          <div id="sub2" float="left">
-            <ul>
-              <li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-                RIDING</a>
-              </li>
-              <li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-                RIDING</a>
-              </li>
-            </ul>
-          </div>
-        </li>
+			<span><img id="home" src="img/b1.JPG"
+				onclick="location.href='main.html'"></span> <span id="login"
+				onclick="location.href='login.html'">login</span> <span id="logout"
+				onclick="location.href='auth/logout.do'">logout</span>
+			<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
+				onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
+				<div id="sub1" float="left">
+					<ul>
+						<li id="s1l1" onclick="location.href='myInfo.html'">MY INFO</a></li>
+						<li id="s1l2" onclick="location.href='myList.html'">MY RIDING
+							LIST</li>
+					</ul>
+				</div>
+			</li>
+			<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
+				onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
+				<div id="sub2" float="left">
+					<ul>
+						<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
+							RIDING</a>
+						</li>
+						<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
+							RIDING</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
+				onmouseout="subMenuCloseBox('menu3','sub3')"
+				onclick="location.href='course.html'">
+				COURSE
+				<div id="sub3" float="left"></div>
+			</div>
+		</div>
+		<br> <br>
 
-        <div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-          onmouseout="subMenuCloseBox('menu3','sub3')"
-          onclick="location.href='course.html'">
-          COURSE
-          <div id="sub3" float="left"></div>
-        </div>
-    </div>
-    <br> <br>
+		<center id="boadLocationText">SEOUL</center>
+		<hr width=100px>
+	</header>
 
-    <center id="boadLocationText">SEOUL</center>
-    <hr width=100px>
-  </header>
+	<div class="container">
+		<table id="boardTable" class="table table-hover">
+			<caption>Riding List</caption>
+			<thead>
+				<tr>
+					<th>제목</th>
+					<th>라이딩 날짜</th>
+					<th>맵         </th>
+					<th>작성일</th>
+				</tr>
+			</thead>
+      
+			<tbody>
+			</tbody>
+		</table>
+	</div>
 
-  <div class="container">
-<table id="boardTable" class="table table-hover">
-<caption>Riding List</caption>
-<thead>
-<tr> <th>제목</th> <th>날짜</th> <th>맵</th> </tr>
-</thead>
+	<button type="button" class="btn btn-default btn pull-right" id="write">WRITE</button>
+	<br>
+	<br>
+	<br>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">...</div>
+			</div>
+		</div>
+	</div>
 
-<tbody>
-</tbody>
-</table>
-</div>
+  <script src="bower_components/moment/moment.js"></script>
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/handlebars/handlebars.min.js"></script>
 
-<button type="button" class="btn btn-default btn pull-right" 
-id="write">WRITE</button><br><br><br>
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/handlebars/handlebars.min.js"></script>
-
-<script type="text/javascript" src="js/simple-lightbox.min.js"></script>
-<script type="text/javascript" src="js/menu.js"></script>
-<script type="text/javascript">
+	<script type="text/javascript" src="js/simple-lightbox.min.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript">
+	
 $.extend({
     getUrlVars: function(){
         var vars = [], hash;
@@ -145,38 +149,37 @@ var tempimg;
 loadBoardList();
 
 function loadBoardList() {
-  $.getJSON("ajax/board/freeList.do", function(result) {
+  $.getJSON("ajax/board/list.do?loca="+ploca+"&rbtype="+prbtype, function(result) {
       var list = result.list;
       var tbody = $("#boardTable tbody");
       for (var i in list) {
       list[i].imglo="mapImg/map1.JPG";
         $("<tr>")
           .html(
-            "<td onclick=\"location.href='freeRead.html?no=" + list[i].bno + "'\""+
-                "style=\"cursor:pointer\">" + list[i].title + "</td>" +
-            "<td>" + list[i].createdDate.toString() + "</td>" +
-            "<td>"+"<img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' >"+"</td>")
+       		  "<td onclick=\"location.href='freeRead.html?no=" + list[i].bno + 
+       				  "&loca="+ ploca + "&rbtype=" + prbtype +"'\""+
+       				  "style=\"cursor:pointer\">" + list[i].title + "</td>" +
+            "<td>" + moment(list[i].mday, 'MM/DD/YYYY').format().substr(0,10) + "</td>" +
+            "<td>"+"<img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' >"+"</td>" + 
+            "<td>" + moment(list[i].createdDate, 'MM/DD/YYYY').format().substr(0,10) + "</td>")
           .appendTo(tbody);
         $(document).ready(function () {
             $("img").simpleLightBox(); 
         }); 
       }
-  });
+  });moment(list[i].mday, 'MM/DD/YYYY').format().substr(0,10)
 }
-
 function popup(url) {
-    window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
+	  window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
 }
 $("#write").click(function(event) {location.href = 
-  "freeWrite.html?loca="+ploca+"&rbtype="+prbtype});
-  
-  
+	"freeWrite.html?loca="+ploca+"&rbtype="+prbtype});
+	
+	
 $('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').focus()
+	  $('#myInput').focus()
 });
 
-
 </script>
-<!--  -->
 </body>
 </html>

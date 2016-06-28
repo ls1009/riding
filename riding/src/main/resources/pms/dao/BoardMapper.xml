@@ -9,6 +9,7 @@
     <result column="TITLE"    property="title"/>
     <result column="MLOCA"    property="mloca"/>
     <result column="MTIME"    property="mtime"/>
+    <result column="MDAY"    property="mday"/>
     <result column="DISTANCE"    property="distance"/>
     <result column="TIME"    property="time"/>
     <result column="PNUM"    property="pnum"/>
@@ -20,41 +21,97 @@
   </resultMap>
   
   <insert id="insert" parameterType="Board">
-    insert into RIDINGBOARD(TITLE,MLOCA,MTIME,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA) 
-    values(#{title},#{mloca},#{mtime},#{distance},#{time},#{pnum},#{ph},now(),#{rbtype},#{mno},#{loca})
+    insert into RIDINGBOARD(TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA) 
+    values(#{title},#{mloca},#{mtime},#{mday},#{distance},#{time},#{pnum},#{ph},now(),#{rbtype},#{mno},#{loca})
+  </insert>
+  
+  <insert id="insertxy" parameterType="map">
+    insert into MAP(AB,BB,BNO) values(#{ab},#{bb},#{bno})
   </insert>
   
   <update id="update" parameterType="Board">
-    update BOARDS set
+    update RIDINGBOARD set
       TITLE=#{title}, 
-      CONTS=#{content}, 
-      CDT=now() 
-    where BNO=#{no}
+      MLOCA=#{mloca},
+      MTIME=#{mtime},
+      MDAY=#{mday},
+      DISTANCE=#{distance},
+      TIME=#{time},
+      PNUM=#{pnum},
+      PH=#{ph}
+    where BNO=#{bno}
   </update>
   
   <delete id="delete" parameterType="int">
-    delete from BOARDS 
+    delete from RIDINGBOARD 
+    where BNO=#{no}
+  </delete>
+  
+  <delete id="deleteMap" parameterType="int">
+    delete from MAP 
     where BNO=#{no}
   </delete>
 
   <select id="selectList" resultMap="BoardMap" parameterType="map">
-    select  BNO,TITLE,MLOCA,MTIME,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
+    select  BNO,TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
     from RIDINGBOARD 
-    where RBTYPE=#{free}
-    order by CDT DESC
+    where RBTYPE=#{rbtype} and loca=#{loca}
+    order by BNO DESC
+    limit #{startIndex}, #{length}
+  </select>
+  
+  <select id="selectListSchedule" resultMap="BoardMap" parameterType="map">
+    select  BNO,TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
+    from RIDINGBOARD 
+    where MNO=#{no} and MDAY>=now()
+    order by BNO DESC
+    limit #{startIndex}, #{length}
+  </select>
+  
+    <select id="selectListHistory" resultMap="BoardMap" parameterType="map">
+    select  BNO,TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
+    from RIDINGBOARD 
+    where MNO=#{no} and MDAY <![CDATA[ < ]]> now()
+    order by BNO DESC
     limit #{startIndex}, #{length}
   </select>
   
   <select id="selectOne" resultMap="BoardMap" parameterType="int">
-    select BNO,TITLE,MLOCA,MTIME,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA
-    from RIDINGBOARD
+    select b.BNO,b.TITLE,b.MLOCA,b.MTIME,b.MDAY,b.DISTANCE,b.TIME,
+            b.PNUM,b.PH,b.CDT,b.RBTYPE,b.MNO,b.LOCA,m.MNM
+    from RIDINGBOARD b inner join MEMBERS m 
+    on b.mno=m.mno
     where BNO=#{no}
   </select>
   
+  <select id="selectMap" parameterType="int" resultType="MapDot"> 
+  select AB,BB from MAP where BNO=#{no} 
+  </select>
+   
   <select id="countAll" resultType="int">
     select count(*) 
     from RIDINGBOARD
   </select>
+  
+  <select id="getLast" parameterType="int" resultMap="BoardMap"> 
+    select * from RIDINGBOARD order by BNO desc limit #{no}
+  </select>
+  
+  <insert id="join" parameterType="map">
+    insert into MEMBERLIST(BNO,MNO) 
+    values(#{bno},#{mno})
+  </insert>
+
+	<select id="isJoin" parameterType="map" resultType="int">
+		select count(*)
+		from MEMBERLIST
+		where BNO=#{bno} and MNO=#{mno}
+	</select>
+	
+	<delete id="joinCancel" parameterType="map" >
+    delete from MEMBERLIST 
+    where BNO=#{bno} and MNO=#{mno}
+  </delete>
 </mapper>
 
 

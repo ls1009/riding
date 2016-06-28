@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/menu.css" type="text/css">
+<script type="text/javascript" src="js/menu.js"></script>
+
+<title>Free Riding Update</title>
+<style>
+.col-xs-5 {
+  margin-left: 80px;
+}
+
+#locationText {
+	font-weight: lighter;
+	font-size: 40px;
+	letter-spacing: 10px;
+	margin-bottom: 7px;
+}
+
+.profile {
+	border-radius: 80%;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+}
+
+.profilename {
+	margin-left: 50px;
+}
+
+#changeBtn {
+  margin-right: 20px;
+}
+
+#cancel {
+  margin-right: 20px;
+}
+</style>
+</head>
+
+<body onload="menuinit();">
+	<header>
+		<span><object id="mainbike" data="img/main.swf"
+				onclick="location.href='main.html'"></object></span>
+
+		<div class="upmenu">
+			<span><img id="home" src="img/b1.JPG"
+				onclick="location.href='main.html'"></span> <span id="login"
+				onclick="location.href='login.html'">login</span> <span id="logout"
+				onclick="location.href='auth/logout.do'">logout</span>
+			<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
+				onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
+				<div id="sub1" float="left">
+					<ul>
+						<li id="s1l1" onclick="location.href='myInfo.html'">MY INFO</a></li>
+						<li id="s1l2" onclick="location.href='myList.html'">MY RIDING
+							LIST</li>
+					</ul>
+				</div>
+			</li>
+			<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
+				onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
+				<div id="sub2" float="left">
+					<ul>
+						<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
+							RIDING</a>
+						</li>
+						<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
+							RIDING</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
+				onmouseout="subMenuCloseBox('menu3','sub3')"
+				onclick="location.href='course.html'">
+				COURSE
+				<div id="sub3" float="left"></div>
+			</div>
+		</div>
+		<br> <br>
+	</header>
+
+
+			<center>
+				<img class="profile" src="img/4.jpg" align="left">
+				<p class="profilename" align="left">KyeongHun-Min</p>
+			</center>
+
+			<h2 align="center">Free Riding Upate</h2>
+			<hr width=100px margin-top=0px>
+      <br>
+
+			<div class="col-xs-5">
+				<input class="form-control" type="text" placeholder="KyeongHun-Min"
+					disabled><br> <input id="title" type="text"
+					class="form-control" placeholder="제목"><br> <input
+					id="mloca" type="text" class="form-control" placeholder="장소"><br>
+				<input id="mday" type="text" class="form-control"
+					placeholder="날짜(2016-01-01)"><br> <input id="mtime"
+					type="text" class="form-control" placeholder="시간"><br>
+				<input id="distance" type="text" class="form-control"
+					placeholder="총거리"><br> <input id="time" type="text"
+					class="form-control" placeholder="예상소요시간"><br> <input
+					id="pnum" type="text" class="form-control" placeholder="모집인원"><br>
+				<input id="ph" type="text" class="form-control" placeholder="연락처"><br>
+      </div>
+      
+				<div id="map" style="width:500px;height:465px;">
+        <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
+        </div><br>
+        
+        <div>
+          <button id="changeBtn" type="button"
+            class="btn btn-default btn pull-right">COMPLETE</button>
+        </div>
+        <div>
+          <button id="cancel" type="button"
+            class="btn btn-default btn pull-right">CANCEL</button>
+        </div>
+        <br><br>
+
+
+
+				<script src="bower_components/jquery/dist/jquery.js"></script>
+				<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+				<script src="bower_components/handlebars/handlebars.min.js"></script>
+				<script type="text/javascript" src="js/menu.js"></script>
+				<script type="text/javascript" src="js/mapApi.js" ></script>
+				<script type="text/javascript">
+$.extend({
+    getUrlVars: function(){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    },
+    getUrlVar: function(name) {
+        return $.getUrlVars()[name];
+    }
+});
+
+var no = $.getUrlVar('no');
+var ploca = $.getUrlVar('loca');
+var prbtype = $.getUrlVar('rbtype');
+
+$.getJSON("ajax/board/detail.do?no=" + no, function(result) {
+	  var board = result.board;
+	  console.log(board.title);
+    $("#title").val(board.title);
+    $("#mloca").val(board.mloca);
+    $("#mtime").val(board.mtime);
+    $("#mday").val(board.mday);
+    $("#distance").val(board.distance);
+    $("#time").val(board.time);
+    $("#pnum").val(board.pnum);
+    $("#ph").val(board.ph);
+});
+
+
+$.getJSON("ajax/board/getMap.do?no="+no, function(result) {
+    var updatelist = result.list;
+    var updateclickLine = new daum.maps.Polyline({
+          map : map, // 선을 표시할 지도입니다 
+          path : [], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+          strokeWeight : 3, // 선의 두께입니다 
+          strokeColor : 'blue', // 선의 색깔입니다
+          strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+          strokeStyle : 'solid' // 선의 스타일입니다
+        });
+    var linepath = updateclickLine.getPath();
+    if (result.status == "success") {
+      /* var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+      mapOption = { 
+          center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          level: 3 // 지도의 확대 레벨
+      };
+      var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+             */
+      for ( var i in updatelist) {
+        console.log(i);
+        
+        if(i == 0) {
+          var startSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png'; // 출발 마커이미지의 주소입니다    
+          var startSize = new daum.maps.Size(50, 45); // 출발 마커이미지의 크기입니다 
+          var startMarker = new daum.maps.Marker({
+              map : map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+              position : new daum.maps.LatLng(updatelist[i].bb, updatelist[i].ab),
+              image : new daum.maps.MarkerImage(startSrc, startSize)
+              // 출발 마커이미지를 설정합니다
+              });
+        }
+
+            linepath.push(new daum.maps.LatLng(updatelist[i].bb, updatelist[i].ab));
+      }
+      
+      if (i == (updatelist.length-1)) {
+        var arriveSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 도착 마커이미지 주소입니다    
+        var arriveSize = new daum.maps.Size(50, 45); // 도착 마커이미지의 크기입니다 
+        
+      // 도착 마커를 생성합니다 
+        var arriveMarker = new daum.maps.Marker({  
+            map: map, // 도착 마커가 지도 위에 표시되도록 설정합니다
+            position: new daum.maps.LatLng(updatelist[i].bb, updatelist[i].ab),
+            draggable: true, // 도착 마커가 드래그 가능하도록 설정합니다
+            image: new daum.maps.MarkerImage(arriveSrc, arriveSize) // 도착 마커이미지를 설정합니다
+        });
+      }
+
+      updateclickLine.setPath(linepath);
+      updateclickLine.setMap(map);
+    } else if (result.status == "failure") {
+      window.alert("불러오기 실패입니다!");
+      }
+}); 
+
+$("#changeBtn").click(function(event) {
+    $.post("ajax/board/update.do", {
+    	  bno: no, 
+        title: $("#title").val(),
+        mloca: $("#mloca").val(),
+        mday: $("#mday").val(),
+        mtime: $("#mtime").val(),
+        distance: $("#distance").val(),
+        time: $("#time").val(),
+        pnum: $("#pnum").val(),
+        ph: $("#ph").val()
+      }, function(result) {
+        if (result.status == "success") {
+            var path = clickLine.getPath();
+            
+            $.ajax({
+                url: 'ajax/board/deleteMap.do',
+                global: false,
+                type: 'POST',
+                data: {bno : no},
+                async: false, //blocks window close
+                success: function() {
+                  console.log("old map delete");
+                  for ( var i in path) {
+                      $.ajax({
+                          url: 'ajax/board/putMap.do',
+                          global: false,
+                          type: 'POST',
+                          data: {ab : path[i].ab,
+                                 bb : path[i].bb},
+                          async: false, //blocks window close
+                          success: function() {
+                            console.log("dot insert");
+                          }
+                      });
+                    }
+                }
+            });
+            
+            
+            location.href = "freeRiding.html?loca=" + ploca
+                + "&rbtype=" + prbtype;
+          } else {
+            window.alert("등록 실패입니다!");
+          }
+        }, "json",false);
+
+      });
+  
+  $("#cancel").click(function(event) {    
+	  location.href= "freeRiding.html?loca=" + ploca + "&rbtype=" + prbtype;
+	});
+</script>
+</body>
+</html>

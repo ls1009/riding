@@ -28,151 +28,148 @@
   cursor:pointer;
 }
 
-
 </style>
 </head>
 
-<body>
-<body>
-  <header>
-   <span><object id="mainbike" data="img/main.swf"
-   onclick="location.href='main.html'"></object></span>
+<body onload="menuinit()">
+	<header>
+		<span><object id="mainbike" data="img/main.swf"
+				onclick="location.href='main.html'"></object></span>
 
-    <div class="upmenu">
-      <body onload="menuinit();">
-        <span><img id="home" src="img/b1.JPG"
-          onclick="location.href='main.html'"></span>
-        <span id="login" onclick="location.href='login.html'">login</span>
-        <span color="gray"> |</span>
-        <span id="logout" font-color="blue">logout</span>
+		<div class="upmenu">
+			<span><img id="home" src="img/b1.JPG"
+				onclick="location.href='main.html'"></span> <span id="login"
+				onclick="location.href='login.html'">login</span> <span id="logout"
+				onclick="location.href='auth/logout.do'">logout</span>
 
-        <li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-          onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-          <div id="sub1" float="left">
-            <ul>
-              <li id="s1l1">MY INFO</a></li>
-              <li id="s1l2" onclick="location.href='myList.html'">MY
-                RIDING LIST</li>
-            </ul>
-          </div>
-        </li>
-      <body onload="menuinit();">
-        <li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-          onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-          <div id="sub2" float="left">
-            <ul>
-              <li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-                RIDING</a>
-              </li>
-              <li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-                RIDING</a>
-              </li>
-            </ul>
-          </div>
-        </li>
+			<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
+				onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
+				<div id="sub1" float="left">
+					<ul>
+						<li id="s1l1" onclick="location.href='myInfo.html'">MY INFO</a></li>
+						<li id="s1l2" onclick="location.href='myList.html'">MY RIDING
+							LIST</li>
+					</ul>
+				</div>
+			</li>
+			<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
+				onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
+				<div id="sub2" float="left">
+					<ul>
+						<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
+							RIDING</a>
+						</li>
+						<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
+							RIDING</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
+				onmouseout="subMenuCloseBox('menu3','sub3')"
+				onclick="location.href='course.html'">
+				COURSE
+				<div id="sub3" float="left"></div>
+			</div>
+		</div>
+		<br> <br>
+	</header>
 
-        <div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-          onmouseout="subMenuCloseBox('menu3','sub3')"
-          onclick="location.href='course.html'">
-          COURSE
-          <div id="sub3" float="left"></div>
-        </div>
-    </div>
-    <br>
-    <br>
-  </header>
+	<p id="d1">사이트 추천코스</p>
+	<hr width=100px margin-top=0px>
+	<br>
 
-  <p id="d1">사이트 추천코스</p>
-  <hr width=100px margin-top=0px>
-  <br>
-  
-  <div id="container">
-    <div class="flexslider">
-      <ul class="slides">
-        <li>
-        <img src="img/인천.jpg" onclick='popup("http://blog.naver.com/hnimmm/220724933703")'/></a>
-          <div class="flex-caption">
-            <h3>경인 아라 뱃길</h3>
-            <p>국토종주의 출발지이고 인천 바다냄새를 맡으며 즐길수 있는 라이딩 코스</p>
-          </div></li>
-          
-        <li><img src="img/부산1.jpg" onclick='popup("mapImg/map1.JPG")'/></a>
-          <div class="flex-caption">
-            <h3>부산 야경관람 라이딩</h3>
-            <p>부산 온천천의 강변길을따라 아름다운 야경을 보면서 즐길수 있는 라이딩 코스</p>
-          </div></li>
-          
-        <li><img src="img/제주1.jpg" onclick='popup("mapImg/map1.JPG")'/>
-          <div class="flex-caption">
-            <h3>제주 환상 자전거길</h3>
-            <p>총거리 234km 제주의 해안을 마주하고 달리고 관광도 할수 있는 코스</p>
-          </div></li>
-          
-        <li><img src="img/서울1.jpg" onclick='popup("mapImg/map1.JPG")'/>
-          <div class="flex-caption">
-            <h3>아라 한강 자전거길</h3>
-            <p>가장 많은 자전거 라이더들이 이용하는 곳이고 시민공원에서 가족과 휴식도 할수 있는 코스</p>
-          </div></li>
-      </ul>
-    </div>
-  </div>
-  <span id="responsiveFlag"></span><br><br><br><br>
+	<div id="container">
+		<div class="flexslider">
+			<ul class="slides">
+				<li><img src="img/인천.jpg"
+					onclick="location.href='course1.html'" /></a>
+					<div class="flex-caption">
+						<h3>경인 아라 뱃길</h3>
+						<p>국토종주의 출발지이고 인천 바다냄새를 맡으며 즐길수 있는 라이딩 코스</p>
+					</div></li>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script src="slide/jquery.flexslider-min.js"></script>
-  <script src="slide/css3-mediaqueries.js"></script>
-  <script src="slide/kwiks.js"></script>
-  
-  <script>
-  var Main = Main || {};
+				<li><img src="img/부산1.jpg" onclick='popup("mapImg/map1.JPG")' /></a>
+					<div class="flex-caption">
+						<h3>부산 야경관람 라이딩</h3>
+						<p>부산 온천천의 강변길을따라 아름다운 야경을 보면서 즐길수 있는 라이딩 코스</p>
+					</div></li>
 
-    jQuery(window).load(function() {
-      window.responsiveFlag = jQuery('#responsiveFlag').css('display');
-      Main.gallery = new Gallery();
+				<li><img src="img/제주1.jpg" onclick='popup("mapImg/map1.JPG")' />
+					<div class="flex-caption">
+						<h3>제주 환상 자전거길</h3>
+						<p>총거리 234km 제주의 해안을 마주하고 달리고 관광도 할수 있는 코스</p>
+					</div></li>
 
-      jQuery(window).resize(function() {
-        Main.gallery.update();
-      });
-    });
+				<li><img src="img/서울1.jpg" onclick='popup("mapImg/map1.JPG")' />
+					<div class="flex-caption">
+						<h3>아라 한강 자전거길</h3>
+						<p>가장 많은 자전거 라이더들이 이용하는 곳이고 시민공원에서 가족과 휴식도 할수 있는 코스</p>
+					</div></li>
+			</ul>
+		</div>
+	</div>
+	<span id="responsiveFlag"></span>
+	<br>
+	<br>
+	<br>
+	<br>
 
-    function Gallery() {
-      var self = this, container = jQuery('.flexslider'), clone = container
-          .clone(false);
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="slide/jquery.flexslider-min.js"></script>
+	<script src="slide/css3-mediaqueries.js"></script>
+	<script src="slide/kwiks.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script>
 
-      this.init = function() {
-        if (responsiveFlag == 'block') {
-          var slides = container.find('.slides');
+		document.getElementById("sub1").style.display = "none";
+		document.getElementById("sub2").style.display = "none";
+		var Main = Main || {};
 
-          slides.kwicks({
-            max : 500,
-            spacing : 0
-          }).find('li > a').click(function() {
-            return false;
-          });
-        } else {
-          container.flexslider();
-        }
-      }
-      this.update = function() {
-        var currentState = jQuery('#responsiveFlag').css('display');
+		jQuery(window).load(function() {
+			window.responsiveFlag = jQuery('#responsiveFlag').css('display');
+			Main.gallery = new Gallery();
 
-        if (responsiveFlag != currentState) {
+			jQuery(window).resize(function() {
+				Main.gallery.update();
+			});
+		});
 
-          responsiveFlag = currentState;
-          container.replaceWith(clone);
-          container = clone;
-          clone = container.clone(false);
+		function Gallery() {
+			var self = this, container = jQuery('.flexslider'), clone = container
+					.clone(false);
 
-          this.init();
-        }
-      }
+			this.init = function() {
+				if (responsiveFlag == 'block') {
+					var slides = container.find('.slides');
 
-      this.init();
-    }
-    
-    function popup(url) {
-        window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
-      }
-  </script>
+					slides.kwicks({
+						max : 500,
+						spacing : 0
+					}).find('li > a').click(function() {
+						return false;
+					});
+				} else {
+					container.flexslider();
+				}
+			}
+			this.update = function() {
+				var currentState = jQuery('#responsiveFlag').css('display');
+
+				if (responsiveFlag != currentState) {
+
+					responsiveFlag = currentState;
+					container.replaceWith(clone);
+					container = clone;
+					clone = container.clone(false);
+
+					this.init();
+				}
+			}
+
+			this.init();
+		}
+	</script>
 </body>
 </html>

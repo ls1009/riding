@@ -1,5 +1,6 @@
 package pms.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ public interface MemberDao {
   int delete(int no);
   int isMember(Map<String,Object> paramMap);
   int countAll();
+  List<Member> memberList(HashMap<String, Object> paramMap);
 }
 
 

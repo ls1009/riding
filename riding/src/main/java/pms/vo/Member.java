@@ -10,6 +10,12 @@ public class Member {
 	protected String gender;
 	protected String img;
 	
+	@Override
+	public String toString() {
+		return "Member [no=" + no + ", name=" + name + ", email=" + email + ", pw=" + pw + ", ph=" + ph + ", position="
+				+ position + ", gender=" + gender + ", img=" + img + "]";
+	}
+	
 	public int getNo() {
 		return no;
 	}

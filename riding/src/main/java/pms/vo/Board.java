@@ -11,6 +11,7 @@ public class Board {
 	private String  title;
 	private String  mloca; //모임 장소
 	private String  mtime; //모임 시간
+	private Date  	mday; //모임 날짜
 	private String  distance; //예상거리
 	private String  time;	//예상시간
 	private String  pnum;	//참여인원
@@ -18,6 +19,16 @@ public class Board {
 	private String  imglo;
 	private Date    createdDate;
 	
+	private String mnm;
+	
+	
+	
+	public String getWriter() {
+		return mnm;
+	}
+	public void setWriter(String mnm) {
+		this.mnm = mnm;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -60,6 +71,12 @@ public class Board {
 	public void setMtime(String mtime) {
 		this.mtime = mtime;
 	}
+	public Date getMday() {
+		return mday;
+	}
+	public void setMday(Date mday) {
+		this.mday = mday;
+	}
 	public String getDistance() {
 		return distance;
 	}
@@ -96,6 +113,14 @@ public class Board {
 	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
+	@Override
+	public String toString() {
+		return "Board [bno=" + bno + ", mno=" + mno + ", rbtype=" + rbtype + ", loca=" + loca + ", title=" + title
+				+ ", mloca=" + mloca + ", mtime=" + mtime + ", mday=" + mday + ", distance=" + distance + ", time="
+				+ time + ", pnum=" + pnum + ", ph=" + ph + ", imglo=" + imglo + ", createdDate=" + createdDate + "]";
+	}
+
+
 
 
 
