@@ -126,7 +126,7 @@
         <br><br>
 
 
-
+        <script src="bower_components/moment/moment.js"></script>
 				<script src="bower_components/jquery/dist/jquery.js"></script>
 				<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 				<script src="bower_components/handlebars/handlebars.min.js"></script>
@@ -159,7 +159,7 @@ $.getJSON("ajax/board/detail.do?no=" + no, function(result) {
     $("#title").val(board.title);
     $("#mloca").val(board.mloca);
     $("#mtime").val(board.mtime);
-    $("#mday").val(board.mday);
+    $("#mday").val(moment(board.mday, 'MM/DD/YYYY').format().substr(0,10));
     $("#distance").val(board.distance);
     $("#time").val(board.time);
     $("#pnum").val(board.pnum);

@@ -4,7 +4,6 @@ import java.util.List;
 
 import pms.vo.Board;
 import pms.vo.MapDot;
-import pms.vo.Member;
 
 public interface BoardService {
   void add(Board board);

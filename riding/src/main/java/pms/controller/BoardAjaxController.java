@@ -161,13 +161,13 @@ public class BoardAjaxController {
     }
     String loca = request.getParameter("loca");
     String rbtype = request.getParameter("rbtype");
-    List<Board> boards = boardService.List(pageNo, pageSize, loca, rbtype);
+    List<Board> list = boardService.List(pageNo, pageSize, loca, rbtype);
     
     HashMap<String,Object> result = new HashMap<>();
     result.put("pageNo", pageNo);
     result.put("pageSize", pageSize);
     result.put("totalPage", totalPage);
-    result.put("list", boards);
+    result.put("list", list);
     
     return new Gson().toJson(result);
   }

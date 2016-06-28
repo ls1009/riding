@@ -1,7 +1,6 @@
 package pms.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -13,17 +12,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.google.gson.Gson;
 
 import pms.service.MemberService;
-import pms.vo.Board;
 import pms.vo.Member;
 
 @Controller

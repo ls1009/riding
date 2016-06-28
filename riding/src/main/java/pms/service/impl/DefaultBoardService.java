@@ -10,7 +10,6 @@ import pms.dao.BoardDao;
 import pms.service.BoardService;
 import pms.vo.Board;
 import pms.vo.MapDot;
-import pms.vo.Member;
 
 @Service
 public class DefaultBoardService implements BoardService {
