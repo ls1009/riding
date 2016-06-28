@@ -17,6 +17,7 @@
   "dependencies": {
     "jquery": "1.12.4",
     "bootstrap": "^3.3.6",
-    "handlebars": "^4.0.5"
+    "handlebars": "^4.0.5",
+    "momentjs": "2.13.0"
   }
 }
