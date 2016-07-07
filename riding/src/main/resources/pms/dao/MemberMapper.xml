@@ -5,7 +5,7 @@
   
 <mapper namespace="pms.dao.MemberDao">
   <sql id="select01">
-    select MNO, MNM, EMAIL, PW, PH, POSI, GEN 
+    select MNO, MNM, EMAIL, PW, PH, GEN, IMGLO 
     from MEMBERS
   </sql>
 
@@ -14,22 +14,20 @@
     <result column="MNM"  property="name"/>
     <result column="PW"    property="pw"/>
     <result column="PH"    property="ph"/>
-    <result column="POSI"    property="position"/>
     <result column="GEN"    property="gender"/>
     <result column="IMGLO"    property="img"/>
   </resultMap>
   
   <insert id="insert" parameterType="Member">
-    insert into MEMBERS(MNM,EMAIL,PW,PH,GEN,POSI)
-    values(#{name},#{email},#{pw},#{ph},#{gender},#{position})
+    insert into MEMBERS(MNM,EMAIL,PW,PH,GEN)
+    values(#{name},#{email},#{pw},#{ph},#{gender})
   </insert>
   
   <update id="update" parameterType="Member">
     update MEMBERS set
       MNM=#{name},
-      EMAIL=#{email},
+      PW=#{pw},
       PH=#{ph},
-      POSI=#{position},
       GEN=#{gender}
     where MNO=#{no}
   </update>
@@ -46,7 +44,7 @@
   </select>
   
   <select id="memberList" resultMap="MemberMap">
-    select m.MNO, m.MNM, m.EMAIL, m.PW, m.PH, m.POSI, m.GEN 
+    select m.MNO, m.MNM, m.EMAIL, m.PW, m.PH, m.GEN 
     from MEMBERS m inner join MEMBERLIST ml
     on  m.MNO=ml.MNO
     where ml.BNO=#{bno}

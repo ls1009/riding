@@ -29,6 +29,11 @@
     insert into MAP(AB,BB,BNO) values(#{ab},#{bb},#{bno})
   </insert>
   
+  <insert id="putImg" parameterType="map">
+    insert into FREEIMG(BNO,IMGLO) 
+    values(#{bno},#{dbpath})
+  </insert>
+  
   <update id="update" parameterType="Board">
     update RIDINGBOARD set
       TITLE=#{title}, 
@@ -51,6 +56,11 @@
     delete from MAP 
     where BNO=#{no}
   </delete>
+  
+  <delete id="deleteMemberList" parameterType="int">
+    delete from MEMBERLIST 
+    where BNO=#{bno}
+  </delete>
 
   <select id="selectList" resultMap="BoardMap" parameterType="map">
     select  BNO,TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
@@ -63,17 +73,23 @@
   <select id="selectListSchedule" resultMap="BoardMap" parameterType="map">
     select  BNO,TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
     from RIDINGBOARD 
-    where MNO=#{no} and MDAY>=now()
+    where MNO=#{no} and MDAY>=now() and RBTYPE=#{rbtype}
     order by BNO DESC
     limit #{startIndex}, #{length}
   </select>
   
-    <select id="selectListHistory" resultMap="BoardMap" parameterType="map">
+   <select id="selectListHistory" resultMap="BoardMap" parameterType="map">
     select  BNO,TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
     from RIDINGBOARD 
-    where MNO=#{no} and MDAY <![CDATA[ < ]]> now()
+    where MNO=#{no} and MDAY <![CDATA[ < ]]> now() and RBTYPE=#{rbtype}
     order by BNO DESC
     limit #{startIndex}, #{length}
+  </select>
+  
+  <select id="getImg" resultType="String" parameterType="map">
+    select IMGLO 
+    from FREEIMG  
+    where BNO=#{bno}
   </select>
   
   <select id="selectOne" resultMap="BoardMap" parameterType="int">
