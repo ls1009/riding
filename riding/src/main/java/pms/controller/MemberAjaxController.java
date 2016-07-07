@@ -190,7 +190,7 @@ public class MemberAjaxController {
 */     
     int extPoint = myPhoto.getOriginalFilename().lastIndexOf(".");
     String filename = System.currentTimeMillis() + myPhoto.getOriginalFilename().substring(extPoint);
-    String path ="C:/dev/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/ridingTest/img/memberImg/"
+    String path ="C:/dev/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/riding/img/memberImg/"
         +filename;
     String dbpath ="img/memberImg/"+filename;
     
