@@ -25,6 +25,9 @@ public interface BoardDao {
   int joinCancel(HashMap<String, Object> paramMap);
   int isJoin(Map<String,Object> paramMap);
   List<Member> MemberList(HashMap<String, Object> paramMap);
+  void putImg(HashMap<String, Object> paramMap);
+  List<String> getImg(HashMap<String, Object> paramMap);
+  void deleteMemberList(int bno);
 }
 
 

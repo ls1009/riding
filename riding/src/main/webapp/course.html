@@ -32,76 +32,61 @@
 </head>
 
 <body onload="menuinit()">
-	<header>
-		<span><object id="mainbike" data="img/main.swf"
-				onclick="location.href='main.html'"></object></span>
-
-		<div class="upmenu">
-			<span><img id="home" src="img/b1.JPG"
-				onclick="location.href='main.html'"></span> <span id="login"
-				onclick="location.href='login.html'">login</span> <span id="logout"
-				onclick="location.href='auth/logout.do'">logout</span>
-
-			<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-				onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-				<div id="sub1" float="left">
-					<ul>
-						<li id="s1l1" onclick="location.href='myInfo.html'">MY INFO</a></li>
-						<li id="s1l2" onclick="location.href='myList.html'">MY RIDING
-							LIST</li>
-					</ul>
-				</div>
-			</li>
-			<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-				onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-				<div id="sub2" float="left">
-					<ul>
-						<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-							RIDING</a>
-						</li>
-						<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-							RIDING</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-			<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-				onmouseout="subMenuCloseBox('menu3','sub3')"
-				onclick="location.href='course.html'">
-				COURSE
-				<div id="sub3" float="left"></div>
-			</div>
-		</div>
-		<br> <br>
-	</header>
+  <header>
+  <div>
+  
+    <div class="row">
+        <a href="main.html">
+          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+        </a>
+    </div>
+    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
+    
+    <div class="upmenu1">
+      <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
+      <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
+      /></span><label>log out</label>
+    </div> 
+     
+    <div class="upmenu2">
+      <nav id="nav-1">
+        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+      </nav>
+    </div>  
+  </div>
+  </header>
+	
+	<div id="container">
 
 	<p id="d1">사이트 추천코스</p>
-	<hr width=100px margin-top=0px>
+	<hr width=100px>
 	<br>
 
 	<div id="container">
 		<div class="flexslider">
 			<ul class="slides">
-				<li><img src="img/인천.jpg"
-					onclick="location.href='course1.html'" /></a>
+				<li><img src="img/locationImg/인천.jpg"
+					onclick="location.href='course1.html'" />
 					<div class="flex-caption">
 						<h3>경인 아라 뱃길</h3>
 						<p>국토종주의 출발지이고 인천 바다냄새를 맡으며 즐길수 있는 라이딩 코스</p>
 					</div></li>
 
-				<li><img src="img/부산1.jpg" onclick='popup("mapImg/map1.JPG")' /></a>
+				<li><img src="img/locationImg/부산.jpg" onclick='popup("mapImg/map1.JPG")' />
 					<div class="flex-caption">
 						<h3>부산 야경관람 라이딩</h3>
 						<p>부산 온천천의 강변길을따라 아름다운 야경을 보면서 즐길수 있는 라이딩 코스</p>
 					</div></li>
 
-				<li><img src="img/제주1.jpg" onclick='popup("mapImg/map1.JPG")' />
+				<li><img src="img/locationImg/제주.jpg" onclick='popup("mapImg/map1.JPG")' />
 					<div class="flex-caption">
 						<h3>제주 환상 자전거길</h3>
 						<p>총거리 234km 제주의 해안을 마주하고 달리고 관광도 할수 있는 코스</p>
 					</div></li>
 
-				<li><img src="img/서울1.jpg" onclick='popup("mapImg/map1.JPG")' />
+				<li><img src="img/locationImg/서울.jpg" onclick='popup("mapImg/map1.JPG")' />
 					<div class="flex-caption">
 						<h3>아라 한강 자전거길</h3>
 						<p>가장 많은 자전거 라이더들이 이용하는 곳이고 시민공원에서 가족과 휴식도 할수 있는 코스</p>
@@ -115,6 +100,8 @@
 	<br>
 	<br>
 
+  </div>
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="slide/jquery.flexslider-min.js"></script>
@@ -123,8 +110,6 @@
 	<script type="text/javascript" src="js/menu.js"></script>
 	<script>
 
-		document.getElementById("sub1").style.display = "none";
-		document.getElementById("sub2").style.display = "none";
 		var Main = Main || {};
 
 		jQuery(window).load(function() {

@@ -13,6 +13,7 @@
 <style>
 .col-xs-5 {
   margin-left: 80px;
+  margin-top: 20px;
 }
 p {
   margin-bottom: 0px;
@@ -29,77 +30,84 @@ p {
 	height: 40px;
 	cursor: pointer;
 }
-
 .profilename {
 	margin-left: 50px;
 }
-
 #changeBtn, #deleteBtn, #joinBtn, #list {
   margin-right: 20px;
 }
-
 th {
   font-size: 15px;
 }
-
 td {
   font-weight:lighter;
+}
+#slide {
+  color: gray;
+  margin-left: 7%;
+  padding-bottom: 10px;
+}
+.photoForm{
+  position:absolute;
+  color: white;
+  z-index: 1000;
+  margin-left: 890px;
 }
 </style>
 </head>
 
-<body onload="menuinit();">
-	<header>
-		<span><object id="mainbike" data="img/main.swf"
-				onclick="location.href='main.html'"></object></span>
+<body>
+  <header>
+	  <div>
+	    
+	    <div class="row">
+	        <a href="main.html">
+	          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+	        </a>
+	    </div>
+	    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
 
-		<div class="upmenu">
-			<span><img id="home" src="img/b1.JPG"
-				onclick="location.href='main.html'"></span> <span id="login"
-				onclick="location.href='login.html'">login</span> <span id="logout"
-				onclick="location.href='auth/logout.do'">logout</span>
-			<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-				onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-				<div id="sub1" float="left">
-					<ul>
-						<li id="s1l1" onclick="location.href='myInfo.html'">MY INFO</a></li>
-						<li id="s1l2" onclick="location.href='myList.html'">MY RIDING
-							LIST</li>
-					</ul>
-				</div>
-			</li>
-			<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-				onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-				<div id="sub2" float="left">
-					<ul>
-						<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-							RIDING</a>
-						</li>
-						<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-							RIDING</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-			<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-				onmouseout="subMenuCloseBox('menu3','sub3')"
-				onclick="location.href='course.html'">
-				COURSE
-				<div id="sub3" float="left"></div>
-			</div>
-		</div>
-		<br> <br>
-	</header>
+			<div class="upmenu1">
+      <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
+      <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
+      /></span><label>log out</label>
+    </div> 
 
+			<div class="upmenu2">
+	      <nav id="nav-1">
+	        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+	        <span class="link-1" onclick="location.href='course.html'">Course</span>
+	        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+	      </nav>
+	    </div>  
+	  </div>
+  </header>
 
-			<center>
-				<img class="profile" src="img/4.jpg" align="left">
-				<p class="profilename" align="left">KyeongHun-Min</p>
-			</center>
-
+  <div id="container">
 			<h2 align="center">Free Riding</h2>
 			<hr width=100px margin-top=0px>
-
+      
+      <form class="photoForm" action="ajax/board/putImg.do" method="post" enctype="multipart/form-data">
+              <button id="photoBtn"  style="background-color: rgba( 0, 0, 0, 0.7 ); border:0;">저장</button>
+              <label id="photoLabel" style="background-color: rgba( 0, 0, 0, 0.7 ); border:0; cursor: pointer;">
+                  사진 선택 <input type="file" name="img" style="display: none;" >
+              </label>
+      </form> 
+      
+      <center>
+        <!-- photo -->
+        <div id="slide">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:900px; height:400px;">
+            <!-- Indicators -->
+            <ol id="dotList" class="carousel-indicators">
+            </ol>
+            <!-- Wrapper for slides -->
+            <div id="photoList" class="carousel-inner" role="listbox" >
+            </div>
+          </div>
+        </div>
+        </center>
+        
 			<div class="col-xs-5">
 		  	<p>작성자</p>
 				<input id="writer" class="form-control" type="text" placeholder=""
@@ -115,64 +123,64 @@ td {
       </div>
       
         <div id="map" style="width: 500px; height: 540px;">
-					<script type="text/javascript"
-						src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
-				</div><br>
+          <script type="text/javascript"
+            src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
+        </div><br>
 
-				<div>
-					<button id="changeBtn" type="button"
-						class="btn btn-default btn pull-right">UPDATE</button>
-				</div>
-				<div>
-					<button id="deleteBtn" type="button"
-						class="btn btn-default btn pull-right">DELETE</button>
-				</div>
-				<div>
+        <div>
+          <button id="changeBtn" type="button"
+            class="btn btn-default btn pull-right">수정</button>
+        </div>
+        <div>
+          <button id="deleteBtn" type="button"
+            class="btn btn-default btn pull-right">삭제</button>
+        </div>
+        <div>
           <button id="joinBtn" 
-            class="btn btn-default btn pull-right"><span id='j'>JOIN</span></button>
+            class="btn btn-default btn pull-right"><span id='j'>참여</span></button>
+        </div>
+          <!-- Button trigger modal -->
+        <div>
+        <button id="list" type="submit" class="btn btn-default btn pull-right" data-toggle="modal" data-target="#myModal">
+          참여목록
+        </button>
         </div>
         
-				  <!-- Button trigger modal -->
-				<button id="list" type="submit" class="btn btn-default btn pull-right" data-toggle="modal" data-target="#myModal">
-				  JOIN LIST
-				</button>
-	
-	<!-- Modal -->
-	<form>
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				  <div class="modal-dialog" role="document">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title" id="myModalLabel">Join List</h4>
-			        </div>
-	        
-			        <div id="md" class="modal-body">
-			        
-			        
-			          <table class="table table-condensed">
-								<thead>
-									<tr>
-										<th>이름</th>
-										<th>성별</th>
-										<th>포지션</th>
-									</tr>
-								</thead>
-			
-								<tbody>
-								</tbody>
-								</table>
-							
-								
-		         	</div>
-				         	
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>
-				</form>
+        <br><br><br>
+  </div>
+  
+  <!-- Modal -->
+  <form>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Join List</h4>
+              </div>
+              <div id="md" class="modal-body">
+              
+                <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>이름</th>
+                    <th>성별</th>
+                    <th>포지션</th>
+                  </tr>
+                </thead>
+      
+                <tbody>
+                </tbody>
+                </table>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </form>
 
 <script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -195,15 +203,37 @@ $.extend({
         return $.getUrlVars()[name];
     }
 });
-
-var no = $.getUrlVar('no');
+var bno = $.getUrlVar('bno');
 var ploca = $.getUrlVar('loca');
 var prbtype = $.getUrlVar('rbtype');
 
-$.getJSON("ajax/board/detail.do?no=" + no, function(result) {
-	
-	  var board = result.board;
-	  $("#writer").val(board.mnm);
+$.post("ajax/board/boardNo.do?bno="+bno, {
+}, function(result) {
+}, "json",false);
+
+$.getJSON("ajax/board/getImg.do?bno=" + bno, function(result) {
+    if (result.status == "success") {
+      $("#dotList").empty();
+      $("#photoList").empty();
+          var path = result.list;
+          var ol = $("#dotList");
+          var div = $("#photoList");
+          
+     		  $("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\">").appendTo(ol);
+          $("<div class=\"item active\">").html("<img src=\"img/boardImg/main1.jpg\" style=\"width:900px; height:400px;\">").appendTo(div);
+          for (var i in path) {
+             $("<li data-target=\"#myCarousel\" data-slide-to='"+(i+1)+"' class=''>").appendTo(ol);
+             $("<div class=\"item\">").html("<img src=\""+path[i]+"\"style=\"width:900px; height:400px;\">").appendTo(div);
+          }
+    }else{
+      window.alert("photo load fail!");
+    }
+});
+
+  
+$.getJSON("ajax/board/detail.do?bno=" + bno, function(result) {
+    var board = result.board;
+    $("#writer").val(board.mnm);
     $("#title").val(board.title);
     $("#mloca").val(board.mloca);
     $("#mday").val(moment(board.mday, 'MM/DD/YYYY').format().substr(0,10));
@@ -213,19 +243,20 @@ $.getJSON("ajax/board/detail.do?no=" + no, function(result) {
     $("#pnum").val(board.pnum);
     $("#ph").val(board.ph);
     if (result.status == "fail") {
-    	  $("#deleteBtn").css("display","none");
-    	  $("#changeBtn").css("display","none");
+        $("#deleteBtn").css("display","none");
+        $("#changeBtn").css("display","none");
+        $("#photoBtn").css("display","none");
+        $("#photoLabel").css("display","none");
      }
 });
-$.getJSON("ajax/board/isJoin.do?no=" + no, function(result) {
+$.getJSON("ajax/board/isJoin.do?bno=" + bno, function(result) {
     if (result.status == "yes") {
-    	document.getElementById("j").textContent="DISJOIN";
+      document.getElementById("j").textContent="참여 취소";
     }else if (result.status == "no") {
-      document.getElementById("j").textContent="JOIN";
+      document.getElementById("j").textContent="참여 신청";
     }
 });
-
-$.getJSON("ajax/member/memberList.do?bno=" + no, function(result) {
+$.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
     var member = result.list;
     var tbody = $("tbody");
     for (var i in member) {
@@ -239,122 +270,154 @@ $.getJSON("ajax/member/memberList.do?bno=" + no, function(result) {
 });
 
 $("#deleteBtn").click(function(event) {
-	  $.getJSON("ajax/board/delete.do?no=" + no, function(result) {
-	      if (result.status == "success") {
-	        location.href = "freeRiding.html?loca="+ploca+"&rbtype="+prbtype;
-	      } else{
-	        window.alert("삭제 실패입니다!");
-	      }
-	  });
-});  
-
-$("#changeBtn").click(function(event) {
-   	location.href = "freeUpdate.html?no="+no+"&loca="+ploca+"&rbtype="+prbtype;
-});
-
-$("#joinBtn").click(function(event) {
-	$.getJSON("ajax/board/join.do?no=" + no, function(result) {
+    $.getJSON("ajax/board/delete.do?bno=" + bno, function(result) {
         if (result.status == "success") {
-        	window.alert("참여 하였습니다!");
-        	document.getElementById("j").textContent="DISJOIN";
-        	$("tbody").empty();
-        	$.getJSON("ajax/member/memberList.do?bno=" + no, function(result) {
-        	    var member = result.list;
-        	    var tbody = $("tbody");
-        	    for (var i in member) {
-        	      $("<tr>")
-        	        .html(
-        	          "<td>" + member[i].name + "</td>" +
-        	          "<td>" + member[i].gender + "</td>" +
-        	          "<td>" + member[i].position +"</td>")
-        	        .appendTo(tbody);
-        	    }
-        	});
-        } else if (result.status == "cancel") {
-          window.alert("참여 취소했습니다!");
-          document.getElementById("j").textContent="JOIN";
-          $("tbody").empty();
-          $.getJSON("ajax/member/memberList.do?bno=" + no, function(result) {
-              var member = result.list;
-              var tbody = $("tbody");
-              for (var i in member) {
-                $("<tr>")
-                  .html(
-                    "<td>" + member[i].name + "</td>" +
-                    "<td>" + member[i].gender + "</td>" +
-                    "<td>" + member[i].position +"</td>")
-                  .appendTo(tbody);
-              }
-          });
+          location.href = "freeLocation.html?loca="+ploca+"&rbtype="+prbtype;
         } else{
-          window.alert("참여 실패입니다!");
+          window.alert("삭제 실패입니다!");
         }
     });
+});  
+$("#changeBtn").click(function(event) {
+    location.href = "freeUpdate.html?bno="+bno+"&loca="+ploca+"&rbtype="+prbtype;
+});
+$("#joinBtn").click(function(event) {
+	$.post("ajax/board/join.do", {
+		  bno:bno
+		}, function(result) {
+			if (result.status == "success") {
+		          window.alert("참여 하였습니다!");
+		          document.getElementById("j").textContent="DISJOIN";
+		          $("tbody").empty();
+		          $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+		              var member = result.list;
+		              var tbody = $("tbody");
+		              for (var i in member) {
+		                $("<tr>")
+		                  .html(
+		                    "<td>" + member[i].name + "</td>" +
+		                    "<td>" + member[i].gender + "</td>" +
+		                    "<td>" + member[i].position +"</td>")
+		                  .appendTo(tbody);
+		              }
+		          });
+		        } else if (result.status == "cancel") {
+		          window.alert("참여 취소했습니다!");
+		          document.getElementById("j").textContent="JOIN";
+		          $("tbody").empty();
+		          $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+		              var member = result.list;
+		              var tbody = $("tbody");
+		              for (var i in member) {
+		                $("<tr>")
+		                  .html(
+		                    "<td>" + member[i].name + "</td>" +
+		                    "<td>" + member[i].gender + "</td>" +
+		                    "<td>" + member[i].position +"</td>")
+		                  .appendTo(tbody);
+		              }
+		          });
+		        } else{
+		          window.alert("참여 실패입니다!");
+		        }
+		}, "json",false);
 });
 
 $('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').focus()
-	});
+    $('#myInput').focus()
+});
+$('.carousel').carousel({
+    interval : 2000
+})
+
+/* $("#photoBtn").click(function(event){
+  $.getJSON("ajax/board/putImg.do?bno="+no, function(result) {
+       var list = result.list;
+      var tbody = $("#boardTable tbody");
+      $("#number").empty();
+      $("#number").append(pageNo);
+      for (var i in list) {
+      list[i].imglo="mapImg/map1.JPG";
+        $("<tr>")
+          .html(
+            "<td class=\"col-md-3\"  onclick=\"location.href='freeRead.html?no=" + list[i].bno + 
+                "&loca="+ ploca + "&rbtype=" + prbtype +"'\""+
+                "style=\"cursor:pointer\">" + list[i].title + "</td>" +
+            "<td class=\"col-md-3\" >" + moment(list[i].mday, 'MM/DD/YYYY').format().substr(0,10) + "</td>" +
+            "<td class=\"col-md-3\" >"+"<center><img width=30 height=30 id=\"map\" src='"+list[i].imglo+"' class='img-responsive' ></center>"+"</td>" + 
+            "<td class=\"col-md-1\" >" + moment(list[i].createdDate, 'MM/DD/YYYY').format().substr(0,10) + "</td>")
+          .appendTo(tbody);
+        $(document).ready(function () {
+            $("#map").simpleLightBox(); 
+        }); 
+      } 
+  });
+}); */
+
 
 //////////////////map load////////////////// 
 var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
 var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다
 var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
 var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
-$.getJSON("ajax/board/getMap.do?no="+no, function(result) {
-	      var list = result.list;
-	      var clickLine = new daum.maps.Polyline({
-	            map : map, // 선을 표시할 지도입니다 
-	            path : [], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
-	            strokeWeight : 3, // 선의 두께입니다 
-	            strokeColor : '#db4040', // 선의 색깔입니다
-	            strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
-	            strokeStyle : 'solid' // 선의 스타일입니다
-	          });
-	      var linepath = clickLine.getPath();
-				if (result.status == "success") {
-					var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+$.getJSON("ajax/board/getMap.do?bno="+bno, function(result) {
+        var list = result.list;
+        var clickLine = new daum.maps.Polyline({
+              map : map, // 선을 표시할 지도입니다 
+              path : [], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+              strokeWeight : 3, // 선의 두께입니다 
+              strokeColor : '#db4040', // 선의 색깔입니다
+              strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+              strokeStyle : 'solid' // 선의 스타일입니다
+            });
+        var linepath = clickLine.getPath();
+        if (result.status == "success") {
+          var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
           mapOption = { 
-              center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-              level: 3 // 지도의 확대 레벨
+              center: new daum.maps.LatLng(list[0].bb, list[0].ab), // 지도의 중심좌표
+              level: 5 // 지도의 확대 레벨
           };
           var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-			          
-					for ( var i in list) {
-						console.log(i);
-						
-						if(i == 0) {
-							var startSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png'; // 출발 마커이미지의 주소입니다    
-							var startSize = new daum.maps.Size(50, 45); // 출발 마커이미지의 크기입니다 
-							var startMarker = new daum.maps.Marker({
-								  map : map, // 출발 마커가 지도 위에 표시되도록 설정합니다
-									position : new daum.maps.LatLng(list[i].bb, list[i].ab),
-									image : new daum.maps.MarkerImage(startSrc, startSize)
-									// 출발 마커이미지를 설정합니다
-									});
-						}
+                
+          for ( var i in list) {
+            console.log(i);
+            
+            if(i == 0) {
+              var startSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png'; // 출발 마커이미지의 주소입니다    
+              var startSize = new daum.maps.Size(50, 45); // 출발 마커이미지의 크기입니다 
+              var startMarker = new daum.maps.Marker({
+                  map : map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+                  position : new daum.maps.LatLng(list[i].bb, list[i].ab),
+                  image : new daum.maps.MarkerImage(startSrc, startSize)
+                  // 출발 마커이미지를 설정합니다
+                  });
+            }
 
-								linepath.push(new daum.maps.LatLng(list[i].bb, list[i].ab));
-					}
+                linepath.push(new daum.maps.LatLng(list[i].bb, list[i].ab));
+          }
           
-				  if (i == (list.length-1)) {
-					  var arriveSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 도착 마커이미지 주소입니다    
-					  var arriveSize = new daum.maps.Size(50, 45); // 도착 마커이미지의 크기입니다 
-					  
-					// 도착 마커를 생성합니다 
-						var arriveMarker = new daum.maps.Marker({  
-						    map: map, // 도착 마커가 지도 위에 표시되도록 설정합니다
-						    position: new daum.maps.LatLng(list[i].bb, list[i].ab),
-						    draggable: true, // 도착 마커가 드래그 가능하도록 설정합니다
-						    image: new daum.maps.MarkerImage(arriveSrc, arriveSize) // 도착 마커이미지를 설정합니다
-						});
-				  }
+          if (i == (list.length-1)) {
+            var arriveSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 도착 마커이미지 주소입니다    
+            var arriveSize = new daum.maps.Size(50, 45); // 도착 마커이미지의 크기입니다 
+            
+          // 도착 마커를 생성합니다 
+            var arriveMarker = new daum.maps.Marker({  
+                map: map, // 도착 마커가 지도 위에 표시되도록 설정합니다
+                position: new daum.maps.LatLng(list[i].bb, list[i].ab),
+                draggable: true, // 도착 마커가 드래그 가능하도록 설정합니다
+                image: new daum.maps.MarkerImage(arriveSrc, arriveSize) // 도착 마커이미지를 설정합니다
+            });
+          }
 
-					clickLine.setPath(linepath);
-					clickLine.setMap(map);
-				} else if (result.status == "failure") {
-					window.alert("불러오기 실패입니다!");
-					}
+          clickLine.setPath(linepath);
+          clickLine.setMap(map);
+          var mapTypeControl = new daum.maps.MapTypeControl();
+          var zoomControl = new daum.maps.ZoomControl();
+          map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+          map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+        } else if (result.status == "failure") {
+          window.alert("불러오기 실패입니다!");
+          }
 });
 </script>
 </body>

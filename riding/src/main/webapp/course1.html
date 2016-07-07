@@ -53,109 +53,86 @@ margin-left: 20%;
 </head>
 
 <body onload="menuinit();">
-   <header>
-      <span><object id="mainbike" data="img/mainlogo.swf"
-            onclick="location.href='main.html'"></object></span>
-
-      <div class="upmenu">
-         <body onload="menuinit();">
-            <span><img id="home" src="img/b1.JPG"
-               onclick="location.href='main.html'"></span>
-            <span id="login" onclick="location.href='login.html'">login</span>
-            <span color="gray"> |</span>
-            <span id="logout" font-color="blue">logout</span>
-
-            <li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-               onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-               <div id="sub1" float="left">
-                  <ul>
-                     <li id="s1l1" onclick="location.href='myInfo.html'">MY INFO</a></li>
-                     <li id="s1l2" onclick="location.href='myList.html'">MY
-                        RIDING LIST</li>
-                  </ul>
-               </div>
-            </li>
-         <body onload="menuinit();">
-            <li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-               onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-               <div id="sub2" float="left">
-                  <ul>
-                     <li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-                        RIDING</a>
-                     </li>
-                     <li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-                        RIDING</a>
-                     </li>
-                  </ul>
-               </div>
-            </li>
-
-            <div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-               onmouseout="subMenuCloseBox('menu3','sub3')"
-               onclick="location.href='course.html'">
-               COURSE
-               <div id="sub3" float="left"></div>
-            </div>
-      </div>
-      <br> <br>
-   </header>
-    <body>
-   <p id="d1"><b>아라 자전거길</p></b>
-    <hr style="border: 1px solid silver;" width="120%">
-   <p id="d2">청라국제도시 역에 도착하면 국토종주를 시작할 수 있는 출발지를 볼 수 있다. 아라서해갑문<br>
-              에서 부산까지 633km 자전거길이 있다. 아라 자전거길은 아라서 해갑문에서 한강 한강갑문까<br> 
-              지 아라뱃길을 따라 총 21km이고 중간지점 계양역에서 굴포천 자전거길로 도 갈 수 있다.<br>  
-              16개의 '이야기다리' 아라자전거길이 자랑하는 명물이다. 서해의 바다냄새와 바람을 느끼며<br>
-              라이딩을 즐길 수 있다. 아라자전거길은 난이도가 쉽기 때문에 누구나 즐길 수가 있다.<br>
-              4대강 국토종주 준비하는 분들은 아라서해갑문에서 만들 수 있다. 가격은 지도 포함해서 4500원<br>
-              이다. 서해갑문 아니더라도 온라인에서도 구매할 수 있다. 자전거 길마다 스탬프 모으는 재미도<br>
-              쏠쏠하다. 아라 자전거길은 자전거로는 1~2시간 걸리고 도보로는 2~3시간 정도 걸린다.</p><br>
-   
-     <p id="d3"><b>코스 안내</p></b>
-    <hr style="border: 1px solid silver;" width="120%">
-  
-     <img id="cos2" src="img/코스사진6.jpg">
-     
-     
-      <p id="d4"><b>교통편 안내</p></b>
-    <hr style="border: 1px solid silver;" width="120%">
-  
-    <img id="cos3" src="img/코스사진7.jpg">
+  <header>
+  <div>
     
-     
-
-    </body>
-   
-   
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-      <li data-target="#myCarousel" data-slide-to="3"></li>
-      <li data-target="#myCarousel" data-slide-to="4"></li>
-    </ol>
-      <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox" >
-
-      <div class="item active">
-        <img src="img/코스사진1.jpg" id="cos1">
-      </div>
-      <div class="item">
-        <img src="img/코스사진2.jpg" id="cos1">
-      </div>
-      <div class="item">
-        <img src="img/코스사진3.jpg" id="cos1">
-      </div>
-        <div class="item">
-        <img src="img/코스사진4.jpg" id="cos1">
-      </div>
-        <div class="item">
-        <img src="img/코스사진5.jpg" id="cos1">
-      </div>
+    <div class="row">
+        <a href="main.html">
+          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+        </a>
     </div>
+    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
     
+    <div class="upmenu1">
+      <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
+      <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
+      /></span><label>log out</label>
+    </div> 
+     
+    <div class="upmenu2">
+      <nav id="nav-1">
+        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+      </nav>
+    </div>  
+  </div>
+  </header>
+   
+   <div id="container">
+   
+	   <p id="d1"><b>아라 자전거길</b></p>
+	    <hr style="border: 1px solid silver;" width="120%">
+	   <p id="d2">청라국제도시 역에 도착하면 국토종주를 시작할 수 있는 출발지를 볼 수 있다. 아라서해갑문<br>
+	              에서 부산까지 633km 자전거길이 있다. 아라 자전거길은 아라서 해갑문에서 한강 한강갑문까<br> 
+	              지 아라뱃길을 따라 총 21km이고 중간지점 계양역에서 굴포천 자전거길로 도 갈 수 있다.<br>  
+	              16개의 '이야기다리' 아라자전거길이 자랑하는 명물이다. 서해의 바다냄새와 바람을 느끼며<br>
+	              라이딩을 즐길 수 있다. 아라자전거길은 난이도가 쉽기 때문에 누구나 즐길 수가 있다.<br>
+	              4대강 국토종주 준비하는 분들은 아라서해갑문에서 만들 수 있다. 가격은 지도 포함해서 4500원<br>
+	              이다. 서해갑문 아니더라도 온라인에서도 구매할 수 있다. 자전거 길마다 스탬프 모으는 재미도<br>
+	              쏠쏠하다. 아라 자전거길은 자전거로는 1~2시간 걸리고 도보로는 2~3시간 정도 걸린다.</p><br>
+	   
+	     <p id="d3"><b>코스 안내</b></p>
+	    <hr style="border: 1px solid silver;" width="120%">
+	  
+	     <img id="cos2" src="img/코스사진6.jpg">
+	     
+	     
+	      <p id="d4"><b>교통편 안내</b></p>
+	    <hr style="border: 1px solid silver;" width="120%">
+	  
+	    <img id="cos3" src="img/코스사진7.jpg">
+    
+	    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+		    <!-- Indicators -->
+		    <ol class="carousel-indicators">
+		      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		      <li data-target="#myCarousel" data-slide-to="1"></li>
+		      <li data-target="#myCarousel" data-slide-to="2"></li>
+		      <li data-target="#myCarousel" data-slide-to="3"></li>
+		      <li data-target="#myCarousel" data-slide-to="4"></li>
+		    </ol>
+		      <!-- Wrapper for slides -->
+		    <div class="carousel-inner" role="listbox" >
+		
+		      <div class="item active">
+		        <img src="img/코스사진1.jpg" id="cos1">
+		      </div>
+		      <div class="item">
+		        <img src="img/코스사진2.jpg" id="cos1">
+		      </div>
+		      <div class="item">
+		        <img src="img/코스사진3.jpg" id="cos1">
+		      </div>
+		        <div class="item">
+		        <img src="img/코스사진4.jpg" id="cos1">
+		      </div>
+		        <div class="item">
+		        <img src="img/코스사진5.jpg" id="cos1">
+		      </div>
+	      </div>
+     </div>
+    </div>
 
 
 

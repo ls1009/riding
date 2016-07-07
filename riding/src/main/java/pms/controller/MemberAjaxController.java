@@ -33,7 +33,7 @@ public class MemberAjaxController {
   @RequestMapping(value="add", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String add(
-		 String name,String email,String pw,String ph,String position,String gender,String img) 
+		 String name,String email,String pw,String ph,String gender,String img) 
 	     throws ServletException, IOException {
 
     Member member = new Member();
@@ -41,7 +41,6 @@ public class MemberAjaxController {
     member.setEmail(email);
     member.setPw(pw);
     member.setPh(ph);
-    member.setPosition(position);
     member.setGender(gender);
     member.setImg(img);
     
@@ -151,18 +150,15 @@ public class MemberAjaxController {
       produces="application/json;charset=UTF-8")
   @ResponseBody
   public String update(
-  int no, String name,String email,String pw,String ph,String position,String gender,String img) 
+  int no, String name,String pw,String ph,String gender) 
   throws ServletException, IOException {
-    
+    System.out.println(no);
     Member member = new Member();
     member.setNo(no);
     member.setName(name);
-    member.setEmail(email);
     member.setPw(pw);
     member.setPh(ph);
-    member.setPosition(position);
     member.setGender(gender);
-    member.setImg(img);
     
     HashMap<String,Object> result = new HashMap<>();
     try {
@@ -176,39 +172,79 @@ public class MemberAjaxController {
   
   @RequestMapping(value = "memberImg", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
   public String insert(
-		  MultipartHttpServletRequest request, ModelMap model, HttpSession session) 
-		  throws IllegalStateException, IOException{
-	  Member member = (Member)session.getAttribute("loginUser");
-	  Map<String, MultipartFile> files = request.getFileMap();
-	  CommonsMultipartFile cmf = (CommonsMultipartFile) files.get("uploadFile");
-	  // 경로
-	  String path ="c:/dev/workspace/ridingTest/src/main/webapp/img/memberImg/"
-	  +member.getNo()+".jpg";
-
-	  File file = new File(path);
-	  // 파일 업로드 처리 완료.
-	  cmf.transferTo(file);
-	  
-	  return "redirect:../../myInfo.html";
+        MultipartHttpServletRequest request, ModelMap model, HttpSession session, MultipartFile myPhoto, Member sessionMember) 
+        throws IllegalStateException, IOException{
+	  	Member member = null;
+		if((Member)session.getAttribute("loginUser") == null) {
+			member = sessionMember;
+		} else {
+			member = (Member)session.getAttribute("loginUser");
+		}
+     
+     System.out.println(myPhoto.getOriginalFilename());
+    /* String path ="C:/bitcamp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp4/wtpwebapps/ridingTest/img/memberImg/"
+     +member.getNo()+".jpg";
+  
+     File file = new File(path);
+     // 파일 업로드 처리 완료.
+*/     
+    int extPoint = myPhoto.getOriginalFilename().lastIndexOf(".");
+    String filename = System.currentTimeMillis() + myPhoto.getOriginalFilename().substring(extPoint);
+    String path ="C:/dev/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/ridingTest/img/memberImg/"
+        +filename;
+    String dbpath ="img/memberImg/"+filename;
+    
+    member.setImg(dbpath);
+    try {
+      memberService.change(member);
+      myPhoto.transferTo(new File(path));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+     return "redirect:../../myInfo.html";
   }
 
   @RequestMapping(value="getImg",
-		  method=RequestMethod.GET,
-		  produces="application/json;charset=UTF-8")
+        method=RequestMethod.POST,
+        produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String getImg(HttpSession session) throws ServletException, IOException {
-	  Member member = (Member)session.getAttribute("loginUser");
-	  String url = "img/memberImg/"+
-			  		member.getNo()+".jpg";
-
-	  HashMap<String,Object> result = new HashMap<>();
-	  try {
-		  result.put("status", url);
-	  } catch (Exception e) {
-		  result.put("status", "failure");
-	  }
-	  return new Gson().toJson(result);
+  public String getImg(HttpSession session, Member sessionMember) throws ServletException, IOException {
+	Member member = null;
+	if((Member)session.getAttribute("loginUser") == null) {
+		member = sessionMember;
+	} else {
+		member = (Member)session.getAttribute("loginUser");
+	}
+	
+     String url = member.getImg();
+     HashMap<String,Object> result = new HashMap<>();
+     try {
+        result.put("status", url);
+     } catch (Exception e) {
+        result.put("status", "failure");
+     }
+     return new Gson().toJson(result);
   }
+  
+  @RequestMapping(value="loginMember",
+      method=RequestMethod.POST,
+      produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String loginMember(HttpSession session, Member sessionMember) throws ServletException, IOException {
+	Member member = null;
+	if((Member)session.getAttribute("loginUser") == null) {
+		member = sessionMember;
+		System.out.println("clientSession "+member);
+	} else {
+		member = (Member)session.getAttribute("loginUser");
+		System.out.println("getAttribute "+member);
+	}
+	System.out.println(member);
+	System.out.println(sessionMember);
+    return new Gson().toJson(member);
+  }
+  
 }//
 
 

@@ -10,6 +10,7 @@ import pms.dao.BoardDao;
 import pms.service.BoardService;
 import pms.vo.Board;
 import pms.vo.MapDot;
+import pms.vo.Member;
 
 @Service
 public class DefaultBoardService implements BoardService {
@@ -28,6 +29,11 @@ public class DefaultBoardService implements BoardService {
   @Override
   public void deleteMap(int bno) {
 	  boardDao.deleteMap(bno);
+  }
+  
+  @Override
+  public void deleteMemberList(int bno) {
+	  boardDao.deleteMemberList(bno);
   }
   
   @Override
@@ -61,37 +67,40 @@ public class DefaultBoardService implements BoardService {
   }
   
   @Override
-  public List<Board> ListSchedule(int pageNo, int pageSize, int no) {
+  public List<Board> ListSchedule(int pageNo, int pageSize, int no,  String rbtype) {
 	  HashMap<String,Object> paramMap = new HashMap<>();
 	  paramMap.put("startIndex", (pageNo - 1) * pageSize);
 	  paramMap.put("length", pageSize);
 	  paramMap.put("no", no);
+	  paramMap.put("rbtype", rbtype);
 
 	  return boardDao.selectListSchedule(paramMap);
   }
 
   @Override
-  public List<Board> ListHistory(int pageNo, int pageSize, int no) {
+  public List<Board> ListHistory(int pageNo, int pageSize, int no,  String rbtype) {
 	  HashMap<String,Object> paramMap = new HashMap<>();
 	  paramMap.put("startIndex", (pageNo - 1) * pageSize);
 	  paramMap.put("length", pageSize);
 	  paramMap.put("no", no);
+	  paramMap.put("rbtype", rbtype);
 
 	  return boardDao.selectListHistory(paramMap);
   }
 
   @Override
-  public void putMap(String ab, String bb) {
+  public void putMap(String ab, String bb, int bno) {
 	  HashMap<String,Object> paramMap = new HashMap<>();
 	  
-	  Board board = boardDao.getLast(1);
-	  int bno = board.getBno();
-	  System.out.println(bno);
+	  if(bno == -1) {
+		  Board board = boardDao.getLast(1);
+		  bno = board.getBno();
+	  }
+	  
 	  paramMap.put("ab", ab);
 	  paramMap.put("bb", bb);
 	  paramMap.put("bno", bno);
 	  boardDao.insertxy(paramMap);
-
   }
 
   @Override
@@ -121,6 +130,21 @@ public class DefaultBoardService implements BoardService {
 	  paramMap.put("bno", bno);
 	  paramMap.put("mno", mno);
 	  return boardDao.isJoin(paramMap);
+  }
+
+  @Override
+  public void putImg(String dbpath, int bno) {
+	  HashMap<String,Object> paramMap = new HashMap<>();
+	  paramMap.put("bno", bno);
+	  paramMap.put("dbpath", dbpath);
+	  boardDao.putImg(paramMap);
+  }
+
+  @Override
+  public List<String> getImg(int bno) {
+	  HashMap<String,Object> paramMap = new HashMap<>();
+	  paramMap.put("bno", bno);
+	  return boardDao.getImg(paramMap);
   }
 
 }//

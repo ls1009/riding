@@ -1,6 +1,7 @@
 package pms.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -12,14 +13,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.google.gson.Gson;
 
 import pms.service.MemberService;
+import pms.vo.Board;
 import pms.vo.Member;
 
 @Controller
@@ -38,12 +42,13 @@ public class AuthController {
   }*/
   
   @RequestMapping(value="/login", method=RequestMethod.POST)
+  @ResponseBody
   public String login(
       String email,
       String password,
       String emailsave,
       HttpServletResponse response,
-      HttpServletRequest request,
+      HttpSession session,
       Model model) {
     if (emailsave != null) {
       Cookie cookie = new Cookie("email", email);
@@ -55,17 +60,20 @@ public class AuthController {
       response.addCookie(cookie);
     }
     
+    HashMap<String,Object> result = new HashMap<>();
+    
     if (memberService.exist(email, password)) {
       Member member = memberService.retrieveByEmail(email);
       //model.addAttribute("loginUser", member);
-      HttpSession session = request.getSession();
       session.setAttribute("loginUser", member);
+      result.put("loginUser", member);
       System.out.println(session.getAttribute("loginUser"));
-      return "redirect:../main.html";
+      result.put("status", "success");
 
     } else { // 로그인 실패!
-      return "redirect:../login.html?status=fail";
+    	result.put("status", "fail");
     }
+    return new Gson().toJson(result);
   }
   
   @RequestMapping("/logout")
@@ -74,7 +82,7 @@ public class AuthController {
     session.invalidate(); // HttpSession 객체 무효화시킨다.
                           // => invalidate()는 스프링에서 @SessionAttributes로
                           //    관리하는 값을 제거하지 못한다.
-    return "redirect:../login.html";
+    return "redirect:../intro.html";
   }
   
   @RequestMapping(value="/log", produces="application/json;charset=UTF-8")

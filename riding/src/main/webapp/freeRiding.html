@@ -12,78 +12,66 @@
   
 <title>Free Riding</title>
 <style>
-.container {
-   width: 90%;
-   font-size:15px;
-}
-th {
-   margin-right: 500px;
-}
 #boadLocationText {
   text-align:center;
   font-weight: 900;
   font-size: 40px;
   color:white;
   letter-spacing: 10px;
-  margin-bottom: 7px;
-  margin-left:400px;
+  margin:auto;
   padding-top:8%;
   width:230px;
   height:230px;
   background-image : url('img/seoul.png')
 }
+#prev {
+  margin-right: 5%;
+}
+#prev, #next, #write {
+  size:20px;
+  cursor: pointer;
+}
+#write {
+  margin-left: 95%;
+}
+#container {
+}
 </style>
 
 </head>
 
-<body onload="menuinit();">
-	<header>
-		<span><object id="mainbike" data="img/main.swf"
-				onclick="location.href='main.html'"></object></span>
-
-		<div class="upmenu">
-
-			<span><img id="home" src="img/b1.JPG"
-				onclick="location.href='main.html'"></span> <span id="login"
-				onclick="location.href='login.html'">login</span> <span id="logout"
-				onclick="location.href='auth/logout.do'">logout</span>
-			<li id="menu1" onmouseover="subMenuOpenBox('menu1','sub1')"
-				onmouseout="subMenuCloseBox('menu1','sub1')">MY RIDING
-				<div id="sub1" float="left">
-					<ul>
-						<li id="s1l1" onclick="location.href='myInfo.html'">MY INFO</a></li>
-						<li id="s1l2" onclick="location.href='myList.html'">MY RIDING
-							LIST</li>
-					</ul>
-				</div>
-			</li>
-			<li id="menu2" onmouseover="subMenuOpenBox('menu2','sub2')"
-				onmouseout="subMenuCloseBox('menu2','sub2')">RIDING
-				<div id="sub2" float="left">
-					<ul>
-						<li id="s2l1" onclick="location.href='freeLocation.html'">FREE
-							RIDING</a>
-						</li>
-						<li id="s2l2" onclick="location.href='guideLocation.html'">GUIDE
-							RIDING</a>
-						</li>
-					</ul>
-				</div>
-			</li>
-			<div id="menu3" onmouseover="subMenuOpenBox('menu3','sub3')"
-				onmouseout="subMenuCloseBox('menu3','sub3')"
-				onclick="location.href='course.html'">
-				COURSE
-				<div id="sub3" float="left"></div>
-			</div>
-		</div>
+<body>
+  <header>
+  <div>
+    
+    <div class="row">
+        <a href="main.html">
+          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+        </a>
+    </div>
+    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
+    
+    <div class="upmenu1">
+      <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
+      <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
+      /></span><label>log out</label>
+    </div> 
+     
+    <div class="upmenu2">
+      <nav id="nav-1">
+        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+      </nav>
+    </div>  
+  </div>
+  </header>
 		<br> <br>
 
 		<center id="boadLocationText">SEOUL</center>
 		<hr width=100px>
-	</header>
 
-	<div class="container">
+	<div id="container">
 		<table id="boardTable" class="table table-hover">
 			<caption>Riding List</caption>
 			<thead>
@@ -97,35 +85,31 @@ th {
       
 			<tbody>
 			</tbody>
+      <img src="img/pen.png" id="write" width="50px"/>
 		</table>
-	</div>
+   <p id="number" class="text-center" ></p>
+   <center>
+   <span id="prev" >prev</span>
+   <span id="next">next</span>
+   </center>
+  </div>
+  
+   
+   
+  <br>
+  <br>
+  <br>
 
-	<button type="button" class="btn btn-default btn pull-right" id="write">WRITE</button>
-	<br>
-	<br>
-	<br>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
-				</div>
-				<div class="modal-body">...</div>
-			</div>
-		</div>
-	</div>
 
   <script src="bower_components/moment/moment.js"></script>
-	<script src="bower_components/jquery/dist/jquery.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="bower_components/handlebars/handlebars.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.alsEN-1.0.min.js"></script>
 
-	<script type="text/javascript" src="js/simple-lightbox.min.js"></script>
-	<script type="text/javascript" src="js/menu.js"></script>
-	<script type="text/javascript">
-	
+  <script type="text/javascript" src="js/simple-lightbox.min.js"></script>
+  <script type="text/javascript" src="js/menu.js"></script>
+  <script type="text/javascript">
+  
 $.extend({
     getUrlVars: function(){
         var vars = [], hash;
@@ -144,42 +128,41 @@ $.extend({
 
 var ploca = $.getUrlVar('loca');
 var prbtype = $.getUrlVar('rbtype');
-var tempimg;
+var pageNo=1;
 
 loadBoardList();
-
 function loadBoardList() {
-  $.getJSON("ajax/board/list.do?loca="+ploca+"&rbtype="+prbtype, function(result) {
+  $.getJSON("ajax/board/list.do?loca="+ploca+"&rbtype="+prbtype+"&pageNo="+pageNo, function(result) {
       var list = result.list;
       var tbody = $("#boardTable tbody");
+      $("#number").empty();
+      $("#number").append(pageNo);
       for (var i in list) {
       list[i].imglo="mapImg/map1.JPG";
         $("<tr>")
           .html(
-       		  "<td onclick=\"location.href='freeRead.html?no=" + list[i].bno + 
-       				  "&loca="+ ploca + "&rbtype=" + prbtype +"'\""+
-       				  "style=\"cursor:pointer\">" + list[i].title + "</td>" +
-            "<td>" + moment(list[i].mday, 'MM/DD/YYYY').format().substr(0,10) + "</td>" +
-            "<td>"+"<img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' >"+"</td>" + 
-            "<td>" + moment(list[i].createdDate, 'MM/DD/YYYY').format().substr(0,10) + "</td>")
+            "<td class=\"col-md-3\"  onclick=\"location.href='freeRead.html?no=" + list[i].bno + 
+                "&loca="+ ploca + "&rbtype=" + prbtype +"'\""+
+                "style=\"cursor:pointer\">" + list[i].title + "</td>" +
+            "<td class=\"col-md-3\" >" + moment(list[i].mday, 'MM/DD/YYYY').format().substr(0,10) + "</td>" +
+            "<td class=\"col-md-3\" >"+"<center><img width=30 height=30 id=\"map\" src='"+list[i].imglo+"' class='img-responsive' ></center>"+"</td>" + 
+            "<td class=\"col-md-1\" >" + moment(list[i].createdDate, 'MM/DD/YYYY').format().substr(0,10) + "</td>")
           .appendTo(tbody);
         $(document).ready(function () {
-            $("img").simpleLightBox(); 
+            $("#map").simpleLightBox(); 
         }); 
       }
   });
 }
 function popup(url) {
-	  window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
+    window.open(url,"Map",'location=no,menubar=no,resizable=no,width=600,height=600');
 }
 $("#write").click(function(event) {location.href = 
-	"freeWrite.html?loca="+ploca+"&rbtype="+prbtype});
-	
-	
-$('#myModal').on('shown.bs.modal', function () {
-	  $('#myInput').focus()
-});
-
+  "freeWrite.html?loca="+ploca+"&rbtype="+prbtype});
+$("#next").click(function(event) {pageNo+=1;$("tbody").empty();
+loadBoardList();});
+$("#prev").click(function(event) {pageNo-=1;$("tbody").empty();
+loadBoardList();});
 </script>
 </body>
 </html>

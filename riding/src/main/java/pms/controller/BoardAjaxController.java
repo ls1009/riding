@@ -1,9 +1,8 @@
 package pms.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
@@ -30,13 +30,21 @@ import pms.vo.Member;
 public class BoardAjaxController {
   @Autowired BoardService boardService;
   
+  int currentBno = 0;
+  
   @RequestMapping(value="Add", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
   public String add
   (String title, String mloca, String mtime,String mday, String distance, String time,
-		  String pnum, String ph, String loca, String rbtype, HttpSession session)
+		  String pnum, String ph, String loca, String rbtype, HttpSession session, Member sessionMember)
   throws ServletException, IOException {
-	Member member = (Member)session.getAttribute("loginUser");
+    Member member = null;
+	if((Member)session.getAttribute("loginUser") == null) {
+		member = sessionMember;
+	} else {
+		member = (Member)session.getAttribute("loginUser");
+	}
+	
     Board board = new Board();
     board.setTitle(title);
     board.setMloca(mloca);
@@ -64,14 +72,15 @@ public class BoardAjaxController {
   
   @RequestMapping(value="delete", produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String delete(int no, HttpSession session) 
+  public String delete(int bno, HttpSession session) 
       throws ServletException, IOException {
     HashMap<String,Object> result = new HashMap<>();
     try {
-	      boardService.delete(no);
-	      boardService.deleteMap(no);
-	      result.put("status", "success");
-	      return new Gson().toJson(result);
+	  boardService.deleteMemberList(bno);
+      boardService.delete(bno);
+      boardService.deleteMap(bno);
+      result.put("status", "success");
+      return new Gson().toJson(result);
     } catch (Exception e) {
       result.put("status", "failure");
     }
@@ -95,9 +104,15 @@ public class BoardAjaxController {
   
   @RequestMapping(value="detail", produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String detail(int no, HttpSession session) throws ServletException, IOException {
-	Member member = (Member)session.getAttribute("loginUser");
-	Board board = boardService.retrieve(no);
+  public String detail(int bno, HttpSession session, Member sessionMember) throws ServletException, IOException {
+	  Member member = null;
+		if((Member)session.getAttribute("loginUser") == null) {
+			member = sessionMember;
+		} else {
+			member = (Member)session.getAttribute("loginUser");
+		}
+	
+	Board board = boardService.retrieve(bno);
 	HashMap<String,Object> result = new HashMap<>();
 
 	if(board.getMno() == member.getNo()) {
@@ -144,6 +159,7 @@ public class BoardAjaxController {
       @RequestParam(defaultValue="5") int pageSize,
       HttpServletRequest request) 
       throws ServletException, IOException {
+	  
     // 페이지 번호와 페이지 당 출력 개수의 유효성 검사
     if (pageNo < 0) { // 1페이지 부터 시작
       pageNo = 1;
@@ -177,7 +193,7 @@ public class BoardAjaxController {
   public String listSchedule(
       @RequestParam(defaultValue="1") int pageNo, 
       @RequestParam(defaultValue="5") int pageSize,
-      HttpSession session) 
+      HttpSession session, String rbtype, Member sessionMember) 
       throws ServletException, IOException {
     // 페이지 번호와 페이지 당 출력 개수의 유효성 검사
     if (pageNo < 0) { // 1페이지 부터 시작
@@ -195,8 +211,15 @@ public class BoardAjaxController {
       pageSize = 50;
     }
     
-    Member member = (Member) session.getAttribute("loginUser");
-    List<Board> list = boardService.ListSchedule(pageNo, pageSize, member.getNo());
+    Member member = null;
+	if((Member)session.getAttribute("loginUser") == null) {
+		member = sessionMember;
+		System.out.println(member);
+	} else {
+		member = (Member)session.getAttribute("loginUser");
+	}
+    
+    List<Board> list = boardService.ListSchedule(pageNo, pageSize, member.getNo(), rbtype);
     HashMap<String,Object> result = new HashMap<>();
     result.put("pageNo", pageNo);
     result.put("pageSize", pageSize);
@@ -210,7 +233,7 @@ public class BoardAjaxController {
   public String listHistory(
       @RequestParam(defaultValue="1") int pageNo, 
       @RequestParam(defaultValue="5") int pageSize,
-      HttpSession session) 
+      HttpSession session, String rbtype, Member sessionMember) 
       throws ServletException, IOException {
     // 페이지 번호와 페이지 당 출력 개수의 유효성 검사
     if (pageNo < 0) { // 1페이지 부터 시작
@@ -228,8 +251,14 @@ public class BoardAjaxController {
       pageSize = 50;
     }
     
-    Member member = (Member) session.getAttribute("loginUser");
-    List<Board> list = boardService.ListHistory(pageNo, pageSize, member.getNo());
+    Member member = null;
+	if((Member)session.getAttribute("loginUser") == null) {
+		member = sessionMember;
+	} else {
+		member = (Member)session.getAttribute("loginUser");
+	}
+    
+    List<Board> list = boardService.ListHistory(pageNo, pageSize, member.getNo(), rbtype);
     HashMap<String,Object> result = new HashMap<>();
     result.put("pageNo", pageNo);
     result.put("pageSize", pageSize);
@@ -246,7 +275,7 @@ public class BoardAjaxController {
 
 	  HashMap<String,Object> result = new HashMap<>();
 	try {
-	    boardService.putMap(ab, bb);
+	    boardService.putMap(ab, bb, -1);
 	    result.put("status", "success");
 	}catch(Exception e) {
 		result.put("status", "failure");
@@ -256,11 +285,11 @@ public class BoardAjaxController {
   
   @RequestMapping(value="getMap", produces="application/json;charset=UTF-8", method=RequestMethod.GET)
   @ResponseBody
-  public String putMap(int no) 
+  public String putMap(int bno) 
       throws ServletException, IOException {
 
 	  HashMap<String,Object> result = new HashMap<>();
-	  List<MapDot> list = boardService.getMap(no);
+	  List<MapDot> list = boardService.getMap(bno);
 	  result.put("list", list);
 	try {
 	    result.put("status", "success");
@@ -270,20 +299,41 @@ public class BoardAjaxController {
     return new Gson().toJson(result);
   }
   
-  @RequestMapping(value="join", produces="application/json;charset=UTF-8", method=RequestMethod.GET)
+  @RequestMapping(value="changeMap", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
   @ResponseBody
-  public String join(int no, HttpSession session) 
+  public String changeMap(int bno, String ab, String bb, HttpSession session) 
       throws ServletException, IOException {
 
-  	Member member = (Member)session.getAttribute("loginUser");
+	  HashMap<String,Object> result = new HashMap<>();
+	try {
+	    boardService.putMap(ab, bb, bno);
+	    result.put("status", "success");
+	}catch(Exception e) {
+		result.put("status", "failure");
+	}
+    return new Gson().toJson(result);
+  }
+  
+  @RequestMapping(value="join", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
+  @ResponseBody
+  public String join(int bno, HttpSession session, Member sessionMember) 
+      throws ServletException, IOException {
+
+    Member member = null;
+	if((Member)session.getAttribute("loginUser") == null) {
+		member = sessionMember;
+	} else {
+		member = (Member)session.getAttribute("loginUser");
+	}
+	
 	HashMap<String,Object> result = new HashMap<>();
 	
 	try {
-		if(boardService.isJoin(no, member.getNo()) > 0) {
-			boardService.joinCancel(no, member.getNo());
+		if(boardService.isJoin(bno, member.getNo()) > 0) {
+			boardService.joinCancel(bno, member.getNo());
 			result.put("status", "cancel");
 		}else {
-			boardService.join(no, member.getNo());
+			boardService.join(bno, member.getNo());
 			result.put("status", "success");
 		}
 	}catch(Exception e) {
@@ -294,18 +344,76 @@ public class BoardAjaxController {
   
   @RequestMapping(value="isJoin", produces="application/json;charset=UTF-8", method=RequestMethod.GET)
   @ResponseBody
-  public String isJoin(int no, HttpSession session) 
+  public String isJoin(int bno, HttpSession session, Member sessionMember) 
       throws ServletException, IOException {
 
-  	Member member = (Member)session.getAttribute("loginUser");
+	Member member = null;
+	if((Member)session.getAttribute("loginUser") == null) {
+		member = sessionMember;
+	} else {
+		member = (Member)session.getAttribute("loginUser");
+	}
 	HashMap<String,Object> result = new HashMap<>();
 	
 	try {
-		if(boardService.isJoin(no, member.getNo()) > 0) {
+		if(boardService.isJoin(bno, member.getNo()) > 0) {
 			result.put("status", "yes");
 		}else {
 			result.put("status", "no");
 		}
+	}catch(Exception e) {
+		result.put("status", "failure");
+	}
+    return new Gson().toJson(result);
+  }
+  
+  @RequestMapping(value="putImg", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
+  public String putImg(MultipartFile img, HttpSession session) 
+      throws ServletException, IOException {
+	  int bno = currentBno;
+	  int extPoint = img.getOriginalFilename().lastIndexOf(".");
+      String filename = System.currentTimeMillis() + img.getOriginalFilename().substring(extPoint);	 
+      
+	  String path ="C:/dev/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/ridingTest/img/boardImg/"+filename;
+	  String dbpath ="img/boardImg/"+filename;	  
+	  
+	  HashMap<String,Object> result = new HashMap<>();
+	  try {
+	    boardService.putImg(dbpath, bno);
+	    List<String> imgPath = boardService.getImg(bno);
+		img.transferTo(new File(path));	
+		result.put("list", imgPath);
+	    result.put("status", "success");
+	}catch(Exception e) {
+		result.put("status", "failure");
+	}
+    return "redirect:../../freeRead.html?bno="+bno;
+  }
+  
+  @RequestMapping(value="getImg", produces="application/json;charset=UTF-8", method=RequestMethod.GET)
+  @ResponseBody
+  public String getImg(int bno, HttpSession session) 
+      throws ServletException, IOException {
+	  HashMap<String,Object> result = new HashMap<>();
+	  try {
+	    List<String> imgPath = boardService.getImg(bno);
+		result.put("list", imgPath);
+	    result.put("status", "success");
+	}catch(Exception e) {
+		result.put("status", "failure");
+	}
+	return new Gson().toJson(result);
+  }
+  
+  @RequestMapping(value="boardNo", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
+  @ResponseBody
+  public String boardNo(HttpSession session, int bno) 
+      throws ServletException, IOException {
+	  currentBno = bno;
+	  HashMap<String,Object> result = new HashMap<>();
+	  try {
+		result.put("bno", bno);
+	    result.put("status", "success");
 	}catch(Exception e) {
 		result.put("status", "failure");
 	}

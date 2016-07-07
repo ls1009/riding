@@ -1,39 +1,263 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
-   <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="css/introcss/intronormalize.css" />
+  <link rel="stylesheet" type="text/css" href="css/introcss/introdemo.css" />
+  
+  <link rel="stylesheet" type="text/css" href="css/introcss/intro.css" />
+  <link href='http://fonts.googleapis.com/css?family=Raleway:200,400,800|Clicker+Script' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="css/introcss/loginComponent.css" />
+  <link rel="stylesheet" type="text/css" href="css/introcss/loginContent.css" />
+  
+  <script src="js/introjs/modernizr.custom.js"></script>
+  
+	<style>
+	.main-title {
+	  cursor:pointer;
+	}
+	html {
+	 width: 100%;
+	}
+	#gender {
+	 background-color: rgba( 255, 255, 255, 0.5 );
+	}
+	.hj {
+	 height: 35px;
+	}
+	option {
+	 background-color: rgba( 0, 0, 0, 0.7 );
+	}
+	</style>
+</head>
+<body>
+   <!-- /container -->
+   <div class="container demo-2">
+      <div class="content">
+         <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+            <h1 class="main-title">
+               Riding
+            </h1>
+             <center>
+   <div class="mockup-content">
+     <div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
+       <button type="button">Login</button>
+       <div class="morph-content">
+         <div>
+           <div class="content-style-form content-style-form-1">
+             <span class="icon icon-close">Close the dialog</span>
+             <h2>Login</h2>
+             <form >
+               <p><label>Email</label><input id="logemail" name="email" type="text" /></p>
+               <p><label>Password</label><input id="logpassword" name="password" type="password" /></p>
+               <p><button id="login">Login</button></p>
+             </form>
+           </div>
+         </div>
+       </div>
+     </div><!-- morph-button -->
 
-        <meta name="description" content="Examples for creative website header animations using Canvas and JavaScript" />
-        <meta name="keywords" content="header, canvas, animated, creative, inspiration, javascript" />
-        <meta name="author" content="Codrops" />
-        <link rel="shortcut icon" href="../favicon.ico">
-        <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-        <link rel="stylesheet" type="text/css" href="css/demo.css" />
-        <link rel="stylesheet" type="text/css" href="css/component.css" />
-        <link href='http://fonts.googleapis.com/css?family=Raleway:200,400,800|Clicker+Script' rel='stylesheet' type='text/css'>
-      
-      <style>
-        .main-title {
-          cursor:pointer;
-        }
-      </style>
-   </head>
-   <body>
-      <div class="container demo-2">
-         <div class="content">
-                <div id="large-header" class="large-header">
-                    <canvas id="demo-canvas"></canvas>
-                    <h1 class="main-title" onclick="location.href='main.html'">Riding</span></h1>
-                </div>
-              
-                
-            </div>
-          
-            </section>
-            
-        <script src="js/rAF.js"></script>
-        <script src="js/demo-2.js"></script>
-   </body>
+     <div class="morph-button morph-button-modal morph-button-modal-3 morph-button-fixed">
+       <button type="button">Signup</button>
+       <div class="morph-content" style="overflow:auto;">
+         <div>
+           <div class="content-style-form content-style-form-2">
+             <span class="icon icon-close">Close the dialog</span>
+             <h2>Sign Up</h2>
+             <form>
+               <p><label>Name<font  name="nameCheck" size="2" color="red"></font></label>
+               <input class="hj" id="name" type="text"/></p>
+               
+               <p><label>Email<font  name="emailCheck" size="2" color="red"></font></label>
+               <input class="hj" id="email" type="text"/></p>
+               
+               <p><label>Password<font  name="passwordCheck" size="2" color="red"></font></label>
+               <input class="hj" id="password"type="password"/></p>
+               
+               <p><label>Repeat Password<font name="check" size="2" color="red"></font> </label>
+               <input class="hj" id="repeat"type="password" /></p>
+               
+               <p><label>phone number<font  name="phonenumberCheck" size="2" color="red"></font></label>
+               <input class="hj" id="ph"type="text"/></p>
+               
+               <span>
+               <label>Gender</label> 
+               <select id="gender">
+                 <option>남자</option>
+                 <option>여자</option>
+               </select>
+               </span><br>
+               
+               
+               <p><button id="addBtn">Sign Up</button></p>
+             </form>
+           </div>
+         </div>
+       </div>
+   </div><!-- morph-button -->
+  </div><!-- /form-mockup -->
+</center>
+         </div>
+      </div>
+   </div>
+
+ 
+        
+ <script src="js/introjs/introrAF.js"></script>
+ <script src="js/introjs/introdemo-2.js"></script>
+ <script src="js/introjs/classie.js"></script>
+ <script src="js/introjs/uiMorphingButton_fixed.js"></script>
+ 
+ <script src="bower_components/jquery/dist/jquery.js"></script>
+ 
+ <script type="text/javascript">
+ $("#addBtn").click(function(event) {
+     $.post("ajax/member/add.do", {
+         name: $("#name").val(),
+         email: $("#email").val(),
+         pw: $("#password").val(),
+         ph: $("#ph").val(),
+         gender: $("#gender").val()
+       }, function(result) {
+         if (result.status == "success") {
+           location.href = "intro.html";
+         } else {
+           window.alert("등록 실패입니다!");
+         }
+       }, "json"
+     );
+   });
+ 
+ $("#login").click(function(event) {
+     $.post("auth/login.do", {
+         email: $("#logemail").val(),
+         password: $("#logpassword").val()
+       }, function(result) {
+         if (result.status == "success") {
+           location.href = "main.html";
+         } else {
+           window.alert("로그인 실패입니다!");
+         }
+       }, "json"
+     );
+   });
+
+ 
+  $('input[id=name]').keyup(function() {
+      if ($('input[id=name]').val() == '') {
+        $('font[name=nameCheck]').html("필수 입력 사항입니다");
+      } else {
+        $('font[name=nameCheck]').html("");
+      }
+    });
+    $('input[id=email]').keyup(function() {
+      if ($('input[id=email]').val() == '') {
+        $('font[name=emailCheck]').html("필수 입력 사항입니다");
+      } else {
+        $('font[name=emailCheck]').html("");
+      }
+    });
+    $('input[id=password]').keyup(function() {
+      if ($('input[id=password]').val() == '') {
+        $('font[name=passwordCheck]').html("필수 입력 사항입니다");
+      } else {
+        $('font[name=passwordCheck]').html("");
+      }
+    });
+    $('input[id=ph]').keyup(function() {
+      if ($('input[id=ph]').val() == '') {
+        $('font[name=phonenumberCheck]').html("필수 입력 사항입니다");
+      } else {
+        $('font[name=phonenumberCheck]').html("");
+      }
+    });
+
+ $(function(){
+     $('#password').keyup(function(){
+      $('font[name=check]').text('');
+     }); //#user_pass.keyup
+
+     $('#repeat').keyup(function(){
+      if($('#password').val()!=$('#repeat').val()){
+       $('font[name=check]').text('');
+       $('font[name=check]').html("암호 불일치");
+       $('font[name=check]').css('color','red');
+      }else {
+       $('font[name=check]').text('');
+       $('font[name=check]').html("암호 일치");
+       $('font[name=check]').css('color','green');
+      }
+     }); //#chpass.keyup
+    });
+ 
+ </script>
+ 
+ 
+ <script type="text/javascript">
+   (function() {
+     var docElem = window.document.documentElement, didScroll, scrollPosition;
+
+     // trick to prevent scrolling when opening/closing button
+     function noScrollFn() {
+       window.scrollTo( scrollPosition ? scrollPosition.x : 0, scrollPosition ? scrollPosition.y : 0 );
+     }
+
+     function noScroll() {
+       window.removeEventListener( 'scroll', scrollHandler );
+       window.addEventListener( 'scroll', noScrollFn );
+     }
+
+     function scrollFn() {
+       window.addEventListener( 'scroll', scrollHandler );
+     }
+
+     function canScroll() {
+       window.removeEventListener( 'scroll', noScrollFn );
+       scrollFn();
+     }
+
+     function scrollHandler() {
+       if( !didScroll ) {
+         didScroll = true;
+         setTimeout( function() { scrollPage(); }, 60 );
+       }
+     };
+
+     function scrollPage() {
+       scrollPosition = { x : window.pageXOffset || docElem.scrollLeft, y : window.pageYOffset || docElem.scrollTop };
+       didScroll = false;
+     };
+
+     scrollFn();
+
+     [].slice.call( document.querySelectorAll( '.morph-button' ) ).forEach( function( bttn ) {
+       new UIMorphingButton( bttn, {
+         closeEl : '.icon-close',
+         onBeforeOpen : function() {
+           // don't allow to scroll
+           noScroll();
+         },
+         onAfterOpen : function() {
+           // can scroll again
+           canScroll();
+         },
+         onBeforeClose : function() {
+           // don't allow to scroll
+           noScroll();
+         },
+         onAfterClose : function() {
+           // can scroll again
+           canScroll();
+         }
+       } );
+     } );
+
+   
+     [].slice.call( document.querySelectorAll( 'form button' ) ).forEach( function( bttn ) { 
+       bttn.addEventListener( 'click', function( ev ) { ev.preventDefault(); } );
+     } );
+   })();
+   </script>
+</body>
 </html>
