@@ -11,7 +11,7 @@
 
 <title>Free Riding</title>
 <style>
-.col-xs-5 {
+.col-md-5 {
   margin-left: 80px;
   margin-top: 20px;
 }
@@ -22,7 +22,7 @@ p {
   font-weight: bold;
 }
 #map {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 .profile {
 	border-radius: 80%;
@@ -52,6 +52,13 @@ td {
   color: white;
   z-index: 1000;
   margin-left: 890px;
+}
+.input-group-addon {
+	background-color: #47a3da;
+	color: white;
+}
+.form-control {
+	background-color: white;
 }
 </style>
 </head>
@@ -108,7 +115,7 @@ td {
         </div>
         </center>
         
-			<div class="col-xs-5">
+			<!-- <div class="col-xs-5">
 		  	<p>작성자</p>
 				<input id="writer" class="form-control" type="text" placeholder=""
 					disabled>
@@ -120,28 +127,65 @@ td {
 				<p>예상 소요시간</p><input id="time" type="text" class="form-control" disabled>
 				<p>모집인원</p><input id="pnum" type="text" class="form-control" disabled>
 				<p>연락처</p><input id="ph" type="text" class="form-control" disabled>
-      </div>
+      </div> -->
       
-        <div id="map" style="width: 500px; height: 540px;">
+      <div class="form-group">
+		<div class="col-md-5">
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="title" class="form-control" type="text" disabled>
+    	</div><br><br>
+			<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;장소&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="mloca" class="form-control" type="text" disabled>
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;날짜&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="mday" class="form-control" type="text" disabled>
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;시간&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="mtime" class="form-control" type="text" disabled>
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;총&nbsp;거리&nbsp;</span>
+     	 <input id="distance" class="form-control" type="text" disabled>
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">소요시간</span>
+     	 <input id="time" class="form-control" type="text" disabled>
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">모집인원</span>
+     	 <input id="pnum" class="form-control" type="text" disabled>
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">전화번호</span>
+     	 <input id="ph" class="form-control" type="text" disabled>
+    	</div><br>
+		</div>
+	</div>
+      
+        <div id="map" style="width: 492px; height: 550px;">
           <script type="text/javascript"
             src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
         </div><br>
 
         <div>
           <button id="changeBtn" type="button"
-            class="btn btn-default btn pull-right">수정</button>
+            class="btn btn-info btn pull-right" style="width: 100px;">수정</button>
         </div>
         <div>
           <button id="deleteBtn" type="button"
-            class="btn btn-default btn pull-right">삭제</button>
+            class="btn btn-info btn pull-right" style="width: 100px;">삭제</button>
         </div>
         <div>
           <button id="joinBtn" 
-            class="btn btn-default btn pull-right"><span id='j'>참여</span></button>
+            class="btn btn-info btn pull-right" style="width: 100px;"><span id='j'>참여</span></button>
         </div>
           <!-- Button trigger modal -->
         <div>
-        <button id="list" type="submit" class="btn btn-default btn pull-right" data-toggle="modal" data-target="#myModal">
+        <button id="list" type="submit" class="btn btn-info btn pull-right" data-toggle="modal" data-target="#myModal" style="width: 100px;">
           참여목록
         </button>
         </div>

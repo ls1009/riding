@@ -11,6 +11,7 @@
 
 <title>Free Riding Update</title>
 <style>
+#container {width: 1280px !important;}
 .col-xs-5 {
   margin-left: 80px;
 }
@@ -35,10 +36,20 @@
 
 #changeBtn {
   margin-right: 20px;
+  margin-top: 20px;
 }
 
 #cancel {
   margin-right: 20px;
+  margin-top: 20px;
+}
+.col-md-3 {
+	margin-top: 20px;
+	margin-left: 85px;
+}
+.input-group-addon {
+	background-color: #47a3da;
+	color: white;
 }
 </style>
 </head>
@@ -80,32 +91,54 @@
 			<hr width=100px margin-top=0px>
       <br>
 
-			<div class="col-xs-5">
-				<input class="form-control" type="text" placeholder="KyeongHun-Min"
-					disabled><br> <input id="title" type="text"
-					class="form-control" placeholder="제목"><br> <input
-					id="mloca" type="text" class="form-control" placeholder="장소"><br>
-				<input id="mday" type="text" class="form-control"
-					placeholder="날짜(2016-01-01)"><br> <input id="mtime"
-					type="text" class="form-control" placeholder="시간"><br>
-				<input id="distance" type="text" class="form-control"
-					placeholder="총거리"><br> <input id="time" type="text"
-					class="form-control" placeholder="예상소요시간"><br> <input
-					id="pnum" type="text" class="form-control" placeholder="모집인원"><br>
-				<input id="ph" type="text" class="form-control" placeholder="연락처"><br>
-      </div>
+			<div class="form-group">
+		<div class="col-md-3">
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="title" class="form-control" placeholder="제목" type="text">
+    	</div><br><br>
+			<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;장소&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="mloca" class="form-control" placeholder="예) 오이도 빨간등대" type="text">
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;날짜&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="mday" class="form-control" placeholder="예) 2016-11-11" type="text">
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;시간&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="mtime" class="form-control" placeholder="예) 오후 2시" type="text">
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;총&nbsp;거리&nbsp;</span>
+     	 <input id="distance" class="form-control" placeholder="예) 약 14km" type="text">
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">소요시간</span>
+     	 <input id="time" class="form-control" placeholder="예) 약 2시간" type="text">
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">모집인원</span>
+     	 <input id="pnum" class="form-control" placeholder="예) 5 ~ 6인" type="text">
+    	</div><br><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">전화번호</span>
+     	 <input id="ph" class="form-control" placeholder="예) 010-1111-1111" type="text">
+    	</div><br>
+		</div>
+	</div>
       
-				<div id="map" style="width:500px;height:465px;">
+				<div id="map" style="width:875px;height:560px;">
         <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
-        </div><br>
+        </div>
         
         <div>
           <button id="changeBtn" type="button"
-            class="btn btn-default btn pull-right">COMPLETE</button>
+            class="btn btn-info btn pull-right" style="width: 100px;">COMPLETE</button>
         </div>
         <div>
           <button id="cancel" type="button"
-            class="btn btn-default btn pull-right">CANCEL</button>
+            class="btn btn-info btn pull-right" style="width: 100px;">CANCEL</button>
         </div>
         <br><br>
   </div>
