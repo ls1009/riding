@@ -8,13 +8,20 @@ public class Member {
 	protected String ph;
 	protected String gender;
 	protected String img;
+	protected String thumimg;
 	
 	@Override
 	public String toString() {
 		return "Member [no=" + no + ", name=" + name + ", email=" + email + ", pw=" + pw + ", ph=" + ph + ", gender="
-				+ gender + ", img=" + img + "]";
+				+ gender + ", img=" + img + ", thumimg=" + thumimg + "]";
 	}
 	
+	public String getThumimg() {
+		return thumimg;
+	}
+	public void setThumimg(String thumimg) {
+		this.thumimg = thumimg;
+	}
 	public int getNo() {
 		return no;
 	}
