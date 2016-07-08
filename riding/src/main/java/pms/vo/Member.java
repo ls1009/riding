@@ -6,14 +6,13 @@ public class Member {
 	protected String email;
 	protected String pw;
 	protected String ph;
-	protected String position;
 	protected String gender;
 	protected String img;
 	
 	@Override
 	public String toString() {
 		return "Member [no=" + no + ", name=" + name + ", email=" + email + ", pw=" + pw + ", ph=" + ph + ", position="
-				+ position + ", gender=" + gender + ", img=" + img + "]";
+				 + ", gender=" + gender + ", img=" + img + "]";
 	}
 	
 	public int getNo() {
@@ -45,12 +44,6 @@ public class Member {
 	}
 	public void setPh(String ph) {
 		this.ph = ph;
-	}
-	public String getPosition() {
-		return position;
-	}
-	public void setPosition(String position) {
-		this.position = position;
 	}
 	public String getGender() {
 		return gender;
