@@ -30,7 +30,7 @@
   </insert>
   
   <insert id="putImg" parameterType="map">
-    insert into FREEIMG(BNO,IMGLO) 
+    insert into RBIMG(BNO,IMGLO) 
     values(#{bno},#{dbpath})
   </insert>
   
@@ -88,7 +88,7 @@
   
   <select id="getImg" resultType="String" parameterType="map">
     select IMGLO 
-    from FREEIMG  
+    from RBIMG  
     where BNO=#{bno}
   </select>
   

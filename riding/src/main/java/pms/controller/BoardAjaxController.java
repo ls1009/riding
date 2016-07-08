@@ -374,7 +374,7 @@ public class BoardAjaxController {
 	  int extPoint = img.getOriginalFilename().lastIndexOf(".");
       String filename = System.currentTimeMillis() + img.getOriginalFilename().substring(extPoint);	 
       
-	  String path ="C:/dev/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/riding/img/boardImg/"+filename;
+	  String path ="C:/bitcamp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp5/wtpwebapps/riding/img/boardImg/"+filename;
 	  String dbpath ="img/boardImg/"+filename;	  
 	  
 	  HashMap<String,Object> result = new HashMap<>();

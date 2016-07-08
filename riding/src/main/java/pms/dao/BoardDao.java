@@ -10,6 +10,7 @@ import pms.vo.Member;
 public interface BoardDao {
   List<Board> selectList(Map<String,Object> paramMap);
   int insert(Board board);
+  int insertxy(HashMap<String, Object> paramMap);
   Board selectOne(int no);
   int update(Board board);
   int delete(int no);
@@ -18,7 +19,6 @@ public interface BoardDao {
 
   List<Board> selectListSchedule(HashMap<String, Object> paramMap);
   List<Board> selectListHistory(HashMap<String, Object> paramMap);
-  int insertxy(HashMap<String, Object> paramMap);
   List<MapDot> selectMap(int no);
   Board getLast(int no);
   int join(Map<String,Object> paramMap);

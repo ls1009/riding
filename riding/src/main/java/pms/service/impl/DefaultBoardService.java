@@ -96,7 +96,6 @@ public class DefaultBoardService implements BoardService {
 		  Board board = boardDao.getLast(1);
 		  bno = board.getBno();
 	  }
-	  
 	  paramMap.put("ab", ab);
 	  paramMap.put("bb", bb);
 	  paramMap.put("bno", bno);

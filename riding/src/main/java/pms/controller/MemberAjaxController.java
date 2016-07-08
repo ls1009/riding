@@ -33,17 +33,14 @@ public class MemberAjaxController {
   @RequestMapping(value="add", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String add(
-		 String name,String email,String pw,String ph,String gender,String img) 
+		 String name,String email,String pw,String ph,String gender) 
 	     throws ServletException, IOException {
-
     Member member = new Member();
     member.setName(name);
     member.setEmail(email);
     member.setPw(pw);
     member.setPh(ph);
     member.setGender(gender);
-    member.setImg(img);
-    
     HashMap<String,Object> result = new HashMap<>();
     try {
       memberService.add(member);
@@ -190,7 +187,7 @@ public class MemberAjaxController {
 */     
     int extPoint = myPhoto.getOriginalFilename().lastIndexOf(".");
     String filename = System.currentTimeMillis() + myPhoto.getOriginalFilename().substring(extPoint);
-    String path ="C:/dev/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/riding/img/memberImg/"
+    String path ="C:/bitcamp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp5/wtpwebapps/riding/img/memberImg/"
         +filename;
     String dbpath ="img/memberImg/"+filename;
     
