@@ -5,7 +5,7 @@
   
 <mapper namespace="pms.dao.MemberDao">
   <sql id="select01">
-    select MNO, MNM, EMAIL, PW, PH, GEN, IMGLO 
+    select MNO, MNM, EMAIL, PW, PH, GEN, IMGLO, THIMGLO 
     from MEMBERS
   </sql>
 
@@ -16,6 +16,7 @@
     <result column="PH"    property="ph"/>
     <result column="GEN"    property="gender"/>
     <result column="IMGLO"    property="img"/>
+    <result column="THIMGLO"    property="thumimg"/>
   </resultMap>
   
   <insert id="insert" parameterType="Member">
@@ -28,6 +29,8 @@
       MNM=#{name},
       PW=#{pw},
       PH=#{ph},
+      IMGLO=#{img},
+      THIMGLO=#{thumimg},
       GEN=#{gender}
     where MNO=#{no}
   </update>
@@ -44,7 +47,7 @@
   </select>
   
   <select id="memberList" resultMap="MemberMap">
-    select m.MNO, m.MNM, m.EMAIL, m.PW, m.PH, m.GEN 
+    select m.MNO, m.MNM, m.EMAIL, m.PW, m.PH, m.GEN, m.IMGLO, m.THIMGLO 
     from MEMBERS m inner join MEMBERLIST ml
     on  m.MNO=ml.MNO
     where ml.BNO=#{bno}
