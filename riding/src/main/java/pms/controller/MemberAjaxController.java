@@ -1,10 +1,13 @@
 package pms.controller;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 
@@ -176,28 +179,43 @@ public class MemberAjaxController {
 		} else {
 			member = (Member)session.getAttribute("loginUser");
 		}
-     
-     System.out.println(myPhoto.getOriginalFilename());
-    /* String path ="C:/bitcamp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp4/wtpwebapps/ridingTest/img/memberImg/"
-     +member.getNo()+".jpg";
-  
-     File file = new File(path);
-     // 파일 업로드 처리 완료.
-*/     
-    int extPoint = myPhoto.getOriginalFilename().lastIndexOf(".");
-    String filename = System.currentTimeMillis() + myPhoto.getOriginalFilename().substring(extPoint);
-    
+    //int extPoint = myPhoto.getOriginalFilename().lastIndexOf(".");
+    //String filename = System.currentTimeMillis() + myPhoto.getOriginalFilename().substring(extPoint);
+		
+	String filename = System.currentTimeMillis() + ".jpg";
+	
     PicturePath pp = new PicturePath();
+    String path =pp.getProfilePath()+filename;
+    String thumPath =pp.getProfilePath()+"thum/"+filename;
     
-    String path =pp.getProfilePath()
-        +filename;
     /*String path = servletContext.getRealPath("img/memberImg/" + filename);*/
-    String dbpath ="img/memberImg/"+filename;
+    //이미지 경로 DB 저장
     
+    String dbpath ="img/memberImg/"+filename;
+    String dbThumPath ="img/memberImg/thum/"+filename;
     member.setImg(dbpath);
+  	member.setThumimg(dbThumPath);
+    
+    ///////////썸네일//////////////
     try {
       memberService.change(member);
       myPhoto.transferTo(new File(path));
+      
+    File originalFileNm = new File(path);
+  	File thumbnailFileNm = new File(thumPath);
+  	int width = 50;
+  	int height = 50;
+  	// 썸네일 이미지 생성
+  	BufferedImage originalImg = ImageIO.read(originalFileNm);
+  	BufferedImage thumbnailImg = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+  	// 썸네일 그리기 
+  	Graphics2D g = thumbnailImg.createGraphics();
+  	g.drawImage(originalImg, 0, 0, width, height, null);
+  	// 파일생성
+  	ImageIO.write(thumbnailImg, "jpg", thumbnailFileNm);	
+  	
+  	
+	  	
     } catch (Exception e) {
       e.printStackTrace();
     }
