@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/menu.css" type="text/css">
+
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+
+<title>course Read</title>
+<style>
+#d1 {
+  text-align:center;
+  font-weight: lighter;
+  font-size: 30px;
+  letter-spacing: 10px;
+  margin-bottom: 7px;
+  margin-top: 5%;
+  color: black;
+}
+.col-xs-5 {
+  margin-left: 80px;
+}
+#update {
+  margin-right: 20px;
+  margin-bottom: 30px;
+}
+#delete {
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
+#site {
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+#user {
+	margin-top: 20px;
+}
+#des {
+	height: 300px;
+}
+.title {
+	font-size: 70px;
+}
+.sub {
+	font-size: 30px;
+}
+#final {
+	margin-bottom: 10px;
+}
+#inputloca {
+	margin-left: 10px;
+}
+.col-md-5 {
+	margin-right: 10px;
+}
+#cos1 {
+	width: 1000px;
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="row">
+        <a href="main.html">
+          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+        </a>
+    </div>
+    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
+    
+    <div class="upmenu1">
+      <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
+      <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
+      /></span><label>log out</label>
+    </div> 
+     
+    <div id="upmenu2">
+      <nav id="nav-1">
+        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+      </nav>
+    </div>  
+  </div>
+</header>
+
+<div id="container">
+	<button id="site" type="button" class="btn btn-info">사이트</button>
+	<button id="user" type="button" class="btn btn-info">사용자</button>
+	<p id="d1">Course Read</p>
+	<hr width=100px>
+
+	<div class="contents1"></div>
+	<div class="row">
+		<div class="col-md-5">
+			<div class="input-group" id="inputdistance">
+				<span class="input-group-addon">&nbsp;&nbsp;&nbsp;거리&nbsp;&nbsp;&nbsp;</span>
+				<input id="distance" class="form-control" type="text" disabled>
+			</div><br>
+		</div>
+		<div class="col-md-5">
+			<div class="input-group" id="inputtime">
+				<span class="input-group-addon">소요시간</span>
+				<input id="time" class="form-control" type="text" disabled>
+			</div><br>
+		</div>
+	</div><br><br><br>
+  <div class="col-md-11">
+		<div class="input-group" id="inputloca">
+			<span class="input-group-addon">&nbsp;&nbsp;&nbsp;경로&nbsp;&nbsp;&nbsp;</span>
+			<input id="loca" class="form-control" type="text" disabled>
+		</div><br>
+	</div><br><br><br>
+	
+	<div class="title">코스사진</div><hr width=1000px>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+			<li data-target="#myCarousel" data-slide-to="3"></li>
+			<li data-target="#myCarousel" data-slide-to="4"></li>
+		</ol>
+	<!-- Wrapper for slides -->
+		<div class="carousel-inner" role="listbox" >
+			<div class="item active">
+				<img src="img/코스사진1.jpg" id="cos1">
+			</div>
+			<div class="item">
+				<img src="img/코스사진2.jpg" id="cos1">
+			</div>
+			<div class="item">
+				<img src="img/코스사진3.jpg" id="cos1">
+			</div>
+			<div class="item">
+				<img src="img/코스사진4.jpg" id="cos1">
+			</div>
+			<div class="item">
+				<img src="img/코스사진5.jpg" id="cos1">
+			</div>
+		</div>
+	</div>
+	
+	<div class="title">코스안내</div><hr width=1000px>
+	
+	<div id="map" style="width:1000px;height:400px;">
+		<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
+	</div><br>
+	
+	<div>
+		<button id="update" type="button" class="btn btn-default btn pull-right">UPDATE</button>
+	</div>
+	<div>
+		<button id="delete" type="button" class="btn btn-default btn pull-right">DELETE</button>
+	</div>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/handlebars/handlebars.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script>
+	$('.carousel').carousel({
+	   interval : 1700
+	});
+</script>
+<script type="text/javascript">
+$.extend({
+    getUrlVars: function(){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    },
+    getUrlVar: function(name) {
+        return $.getUrlVars()[name];
+    }
+});
+
+var no = $.getUrlVar('no');
+
+$.getJSON("ajax/course/detail.do?no=" + no, function(result) {
+	var course = result.course;
+	$(".contents1").html("<div class=\"title\">" + course.title + "</div>" + "<hr width=1000px>"
+			              + "<div id=\"des\">" + course.des + "</div>");
+	$("#distance").val(course.distance);
+	$("#time").val(course.time);
+	$("#loca").val(course.loca);
+});
+
+$("#update").click(function(event) {
+	location.href = "courseUpdate.html?no=" + no;
+})
+
+$("#delete").click(function(event) {
+	$.getJSON("ajax/course/delete.do?no=" + no, function(result) {
+		if (result.status == "success") {
+			location.href = "course2.html";
+		} else {
+			window.alert("삭제 실패입니다!");
+		}
+	});
+});
+
+$("#site").click(function(event) {
+	location.href = "course.html";
+});
+$("#user").click(function(event) {
+	location.href = "course2.html";
+});
+
+//////////////////map load////////////////// 
+var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
+var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다
+var distanceOverlay; // 선의 거리정보를 표시할 커스텀오버레이 입니다
+var dots = {}; // 선이 그려지고 있을때 클릭할 때마다 클릭 지점과 거리를 표시하는 커스텀 오버레이 배열입니다.
+$.getJSON("ajax/course/getMap.do?no="+no, function(result) {
+	      var list = result.list;
+	      var clickLine = new daum.maps.Polyline({
+	            map : map, // 선을 표시할 지도입니다 
+	            path : [], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+	            strokeWeight : 3, // 선의 두께입니다 
+	            strokeColor : '#db4040', // 선의 색깔입니다
+	            strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+	            strokeStyle : 'solid' // 선의 스타일입니다
+	          });
+	      var linepath = clickLine.getPath();
+				if (result.status == "success") {
+					var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+          mapOption = { 
+              center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+          };
+          var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			          
+					for ( var i in list) {
+						console.log(i);
+						
+						if(i == 0) {
+							var startSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png'; // 출발 마커이미지의 주소입니다    
+							var startSize = new daum.maps.Size(50, 45); // 출발 마커이미지의 크기입니다 
+							var startMarker = new daum.maps.Marker({
+								  map : map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+									position : new daum.maps.LatLng(list[i].bb, list[i].ab),
+									image : new daum.maps.MarkerImage(startSrc, startSize)
+									// 출발 마커이미지를 설정합니다
+									});
+						}
+
+								linepath.push(new daum.maps.LatLng(list[i].bb, list[i].ab));
+					}
+          
+				  if (i == (list.length-1)) {
+					  var arriveSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 도착 마커이미지 주소입니다    
+					  var arriveSize = new daum.maps.Size(50, 45); // 도착 마커이미지의 크기입니다 
+					  
+					// 도착 마커를 생성합니다 
+						var arriveMarker = new daum.maps.Marker({  
+						    map: map, // 도착 마커가 지도 위에 표시되도록 설정합니다
+						    position: new daum.maps.LatLng(list[i].bb, list[i].ab),
+						    draggable: true, // 도착 마커가 드래그 가능하도록 설정합니다
+						    image: new daum.maps.MarkerImage(arriveSrc, arriveSize) // 도착 마커이미지를 설정합니다
+						});
+				  }
+
+					clickLine.setPath(linepath);
+					clickLine.setMap(map);
+				} else if (result.status == "failure") {
+					window.alert("불러오기 실패입니다!");
+					}
+});
+</script>
+</body>
+</html>

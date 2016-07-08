@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="pms.dao.CourseDao">
+  <resultMap type="Course" id="CourseMap">
+    <id     column="MCNO"    property="mcno"/>
+    <result column="MCTYPE"    property="mctype"/>
+    <result column="MNO"    property="mno"/>
+    <result column="TITLE"    property="title"/>
+    <result column="DES"    property="des"/>
+    <result column="CDT"    property="cdt"/>
+    <result column="DISTANCE"    property="distance"/>
+    <result column="TIME"    property="time"/>
+    <result column="LOCA"    property="loca"/>
+  </resultMap>
+  
+  <insert id="insert" parameterType="Course">
+    insert into MCOURSE(MNO,TITLE,DES,CDT,DISTANCE,TIME,LOCA)
+    values(#{mno},#{title},#{des},now(),#{distance},#{time},#{loca})
+  </insert>
+  
+  <update id="update" parameterType="Course">
+    update MCOURSE set
+      TITLE=#{title},
+      DES=#{des},
+      CDT=now(),
+      DISTANCE=#{distance},
+      TIME=#{time},
+      LOCA=#{loca}
+    where MCNO=#{mcno}
+  </update>
+  
+  <delete id="delete" parameterType="int">
+    delete from MCOURSE 
+    where MCNO=#{no}
+  </delete>
+
+  <select id="selectList" resultMap="CourseMap" parameterType="map">
+    select  MCNO, MCTYPE, MNO, TITLE, DES, CDT, DISTANCE, TIME, LOCA 
+    from MCOURSE
+    order by MCNO DESC
+    limit #{startIndex}, #{length}
+  </select>
+  
+  <select id="selectOne" resultMap="CourseMap" parameterType="int">
+    select c.MCNO,c.TITLE,c.DES,c.CDT,c.DISTANCE,c.TIME,c.LOCA,m.MNM
+    from MCOURSE c inner join MEMBERS m 
+    on c.mno=m.mno
+    where MCNO=#{no}
+  </select>
+   
+  <select id="countAll" resultType="int">
+    select count(*) 
+    from MCOURSE
+  </select>
+  
+  <insert id="insertxy" parameterType="map">
+    insert into CMAP(AB,BB,MCNO) 
+    values(#{ab},#{bb},#{mcno})
+  </insert>
+  
+  <select id="selectMap" parameterType="int" resultType="MapDot"> 
+  select AB,BB from CMAP 
+  where MCNO=#{no}
+  </select>
+  
+  <delete id="deleteMap" parameterType="int">
+    delete from CMAP 
+    where MCNO=#{no}
+  </delete>
+  
+  <select id="getLast" parameterType="int" resultMap="CourseMap"> 
+    select * from MCOURSE order by MCNO desc limit #{no}
+  </select>
+</mapper>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="css/menu.css" type="text/css">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+<title>course2</title>
+<style>
+#d1 {
+  text-align:center;
+  font-weight: lighter;
+  font-size: 30px;
+  letter-spacing: 10px;
+  margin-bottom: 7px;
+  margin-top: 5%;
+  color: black;
+}
+#prev {
+  margin-right: 5%;
+}
+#prev, #next, #write {
+  size:20px;
+  cursor: pointer;
+}
+#write {
+  margin-left: 95%;
+}
+#site {
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+#user {
+	margin-top: 20px;
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="row">
+        <a href="main.html">
+          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+        </a>
+    </div>
+    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
+    
+    <div class="upmenu1">
+      <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
+      <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
+      /></span><label>log out</label>
+    </div> 
+     
+    <div id="upmenu2">
+      <nav id="nav-1">
+        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+      </nav>
+    </div>  
+  </div>
+</header>
+
+<div id="container">
+<button id="site" type="button" class="btn btn-info">사이트</button>
+<button id="user" type="button" class="btn btn-info">사용자</button>
+<p id="d1">사용자 추천코스</p>
+<hr width=100px>
+<br></div>
+
+<div id="container">
+	<table id="courseTable" class="table table-hover" style="table-layout:fixed;">
+		<caption>Riding List</caption>
+			<thead>
+        <tr>
+          <th>제목</th>
+          <th>설명</th>
+          <th>게시일</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <img src="img/pen.png" id="write" width="50px"/>
+	</table>
+	<p id="number" class="text-center" ></p>
+	<center>
+		<span id="prev" >prev</span>
+		<span id="next">next</span>
+	</center>
+</div>
+
+<script src="bower_components/moment/moment.js"></script>      
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/handlebars/handlebars.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript">
+$("#write").click(function(event) {location.href = "courseWrite.html"});
+
+var pageNo=1;
+courseList();
+
+function courseList() {
+	$.getJSON("ajax/course/list.do?pageNo="+pageNo, function(result) {
+		var list = result.list;
+		var tbody = $("#courseTable tbody");
+		
+		$("#number").empty();
+		$("#number").append(pageNo);
+		
+		for (var i in list) {
+			$("<tr>").html(
+				"<td class=\"col-md-3\" onclick=\"location.href='courseRead.html?no=" + list[i].mcno + 
+				"'\"" + "style=\"cursor:pointer\">" + list[i].title + "</td>" +
+				"<td class=\"col-md-3\" >" + list[i].des + "</td>" +
+				"<td class=\"col-md-3\" >" + moment(list[i].cdt, 'MM/DD/YYYY').format().substr(0,10) + "</td>").appendTo(tbody);
+			}
+	});
+}
+
+$("#next").click(function(event) {
+	pageNo+=1;
+	$("tbody").empty();
+	courseList();
+});
+$("#prev").click(function(event) {
+	pageNo-=1;
+	$("tbody").empty();
+	courseList();
+});
+
+$("#site").click(function(event) {
+	location.href = "course.html";
+});
+$("#user").click(function(event) {
+	location.href = "course2.html";
+});
+</script>
+</body>
+</html>

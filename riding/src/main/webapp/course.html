@@ -13,7 +13,6 @@
   <!-- FlexSlider pieces -->
 <link rel="stylesheet" href="slide/default.css" type="text/css" />
 <style>
-
 #d1 {
   text-align:center;
   font-weight: lighter;
@@ -23,11 +22,17 @@
   margin-top: 5%;
   color: black;
 }
-
 .slides li {
   cursor:pointer;
 }
-
+#site {
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+#user {
+	margin-top: 20px;
+}
 </style>
 </head>
 
@@ -59,7 +64,8 @@
   </header>
 	
 	<div id="container">
-
+	<button id="site" type="button" class="btn btn-info">사이트</button>
+	<button id="user" type="button" class="btn btn-info">사용자</button>
 	<p id="d1">사이트 추천코스</p>
 	<hr width=100px>
 	<br>
@@ -155,6 +161,14 @@
 
 			this.init();
 		}
+	</script>
+	<script type="text/javascript">
+	$("#site").click(function(event) {
+		location.href = "course.html";
+	});
+	$("#user").click(function(event) {
+		location.href = "course2.html";
+	});
 	</script>
 </body>
 </html>

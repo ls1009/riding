@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/menu.css" type="text/css">
+<link rel="stylesheet" href="css/mapApi.css" type="text/css">
+
+<title>course Write</title>
+<style>
+#d1 {
+  text-align:center;
+  font-weight: lighter;
+  font-size: 30px;
+  letter-spacing: 10px;
+  margin-bottom: 7px;
+  margin-top: 5%;
+  color: black;
+}
+.col-xs-5 {
+  margin-left: 80px;
+}
+#register {
+  margin-right: 20px;
+}
+#cancel {
+	margin-right: 20px;
+}
+#site {
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+#user {
+	margin-top: 20px;
+}
+#des {
+	height: 300px;
+}
+.col-md-8 {
+	margin-left: 160px;
+	margin-bottom: 30px;
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="row">
+        <a href="main.html">
+          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+        </a>
+    </div>
+    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
+    
+    <div class="upmenu1">
+      <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
+      <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
+      /></span><label>log out</label>
+    </div> 
+     
+    <div id="upmenu2">
+      <nav id="nav-1">
+        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+      </nav>
+    </div>  
+  </div>
+</header>
+
+<div id="container">
+	<button id="site" type="button" class="btn btn-info">사이트</button>
+	<button id="user" type="button" class="btn btn-info">사용자</button>
+	<p id="d1">Course Write</p>
+	<hr width=100px>
+	<br>
+	
+	<!-- <div class="col-xs-5">
+		<input id="title" type="text" class="form-control" placeholder="제목"><br>
+		<input id="des" type="text" class="form-control" placeholder="설명"><br>
+	</div> -->
+	<div class="form-group">
+		<div class="col-md-8">
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="title" class="form-control" placeholder="제목" type="text">
+    	</div><br>
+			<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;거리&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="distance" class="form-control" placeholder="예) 오이도역 3번출구 200m" type="text">
+    	</div><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">소요시간</span>
+     	 <input id="time" class="form-control" placeholder="예) 약 8분" type="text">
+    	</div><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;경로&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="loca" class="form-control" placeholder="예) 오이도역 -> 3번출구 -> 냉정초등학교" type="text">
+    	</div><br>
+    	<label class="col-md-4 control-label" for="textarea">상세 설명</label>
+			<textarea class="form-control" id="des" name="textarea"></textarea><br>
+			<form action="ajax/member/memberImg.do" method="post" enctype="multipart/form-data">
+				<div id="photowrapper">
+		      <!-- <img id="UploadedImg" class="img-circle" src="BasicImg.jpg" width="200" height="200"><br> -->
+		      <label for="ex_file">&nbsp;&nbsp;&nbsp;사진 등록</label>
+		      <input type='file' id="ex_file" accept="image/*" onchange="readURL(this)" name="myPhoto"/>
+		      <button class="buttonStyle">저장</button>
+				</div>
+			</form>
+			<label class="col-md-4 control-label" for="textarea">코스 안내</label>
+			<div id="map" style="width:650px;height:300px;">
+				<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
+			</div><br>
+			<div>
+				<button id="register" type="button" class="btn btn-primary btn pull-right">REGISTER</button>
+			</div>
+			<div>
+				<button id="cancel" type="button" class="btn btn-primary btn pull-right">CANCEL</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/handlebars/handlebars.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript" src="js/mapApi.js" ></script>
+<script type="text/javascript">
+$("#register").click(function(event) {
+	$.post("ajax/course/Add.do", {
+		title: $("#title").val(),
+		des: $("#des").val(),
+		distance: $("#distance").val(),
+		time: $("#time").val(),
+		loca: $("#loca").val()
+	}, function(result) {
+		if (result.status == "success") {
+			var path = clickLine.getPath();
+			for (var i in path) {
+				$.ajax({
+					url: 'ajax/course/putMap.do',
+					global: false,
+					type: 'POST',
+					data: {ab: path[i].ab,
+								 bb: path[i].bb},
+					async: false,
+					success: function() {
+						console.log("dot insert");
+					}
+				});
+			}
+			location.href = "course2.html";
+		} else {
+			window.alert("등록 실패입니다!");
+		}
+	}, "json", false);
+});
+
+$("#cancel").click(function(event) {
+	location.href = "course2.html";
+});
+
+$("#site").click(function(event) {
+	location.href = "course.html";
+});
+$("#user").click(function(event) {
+	location.href = "course2.html";
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#UploadedImg').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+</body>
+</html>

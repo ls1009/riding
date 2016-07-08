@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/menu.css" type="text/css">
+
+<title>course Update</title>
+<style>
+#d1 {
+  text-align:center;
+  font-weight: lighter;
+  font-size: 30px;
+  letter-spacing: 10px;
+  margin-bottom: 7px;
+  margin-top: 5%;
+  color: black;
+}
+.col-xs-5 {
+  margin-left: 80px;
+}
+#update {
+  margin-right: 20px;
+}
+#cancel {
+	margin-right: 20px;
+}
+#site {
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+#user {
+	margin-top: 20px;
+}
+#des {
+	height: 300px;
+}
+.col-md-8 {
+	margin-left: 160px;
+	margin-bottom: 30px;
+}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="row">
+        <a href="main.html">
+          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+        </a>
+    </div>
+    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
+    
+    <div class="upmenu1">
+      <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
+      <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
+      /></span><label>log out</label>
+    </div> 
+     
+    <div id="upmenu2">
+      <nav id="nav-1">
+        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+      </nav>
+    </div>  
+  </div>
+</header>
+
+<div id="container">
+	<button id="site" type="button" class="btn btn-info">사이트</button>
+	<button id="user" type="button" class="btn btn-info">사용자</button>
+	<p id="d1">Course Update</p>
+	<hr width=100px>
+	<br>
+	
+	<div class="form-group">
+		<div class="col-md-8">
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="title" class="form-control" type="text">
+    	</div><br>
+			<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;거리&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="distance" class="form-control" type="text">
+    	</div><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">소요시간</span>
+     	 <input id="time" class="form-control" type="text">
+    	</div><br>
+    	<div class="input-group">
+     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;경로&nbsp;&nbsp;&nbsp;</span>
+     	 <input id="loca" class="form-control" type="text">
+    	</div><br>
+    	<label class="col-md-4 control-label" for="textarea">상세 설명</label>
+			<textarea class="form-control" id="des" name="textarea"></textarea><br>
+			<label class="col-md-4 control-label" for="textarea">코스 안내</label>
+			<div id="map" style="width:650px;height:300px;">
+				<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
+			</div><br>
+			<div>
+				<button id="update" type="button" class="btn btn-primary btn pull-right">UPDATE</button>
+			</div>
+			<div>
+				<button id="cancel" type="button" class="btn btn-primary btn pull-right">CANCEL</button>
+			</div>
+		</div>
+	</div>
+	
+	<!-- <div class="col-xs-5">
+		<input id="title" type="text" class="form-control" placeholder="제목"><br>
+		<input id="des" type="text" class="form-control" placeholder="설명"><br>
+	</div>
+	
+	<div>
+		<button id="register" type="button" class="btn btn-default btn pull-right">REGISTER</button>
+	</div>
+	<div>
+		<button id="cancel" type="button" class="btn btn-default btn pull-right">CANCEL</button>
+	</div> -->
+</div>
+
+<script type="text/javascript" src="js/mapApi.js" ></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+$.extend({
+    getUrlVars: function(){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    },
+    getUrlVar: function(name) {
+        return $.getUrlVars()[name];
+    }
+});
+
+var no = $.getUrlVar('no');
+
+$.getJSON("ajax/course/detail.do?no=" + no, function(result) {
+	var course = result.course;
+	$("#title").val(course.title);
+	$("#des").val(course.des);
+	$("#distance").val(course.distance);
+	$("#time").val(course.time);
+	$("#loca").val(course.loca);
+});
+
+$("#update").click(function(event) {
+	$.post("ajax/course/update.do", {
+		mcno: no,
+		title: $("#title").val(),
+		des: $("#des").val(),
+		distance: $("#distance").val(),
+		time: $("#time").val(),
+		loca: $("#loca").val()
+	}, function(result) {
+		if (result.status == "success") {
+			var path = clickLine.getPath();
+			$.ajax({
+				url: 'ajax/course/deleteMap.do',
+				global: false,
+				data: {mcno: no},
+				async: false,
+				success: function() {
+					console.log("old map delete");
+					for (var i in path) {
+						$.ajax({
+							url: 'ajax/course/changeMap.do',
+							global: false,
+							type: 'POST',
+							data: {mcno: no,
+										 ab: path[i].ab,
+										 bb: path[i].bb},
+							async: false,
+							success: function() {
+								console.log("dot insert");
+							}
+						});
+					}
+				}
+			});
+			location.href = "courseRead.html?no=" + no;
+		} else {
+			window.alert("변경 실패입니다!");
+		}
+	}, "json", false);
+});
+
+$("#cancel").click(function(event) {
+	location.href = "course2.html";
+});
+
+$("#site").click(function(event) {
+	location.href = "course.html";
+});
+$("#user").click(function(event) {
+	location.href = "course2.html";
+});
+
+$.getJSON("ajax/course/getMap.do?no="+no, function(result) {
+    var updatelist = result.list;
+    var updateclickLine = new daum.maps.Polyline({
+          map : map, // 선을 표시할 지도입니다 
+          path : [], // 선을 구성하는 좌표 배열입니다 클릭한 위치를 넣어줍니다
+          strokeWeight : 3, // 선의 두께입니다 
+          strokeColor : 'blue', // 선의 색깔입니다
+          strokeOpacity : 1, // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+          strokeStyle : 'solid' // 선의 스타일입니다
+        });
+    var linepath = updateclickLine.getPath();
+    if (result.status == "success") {
+      /* var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+      mapOption = { 
+          center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          level: 3 // 지도의 확대 레벨
+      };
+      var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+             */
+      for ( var i in updatelist) {
+        console.log(i);
+        
+        if(i == 0) {
+          var startSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/red_b.png'; // 출발 마커이미지의 주소입니다    
+          var startSize = new daum.maps.Size(50, 45); // 출발 마커이미지의 크기입니다 
+          var startMarker = new daum.maps.Marker({
+              map : map, // 출발 마커가 지도 위에 표시되도록 설정합니다
+              position : new daum.maps.LatLng(updatelist[i].bb, updatelist[i].ab),
+              image : new daum.maps.MarkerImage(startSrc, startSize)
+              // 출발 마커이미지를 설정합니다
+              });
+        }
+
+            linepath.push(new daum.maps.LatLng(updatelist[i].bb, updatelist[i].ab));
+      }
+      
+      if (i == (updatelist.length-1)) {
+        var arriveSrc = 'http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/blue_b.png'; // 도착 마커이미지 주소입니다    
+        var arriveSize = new daum.maps.Size(50, 45); // 도착 마커이미지의 크기입니다 
+        
+      // 도착 마커를 생성합니다 
+        var arriveMarker = new daum.maps.Marker({  
+            map: map, // 도착 마커가 지도 위에 표시되도록 설정합니다
+            position: new daum.maps.LatLng(updatelist[i].bb, updatelist[i].ab),
+            draggable: true, // 도착 마커가 드래그 가능하도록 설정합니다
+            image: new daum.maps.MarkerImage(arriveSrc, arriveSize) // 도착 마커이미지를 설정합니다
+        });
+      }
+
+      updateclickLine.setPath(linepath);
+      updateclickLine.setMap(map);
+    } else if (result.status == "failure") {
+      window.alert("불러오기 실패입니다!");
+      }
+}); 
+</script>
+</body>
+</html>

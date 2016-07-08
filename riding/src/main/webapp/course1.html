@@ -49,10 +49,18 @@ margin-left: 20%;
 #cos3 {
 margin-left: 20%;
 }
+#site {
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+#user {
+	margin-top: 20px;
+}
 </style>
 </head>
 
-<body onload="menuinit();">
+<body>
   <header>
   <div>
     
@@ -80,7 +88,8 @@ margin-left: 20%;
   </header>
    
    <div id="container">
-   
+   <button id="site" type="button" class="btn btn-info">사이트</button>
+	 <button id="user" type="button" class="btn btn-info">사용자</button>
 	   <p id="d1"><b>아라 자전거길</b></p>
 	    <hr style="border: 1px solid silver;" width="120%">
 	   <p id="d2">청라국제도시 역에 도착하면 국토종주를 시작할 수 있는 출발지를 볼 수 있다. 아라서해갑문<br>
@@ -145,6 +154,14 @@ margin-left: 20%;
       $('.carousel').carousel({
          interval : 1700
       })
+   </script>
+   <script type="text/javascript">
+   $("#site").click(function(event) {
+		location.href = "course.html";
+	});
+	$("#user").click(function(event) {
+		location.href = "course2.html";
+	});
    </script>
 </body>
 </html>
