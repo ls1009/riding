@@ -151,9 +151,8 @@ public class MemberAjaxController {
   public String update(
   int no, String name,String pw,String ph,String gender) 
   throws ServletException, IOException {
-    System.out.println(no);
-    Member member = new Member();
-    member.setNo(no);
+    
+    Member member = memberService.retrieveByNo(no);
     member.setName(name);
     member.setPw(pw);
     member.setPh(ph);
@@ -163,6 +162,7 @@ public class MemberAjaxController {
     try {
       memberService.change(member);
       result.put("status", "success");
+      result.put("mno", no);
     } catch (Exception e) {
       result.put("status", "failure");
     }
@@ -251,11 +251,13 @@ public class MemberAjaxController {
   @ResponseBody
   public String loginMember(HttpSession session, Member sessionMember) throws ServletException, IOException {
 	Member member = null;
+	Member tempMember = null;
 	if((Member)session.getAttribute("loginUser") == null) {
 		member = sessionMember;
 		System.out.println("clientSession "+member);
 	} else {
-		member = (Member)session.getAttribute("loginUser");
+		tempMember = (Member)session.getAttribute("loginUser");
+    member = memberService.retrieveByNo(tempMember.getNo());
 		System.out.println("getAttribute "+member);
 	}
 	System.out.println(member);
