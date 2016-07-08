@@ -283,7 +283,6 @@ function getTimeHTML(distance) {
 ///////////////////////////////////////////////////////////////////////////////
 var markers = [];
 var ps = new daum.maps.services.Places();  
-console.log(1111);
 //검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new daum.maps.InfoWindow({zIndex:1});
 

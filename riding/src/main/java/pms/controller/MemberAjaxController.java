@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
@@ -18,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
 
 import pms.service.MemberService;
 import pms.vo.Member;
+import pms.vo.PicturePath;
 
 @Controller
 @RequestMapping("/ajax/member/")
@@ -187,7 +186,10 @@ public class MemberAjaxController {
 */     
     int extPoint = myPhoto.getOriginalFilename().lastIndexOf(".");
     String filename = System.currentTimeMillis() + myPhoto.getOriginalFilename().substring(extPoint);
-    String path ="C:/bitcamp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp5/wtpwebapps/riding/img/memberImg/"
+    
+    PicturePath pp = new PicturePath();
+    
+    String path =pp.getProfilePath()
         +filename;
     /*String path = servletContext.getRealPath("img/memberImg/" + filename);*/
     String dbpath ="img/memberImg/"+filename;

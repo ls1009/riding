@@ -25,6 +25,7 @@ import pms.service.BoardService;
 import pms.vo.Board;
 import pms.vo.MapDot;
 import pms.vo.Member;
+import pms.vo.PicturePath;
 
 @Controller
 @RequestMapping("/ajax/board/")
@@ -375,8 +376,10 @@ public class BoardAjaxController {
 	  int bno = currentBno;
 	  int extPoint = img.getOriginalFilename().lastIndexOf(".");
       String filename = System.currentTimeMillis() + img.getOriginalFilename().substring(extPoint);	 
-      
-	  String path ="C:/bitcamp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp5/wtpwebapps/riding/img/boardImg/"+filename;
+     
+      PicturePath pp = new PicturePath();
+	  
+      String path =pp.getBoardPicPath()+filename;
     /*String path = servletContext.getRealPath("img/boardImg/" + filename);*/
 	  String dbpath ="img/boardImg/"+filename;	  
 	  
