@@ -189,6 +189,7 @@ public class MemberAjaxController {
     String filename = System.currentTimeMillis() + myPhoto.getOriginalFilename().substring(extPoint);
     String path ="C:/bitcamp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp5/wtpwebapps/riding/img/memberImg/"
         +filename;
+    /*String path = servletContext.getRealPath("img/memberImg/" + filename);*/
     String dbpath ="img/memberImg/"+filename;
     
     member.setImg(dbpath);
