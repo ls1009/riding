@@ -11,8 +11,8 @@ public class Member {
 	
 	@Override
 	public String toString() {
-		return "Member [no=" + no + ", name=" + name + ", email=" + email + ", pw=" + pw + ", ph=" + ph + ", position="
-				 + ", gender=" + gender + ", img=" + img + "]";
+		return "Member [no=" + no + ", name=" + name + ", email=" + email + ", pw=" + pw + ", ph=" + ph + ", gender="
+				+ gender + ", img=" + img + "]";
 	}
 	
 	public int getNo() {
