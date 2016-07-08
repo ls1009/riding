@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -29,6 +30,7 @@ import pms.vo.Member;
 @RequestMapping("/ajax/board/")
 public class BoardAjaxController {
   @Autowired BoardService boardService;
+  @Autowired ServletContext servletContext;
   
   int currentBno = 0;
   
@@ -375,6 +377,7 @@ public class BoardAjaxController {
       String filename = System.currentTimeMillis() + img.getOriginalFilename().substring(extPoint);	 
       
 	  String path ="C:/bitcamp/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp5/wtpwebapps/riding/img/boardImg/"+filename;
+    /*String path = servletContext.getRealPath("img/boardImg/" + filename);*/
 	  String dbpath ="img/boardImg/"+filename;	  
 	  
 	  HashMap<String,Object> result = new HashMap<>();
