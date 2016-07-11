@@ -11,7 +11,7 @@
 
 <title>Free Riding</title>
 <style>
-.col-md-5 {
+.col-md-3 {
   margin-left: 80px;
   margin-top: 20px;
 }
@@ -104,7 +104,7 @@ td {
       <center>
         <!-- photo -->
         <div id="slide">
-          <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:900px; height:400px;">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:1150px; height:600px;">
             <!-- Indicators -->
             <ol id="dotList" class="carousel-indicators">
             </ol>
@@ -130,47 +130,47 @@ td {
       </div> -->
              
       <div class="form-group">
-		<div class="col-md-5">
+		<div class="col-md-3">
 		  <div class="input-group">
        <span class="input-group-addon">&nbsp;&nbsp;작성자&nbsp;&nbsp;&nbsp;</span>
        <input id="writer" class="form-control" type="text" disabled>
-      </div><br>
+      </div><br><br>
     	<div class="input-group">
      	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</span>
      	 <input id="title" class="form-control" type="text" disabled>
-    	</div><br>
+    	</div><br><br>
 			<div class="input-group">
      	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;장소&nbsp;&nbsp;&nbsp;</span>
      	 <input id="mloca" class="form-control" type="text" disabled>
-    	</div><br>
+    	</div><br><br>
     	<div class="input-group">
      	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;날짜&nbsp;&nbsp;&nbsp;</span>
      	 <input id="mday" class="form-control" type="text" disabled>
-    	</div><br>
+    	</div><br><br>
     	<div class="input-group">
      	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;시간&nbsp;&nbsp;&nbsp;</span>
      	 <input id="mtime" class="form-control" type="text" disabled>
-    	</div><br>
+    	</div><br><br>
     	<div class="input-group">
      	 <span class="input-group-addon">&nbsp;총&nbsp;거리&nbsp;</span>
      	 <input id="distance" class="form-control" type="text" disabled>
-    	</div><br>
+    	</div><br><br>
     	<div class="input-group">
      	 <span class="input-group-addon">소요시간</span>
      	 <input id="time" class="form-control" type="text" disabled>
-    	</div><br>
+    	</div><br><br>
     	<div class="input-group">
      	 <span class="input-group-addon">모집인원</span>
      	 <input id="pnum" class="form-control" type="text" disabled>
-    	</div><br>
+    	</div><br><br>
     	<div class="input-group">
      	 <span class="input-group-addon">전화번호</span>
      	 <input id="ph" class="form-control" type="text" disabled>
-    	</div><br>
+    	</div><br><br>
 		</div>
 	</div>
       
-        <div id="map" style="width: 492px; height: 550px;">
+        <div id="map" style="width:875px;height:620px;">
           <script type="text/javascript"
             src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
         </div><br>
@@ -267,10 +267,10 @@ $.getJSON("ajax/board/getImg.do?bno=" + bno, function(result) {
           var div = $("#photoList");
           
      		  $("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\">").appendTo(ol);
-          $("<div class=\"item active\">").html("<img src=\"img/boardImg/main1.jpg\" style=\"width:900px; height:400px;\">").appendTo(div);
+          $("<div class=\"item active\">").html("<img src=\"img/boardImg/main1.jpg\" style=\"width:1150px; height:600px;\">").appendTo(div);
           for (var i in path) {
              $("<li data-target=\"#myCarousel\" data-slide-to='"+(i+1)+"' class=''>").appendTo(ol);
-             $("<div class=\"item\">").html("<img src=\""+path[i]+"\"style=\"width:900px; height:400px;\">").appendTo(div);
+             $("<div class=\"item\">").html("<img src=\""+path[i]+"\"style=\"width:1150px; height:600px;\">").appendTo(div);
           }
     }else{
       window.alert("사진을 불러오지 못하였습니다");
