@@ -14,6 +14,7 @@ public interface BoardService {
   void delete(int no);
   void deleteMemberList(int bno);
   void deleteMap(int bno);
+  void deleteImg(int bno);
   
   Board retrieve(int no);
   List<Board> List(int pageNo, int pageSize, String loca, String rbtype);

@@ -61,6 +61,11 @@
     delete from MEMBERLIST 
     where BNO=#{bno}
   </delete>
+  
+  <delete id="deleteImg" parameterType="int">
+    delete from RBIMG
+    where BNO=#{bno}
+  </delete>
 
   <select id="selectList" resultMap="BoardMap" parameterType="map">
     select  b.BNO,b.TITLE,b.MLOCA,b.MTIME,b.MDAY,b.DISTANCE,b.TIME,b.PNUM,

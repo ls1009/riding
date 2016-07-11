@@ -152,6 +152,12 @@ public class DefaultBoardService implements BoardService {
     return boardDao.getLast(1);
   }
 
+  @Override
+  public void deleteImg(int bno) {
+	  boardDao.deleteImg(bno);
+
+}
+
 }//
 
 /*

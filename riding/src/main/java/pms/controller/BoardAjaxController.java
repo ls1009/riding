@@ -82,8 +82,9 @@ public class BoardAjaxController {
     HashMap<String,Object> result = new HashMap<>();
     try {
 	  boardService.deleteMemberList(bno);
+	  boardService.deleteMap(bno);
+	  boardService.deleteImg(bno);
       boardService.delete(bno);
-      boardService.deleteMap(bno);
       result.put("status", "success");
       return new Gson().toJson(result);
     } catch (Exception e) {
