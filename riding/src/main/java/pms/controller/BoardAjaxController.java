@@ -56,7 +56,6 @@ public class BoardAjaxController {
     board.setDistance(distance);
     board.setTime(time);
     board.setPnum(pnum);
-    board.setPh(ph);
     
     board.setRbtype(rbtype);
     board.setMno(member.getNo());
@@ -147,7 +146,6 @@ public class BoardAjaxController {
 	  board.setDistance(distance);
 	  board.setTime(time);
 	  board.setPnum(pnum);
-	  board.setPh(ph);
 
 	  try {
 		  boardService.change(board);

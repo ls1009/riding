@@ -100,7 +100,7 @@
   
   <select id="selectOne" resultMap="BoardMap" parameterType="int">
     select b.BNO,b.TITLE,b.MLOCA,b.MTIME,b.MDAY,b.DISTANCE,b.TIME,
-            b.PNUM,b.PH,b.CDT,b.RBTYPE,b.MNO,b.LOCA,m.MNM
+            b.PNUM,b.CDT,b.RBTYPE,b.MNO,b.LOCA,m.MNM,m.PH
     from RIDINGBOARD b inner join MEMBERS m 
     on b.mno=m.mno
     where BNO=#{no}

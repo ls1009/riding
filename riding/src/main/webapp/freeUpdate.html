@@ -121,11 +121,6 @@
      	 <span class="input-group-addon">모집인원</span>
      	 <input id="pnum" class="form-control" placeholder="예) 5 ~ 6인" type="text">
     	</div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">전화번호</span>
-     	 <input id="ph" class="form-control" placeholder="예) 010-1111-1111" type="text">
-    	</div><br>
-		</div>
 	</div>
       
 				<div id="map" style="width:875px;height:560px;">
@@ -181,7 +176,6 @@ $.getJSON("ajax/board/detail.do?bno=" + bno, function(result) {
     $("#distance").val(board.distance);
     $("#time").val(board.time);
     $("#pnum").val(board.pnum);
-    $("#ph").val(board.ph);
 });
 
 
