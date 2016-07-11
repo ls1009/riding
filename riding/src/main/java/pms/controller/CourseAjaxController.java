@@ -1,5 +1,6 @@
 package pms.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
@@ -21,11 +23,14 @@ import pms.service.CourseService;
 import pms.vo.Course;
 import pms.vo.MapDot;
 import pms.vo.Member;
+import pms.vo.PicturePath;
 
 @Controller
 @RequestMapping("/ajax/course/")
 public class CourseAjaxController {
   @Autowired CourseService courseService;
+  
+  int currentMcno = 0;
   
   @RequestMapping(value="Add", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
   @ResponseBody
@@ -216,8 +221,64 @@ public class CourseAjaxController {
 	}
     return new Gson().toJson(result);
   }
-}//
 
-
-
+  @RequestMapping(value="putImg", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
+  public String putImg(MultipartFile img, HttpSession session) 
+      throws ServletException, IOException {
+    
+    int mcno = currentMcno;
+    int extPoint = img.getOriginalFilename().lastIndexOf(".");
+      String filename = System.currentTimeMillis() + img.getOriginalFilename().substring(extPoint);  
+     
+      PicturePath pp = new PicturePath();
+    
+      String path =pp.getCoursePicPath()+filename;
+      
+      String dbpath ="img/courseImg/"+filename;
+    
+      HashMap<String,Object> result = new HashMap<>();
+      try {
+        courseService.putImg(dbpath, mcno);
+        List<String> imgPath = courseService.getImg(mcno);
+        img.transferTo(new File(path)); 
+        
+        result.put("list", imgPath);
+        result.put("status", "success");
+      
+      }catch(Exception e) {
+       result.put("status", "failure");
+      }
+      return "redirect:../../courseRead.html?no="+mcno;
+  }
+  
+  @RequestMapping(value="getImg", produces="application/json;charset=UTF-8", method=RequestMethod.GET)
+  @ResponseBody
+  public String getImg(int no, HttpSession session) 
+      throws ServletException, IOException {
+    HashMap<String,Object> result = new HashMap<>();
+    try {
+      List<String> imgPath = courseService.getImg(no);
+    result.put("list", imgPath);
+      result.put("status", "success");
+  }catch(Exception e) {
+    result.put("status", "failure");
+  }
+  return new Gson().toJson(result);
+  }
+  
+  @RequestMapping(value="courseNo", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
+  @ResponseBody
+  public String courseNo(HttpSession session, int no) 
+      throws ServletException, IOException {
+    currentMcno = no;
+    HashMap<String,Object> result = new HashMap<>();
+    try {
+    result.put("no", no);
+      result.put("status", "success");
+  }catch(Exception e) {
+    result.put("status", "failure");
+  }
+    return new Gson().toJson(result);
+  }
+}
 

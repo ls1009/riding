@@ -74,4 +74,15 @@
   <select id="getLast" parameterType="int" resultMap="CourseMap"> 
     select * from MCOURSE order by MCNO desc limit #{no}
   </select>
+  
+  <insert id="putImg" parameterType="map">
+  	insert into MCIMG(MCNO,IMGLO)
+  	values(#{mcno},#{dbpath})
+  </insert>
+  
+  <select id="getImg" resultType="String" parameterType="map">
+  	select IMGLO
+  	from MCIMG
+  	where MCNO=#{mcno}
+  </select>
 </mapper>

@@ -16,4 +16,7 @@ public interface CourseService {
   void putMap(String ab, String bb, int mcno);
   List<MapDot> getMap(int no);
   void deleteMap(int mcno);
+  
+  void putImg(String dbpath, int mcno);
+  List<String> getImg(int mcno);
 }

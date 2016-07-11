@@ -77,4 +77,19 @@ public class DefaultCourseService implements CourseService {
   public List<MapDot> getMap(int no) {
 	  return courseDao.selectMap(no);
   }
+  
+  @Override
+  public void putImg(String dbpath, int mcno) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("mcno", mcno);
+    paramMap.put("dbpath", dbpath);
+    courseDao.putImg(paramMap);
+  }
+
+  @Override
+  public List<String> getImg(int mcno) {
+    HashMap<String,Object> paramMap = new HashMap<>();
+    paramMap.put("mcno", mcno);
+    return courseDao.getImg(paramMap);
+  }
 }
