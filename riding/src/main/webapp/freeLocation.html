@@ -122,6 +122,7 @@
           <th>라이딩 날짜</th>
           <th>맵         </th>
           <th>작성일</th>
+          <th>작성자</th>
         </tr>
       </thead>
       
@@ -177,7 +178,8 @@ function loadBoardList() {
                 "style=\"cursor:pointer\">" + list[i].title + "</td>" +
             "<td class=\"col-md-3\" >" + moment(list[i].mday, 'MM/DD/YYYY').format().substr(0,10) + "</td>" +
             "<td class=\"col-md-3\" >"+"<center><img width=30 height=30 id=\"map\" src='"+list[i].imglo+"' class='img-responsive' ></center>"+"</td>" + 
-            "<td class=\"col-md-1\" >" + moment(list[i].createdDate, 'MM/DD/YYYY').format().substr(0,10) + "</td>")
+            "<td class=\"col-md-3\" >" + moment(list[i].createdDate, 'MM/DD/YYYY').format().substr(0,10) + "</td>" +
+            "<td class=\"col-md-3\" >" + list[i].mnm + "</td>" )
           .appendTo(tbody);
         $(document).ready(function () {
             $("#map").simpleLightBox(); 
