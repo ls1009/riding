@@ -60,6 +60,13 @@ td {
 .form-control {
 	background-color: white;
 }
+#thum {
+  border-radius: 100%;
+}
+.modal-body  td {
+  text-align: center;
+  vertical-align: middle;
+}
 </style>
 </head>
 
@@ -311,7 +318,7 @@ $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
     for (var i in member) {
       $("<tr>")
         .html(
-          "<td>" + member[i].name + "</td>" +
+          "<td>" + "<img id='thum' src="+ member[i].thumimg + ">" +"&nbsp;"+member[i].name + "</td>" +
           "<td>" + member[i].gender + "</td>")
         .appendTo(tbody);
     }
@@ -345,9 +352,8 @@ $("#joinBtn").click(function(event) {
 		              for (var i in member) {
 		                $("<tr>")
 		                  .html(
-		                    "<td>" + member[i].name + "</td>" +
-		                    "<td>" + member[i].gender + "</td>" +
-		                    "<td>" + member[i].position +"</td>")
+		                    "<td>" + "<img id='thum' src="+ member[i].thumimg + ">" +"&nbsp;"+member[i].name + "</td>" +
+		                    "<td>" + member[i].gender + "</td>" )
 		                  .appendTo(tbody);
 		              }
 		          });
@@ -361,9 +367,8 @@ $("#joinBtn").click(function(event) {
 		              for (var i in member) {
 		                $("<tr>")
 		                  .html(
-		                    "<td>" + member[i].name + "</td>" +
-		                    "<td>" + member[i].gender + "</td>" +
-		                    "<td>" + member[i].position +"</td>")
+		                    "<td>" + "<img id='thum' src="+ member[i].thumimg + ">" +"&nbsp;"+member[i].name + "</td>" +
+		                    "<td>" + member[i].gender + "</td>")
 		                  .appendTo(tbody);
 		              }
 		          });
