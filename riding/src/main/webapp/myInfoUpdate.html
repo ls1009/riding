@@ -131,17 +131,11 @@ button {width:70px;heignt:20px;}
 	
 		
 		$(function(){
-			  $('#pwd').keyup(function(){
-			   $('font[name=check]').text('');
-			  }); //#user_pass.keyup
-
 			  $('#confirm_pwd').keyup(function(){
-			   if($('#pwd').val()!=$('#confirm_pwd').val()){
-			    $('font[name=check]').text('');
+			   if ($('#pwd').val()!=$('#confirm_pwd').val()){
 			    $('font[name=check]').html("암호 불일치");
 			    $('font[name=check]').css('coloc','red');
-			   }else {
-			    $('font[name=check]').text('');
+			   } else {
 			    $('font[name=check]').html("암호 일치");
 			    $('font[name=check]').css('color','green');
 			   }
@@ -151,20 +145,25 @@ button {width:70px;heignt:20px;}
 		
 		
 		$("#updateButton").click(function(event) {
-					$.post("ajax/member/update.do", {
-						no : mno,
-						name : $("#usr").val(),
-						pw : $("#pwd").val(),
-						ph : $("#tel").val(),
-						gender : $("#gender").val()
-					}, function(result) {
-						if (result.status == "success") {
-							window.alert("수정했습니다!");
-							location.href = "myInfo.html";
-						} else {
-							window.alert("수정에 실패했습니다!");
-						}
-					}, "json");
+					if ($('#pwd').val()!=$('#confirm_pwd').val()){
+						window.alert("비밀번호가 맞지 않습니다!");
+					} else {
+    					$.post("ajax/member/update.do", {
+    						no : mno,
+    						name : $("#usr").val(),
+    						pw : $("#pwd").val(),
+    						ph : $("#tel").val(),
+    						gender : $("#gender").val()
+    					}, function(result) {
+      						if (result.status == "success") {
+      							window.alert("수정했습니다!");
+      							location.href = "myInfo.html";
+      						} else {
+      							window.alert("수정에 실패했습니다!");
+      						}
+    					
+    					}, "json");
+					}
 				});
 		
 		function cancel_event() {
