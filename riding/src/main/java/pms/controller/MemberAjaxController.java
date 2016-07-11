@@ -203,8 +203,8 @@ public class MemberAjaxController {
       
     File originalFileNm = new File(path);
   	File thumbnailFileNm = new File(thumPath);
-  	int width = 50;
-  	int height = 50;
+  	int width = 500;
+  	int height = 500;
   	// 썸네일 이미지 생성
   	BufferedImage originalImg = ImageIO.read(originalFileNm);
   	BufferedImage thumbnailImg = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);

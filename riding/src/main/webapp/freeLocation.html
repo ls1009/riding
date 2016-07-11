@@ -11,24 +11,6 @@
 <link rel="stylesheet" type="text/css" media="screen" href="css/CSSreset.min.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="css/als_demo.css" />
 
-
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.alsEN-1.0.min.js"></script>
-<script type="text/javascript">
-      $(document).ready(function() 
-      {
-        $("#lista1").als({
-          visible_items: 4,
-          scrolling_items: 2,
-          orientation: "horizontal",
-          circular: "yes",
-          autoscroll: "no",
-          interval: 5000,
-          direction: "right"
-        });
-      });
-</script>
-
 <title></title>
 <style>
 #prev {
@@ -136,12 +118,28 @@
    <span id="next">next</span>
    </center>
   </div>
-
-<script type="text/javascript" src="js/simple-lightbox.min.js"></script>    
+  
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script src="bower_components/moment/moment.js"></script>      
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/handlebars/handlebars.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript" src="js/jquery.alsEN-1.0.min.js"></script>
+<script type="text/javascript" src="js/simple-lightbox.min.js"></script>    
+<script type="text/javascript">
+      $(document).ready(function() 
+      {
+        $("#lista1").als({
+          visible_items: 4,
+          scrolling_items: 2,
+          orientation: "horizontal",
+          circular: "yes",
+          autoscroll: "no",
+          interval: 5000,
+          direction: "right"
+        });
+        $("#map").simpleLightBox(); 
+      });
+</script>
 <script type="text/javascript">
 $.extend({
     getUrlVars: function(){
@@ -182,7 +180,7 @@ function loadBoardList() {
             "<td class=\"col-md-3\" >" + list[i].mnm + "</td>" )
           .appendTo(tbody);
         $(document).ready(function () {
-            $("#map").simpleLightBox(); 
+            $(".img-responsive").simpleLightBox(); 
         }); 
       }
   });

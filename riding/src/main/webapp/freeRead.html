@@ -3,35 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet"
-	href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+  href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/menu.css" type="text/css">
+<link rel="stylesheet" href="css/simple-lightbox.min.css" type="text/css">
 <script type="text/javascript" src="js/menu.js"></script>
 
 <title>Free Riding</title>
 <style>
-.col-md-3 {
-  margin-left: 80px;
-  margin-top: 20px;
-}
-p {
-  margin-bottom: 0px;
-  margin-top:10px;
-  padding-bottom: 0px;
-  font-weight: bold;
-}
 #map {
   margin-top: 20px;
 }
 .profile {
-	border-radius: 80%;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
+  border-radius: 80%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 }
 .profilename {
-	margin-left: 50px;
+  margin-left: 50px;
 }
 #changeBtn, #deleteBtn, #joinBtn, #list {
   margin-right: 20px;
@@ -54,52 +45,57 @@ td {
   margin-left: 1150px;
 }
 .input-group-addon {
-	background-color: #47a3da;
-	color: white;
+  background-color: #47a3da;
+  color: white;
 }
 .form-control {
-	background-color: white;
+  background-color: white;
 }
 #thum {
   border-radius: 100%;
+  margin-right: 0px;
+  z-index: 1000;
 }
 .modal-body  td {
   text-align: center;
   vertical-align: middle;
+}
+.modal-content {
+  width: 300px;
 }
 </style>
 </head>
 
 <body>
   <header>
-	  <div>
-	    
-	    <div class="row">
-	        <a href="main.html">
-	          <div class="col-md-1" style="width: 300px; height: 70px;"></div>
-	        </a>
-	    </div>
-	    <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
+    <div>
+      
+      <div class="row">
+          <a href="main.html">
+            <div class="col-md-1" style="width: 300px; height: 70px;"></div>
+          </a>
+      </div>
+      <object id="mainbike" data="img/main.swf" style="width:300px; height:70px;"></object>
 
-			<div class="upmenu1">
+      <div class="upmenu1">
       <!-- <span id="logout" onclick="location.href='auth/logout.do'">logout</span> -->
       <span><img id="logout" src="img/lockon.png" onclick="location.href='auth/logout.do'"
       /></span><label>log out</label>
     </div> 
 
-			<div class="upmenu2">
-	      <nav id="nav-1">
-	        <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
-	        <span class="link-1" onclick="location.href='course.html'">Course</span>
-	        <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
-	      </nav>
-	    </div>  
-	  </div>
+      <div class="upmenu2">
+        <nav id="nav-1">
+          <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
+          <span class="link-1" onclick="location.href='course.html'">Course</span>
+          <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
+        </nav>
+      </div>  
+    </div>
   </header>
 
   <div id="container">
-			<h2 align="center">Free Riding</h2>
-			<hr width=100px margin-top=0px>
+      <h2 align="center">Free Riding</h2>
+      <hr width=100px margin-top=0px>
       
       <form class="photoForm" action="ajax/board/putImg.do" method="post" enctype="multipart/form-data">
               <button id="photoBtn"  style="background-color: rgba( 0, 0, 0, 0.7 ); border:0;">저장</button>
@@ -122,60 +118,60 @@ td {
         </div>
         </center>
         
-			<!-- <div class="col-xs-5">
-		  	<p>작성자</p>
-				<input id="writer" class="form-control" type="text" placeholder=""
-					disabled>
-				<p>제목</p><input id="title" type="text" class="form-control"  disabled>
-				<p>장소</p><input id="mloca" type="text" class="form-control" disabled>
-				<p>날짜</p><input id="mday" type="text" class="form-control" disabled>
-				<p>시간</p><input id="mtime" type="text" class="form-control" disabled>
-				<p>총거리</p><input id="distance" type="text" class="form-control" disabled>
-				<p>예상 소요시간</p><input id="time" type="text" class="form-control" disabled>
-				<p>모집인원</p><input id="pnum" type="text" class="form-control" disabled>
-				<p>연락처</p><input id="ph" type="text" class="form-control" disabled>
+      <!-- <div class="col-xs-5">
+        <p>작성자</p>
+        <input id="writer" class="form-control" type="text" placeholder=""
+          disabled>
+        <p>제목</p><input id="title" type="text" class="form-control"  disabled>
+        <p>장소</p><input id="mloca" type="text" class="form-control" disabled>
+        <p>날짜</p><input id="mday" type="text" class="form-control" disabled>
+        <p>시간</p><input id="mtime" type="text" class="form-control" disabled>
+        <p>총거리</p><input id="distance" type="text" class="form-control" disabled>
+        <p>예상 소요시간</p><input id="time" type="text" class="form-control" disabled>
+        <p>모집인원</p><input id="pnum" type="text" class="form-control" disabled>
+        <p>연락처</p><input id="ph" type="text" class="form-control" disabled>
       </div> -->
              
       <div class="form-group">
-		<div class="col-md-3">
-		  <div class="input-group">
+    <div class="col-md-3">
+      <div class="input-group">
        <span class="input-group-addon">&nbsp;&nbsp;작성자&nbsp;&nbsp;&nbsp;</span>
        <input id="writer" class="form-control" type="text" disabled>
       </div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</span>
-     	 <input id="title" class="form-control" type="text" disabled>
-    	</div><br><br>
-			<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;장소&nbsp;&nbsp;&nbsp;</span>
-     	 <input id="mloca" class="form-control" type="text" disabled>
-    	</div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;날짜&nbsp;&nbsp;&nbsp;</span>
-     	 <input id="mday" class="form-control" type="text" disabled>
-    	</div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;시간&nbsp;&nbsp;&nbsp;</span>
-     	 <input id="mtime" class="form-control" type="text" disabled>
-    	</div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;총&nbsp;거리&nbsp;</span>
-     	 <input id="distance" class="form-control" type="text" disabled>
-    	</div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">소요시간</span>
-     	 <input id="time" class="form-control" type="text" disabled>
-    	</div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">모집인원</span>
-     	 <input id="pnum" class="form-control" type="text" disabled>
-    	</div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">전화번호</span>
-     	 <input id="ph" class="form-control" type="text" disabled>
-    	</div><br><br>
-		</div>
-	</div>
+      <div class="input-group">
+       <span class="input-group-addon">&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</span>
+       <input id="title" class="form-control" type="text" disabled>
+      </div><br><br>
+      <div class="input-group">
+       <span class="input-group-addon">&nbsp;&nbsp;&nbsp;장소&nbsp;&nbsp;&nbsp;</span>
+       <input id="mloca" class="form-control" type="text" disabled>
+      </div><br><br>
+      <div class="input-group">
+       <span class="input-group-addon">&nbsp;&nbsp;&nbsp;날짜&nbsp;&nbsp;&nbsp;</span>
+       <input id="mday" class="form-control" type="text" disabled>
+      </div><br><br>
+      <div class="input-group">
+       <span class="input-group-addon">&nbsp;&nbsp;&nbsp;시간&nbsp;&nbsp;&nbsp;</span>
+       <input id="mtime" class="form-control" type="text" disabled>
+      </div><br><br>
+      <div class="input-group">
+       <span class="input-group-addon">&nbsp;총&nbsp;거리&nbsp;</span>
+       <input id="distance" class="form-control" type="text" disabled>
+      </div><br><br>
+      <div class="input-group">
+       <span class="input-group-addon">소요시간</span>
+       <input id="time" class="form-control" type="text" disabled>
+      </div><br><br>
+      <div class="input-group">
+       <span class="input-group-addon">모집인원</span>
+       <input id="pnum" class="form-control" type="text" disabled>
+      </div><br><br>
+      <div class="input-group">
+       <span class="input-group-addon">전화번호</span>
+       <input id="ph" class="form-control" type="text" disabled>
+      </div><br><br>
+    </div>
+  </div>
       
         <div id="map" style="width:875px;height:620px;">
           <script type="text/javascript"
@@ -206,18 +202,19 @@ td {
   
   <!-- Modal -->
   <form>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
           <div class="modal-dialog" role="document">
-            <div class="modal-content">
+            <div class="modal-content" >
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Join List</h4>
               </div>
               <div id="md" class="modal-body">
               
-                <table class="table table-condensed">
+                <table class="table table-condensed" style="table-layout:fixed;">
                 <thead>
                   <tr>
+                    <th></th>
                     <th>이름</th>
                     <th>성별</th>
                   </tr>
@@ -241,6 +238,7 @@ td {
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/handlebars/handlebars.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript" src="js/simple-lightbox.min.js"></script> 
 <script type="text/javascript">
 $.extend({
     getUrlVars: function(){
@@ -273,7 +271,7 @@ $.getJSON("ajax/board/getImg.do?bno=" + bno, function(result) {
           var ol = $("#dotList");
           var div = $("#photoList");
           
-     		  $("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\">").appendTo(ol);
+          $("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\">").appendTo(ol);
           $("<div class=\"item active\">").html("<img src=\"img/boardImg/main1.jpg\" style=\"width:1150px; height:600px;\">").appendTo(div);
           for (var i in path) {
              $("<li data-target=\"#myCarousel\" data-slide-to='"+(i+1)+"' class=''>").appendTo(ol);
@@ -302,7 +300,7 @@ $.getJSON("ajax/board/detail.do?bno=" + bno, function(result) {
         $("#photoBtn").css("display","none");
         $("#photoLabel").css("display","none");
      } else {
-    	 $("#joinBtn").css("display","none");
+       $("#joinBtn").css("display","none");
      }
 });
 $.getJSON("ajax/board/isJoin.do?bno=" + bno, function(result) {
@@ -318,10 +316,14 @@ $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
     for (var i in member) {
       $("<tr>")
         .html(
-          "<td>" + "<img id='thum' src="+ member[i].thumimg + ">" +"&nbsp;"+member[i].name + "</td>" +
-          "<td>" + member[i].gender + "</td>")
+          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive' /></center>" + "</td>" +
+          "<td class=\"col-md-5\">" + member[i].name + "</td>" +
+          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
         .appendTo(tbody);
     }
+      $(document).ready(function () {
+          $(".img-responsive").simpleLightBox(); 
+      });
 });
 
 
@@ -339,43 +341,51 @@ $("#changeBtn").click(function(event) {
     location.href = "freeUpdate.html?bno="+bno+"&loca="+ploca+"&rbtype="+prbtype;
 });
 $("#joinBtn").click(function(event) {
-	$.post("ajax/board/join.do", {
-		  bno:bno
-		}, function(result) {
-			if (result.status == "success") {
-		          window.alert("참여 하였습니다!");
-		          document.getElementById("j").textContent="DISJOIN";
-		          $("tbody").empty();
-		          $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
-		              var member = result.list;
-		              var tbody = $("tbody");
-		              for (var i in member) {
-		                $("<tr>")
-		                  .html(
-		                    "<td>" + "<img id='thum' src="+ member[i].thumimg + ">" +"&nbsp;"+member[i].name + "</td>" +
-		                    "<td>" + member[i].gender + "</td>" )
-		                  .appendTo(tbody);
-		              }
-		          });
-		        } else if (result.status == "cancel") {
-		          window.alert("참여 취소했습니다!");
-		          document.getElementById("j").textContent="JOIN";
-		          $("tbody").empty();
-		          $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
-		              var member = result.list;
-		              var tbody = $("tbody");
-		              for (var i in member) {
-		                $("<tr>")
-		                  .html(
-		                    "<td>" + "<img id='thum' src="+ member[i].thumimg + ">" +"&nbsp;"+member[i].name + "</td>" +
-		                    "<td>" + member[i].gender + "</td>")
-		                  .appendTo(tbody);
-		              }
-		          });
-		        } else{
-		          window.alert("참여 실패입니다!");
-		        }
-		}, "json",false);
+  $.post("ajax/board/join.do", {
+      bno:bno
+    }, function(result) {
+      if (result.status == "success") {
+              window.alert("참여 하였습니다!");
+              document.getElementById("j").textContent="DISJOIN";
+              $("tbody").empty();
+              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+                  var member = result.list;
+                  var tbody = $("tbody");
+                  for (var i in member) {
+                    $("<tr>")
+                      .html(
+                          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
+                          "<td class=\"col-md-5\">" +member[i].name + "</td>" +
+                          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
+                      .appendTo(tbody);
+                    $(document).ready(function () {
+                        $(".img-responsive").simpleLightBox(); 
+                    });
+                  }
+              });
+            } else if (result.status == "cancel") {
+              window.alert("참여 취소했습니다!");
+              document.getElementById("j").textContent="JOIN";
+              $("tbody").empty();
+              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+                  var member = result.list;
+                  var tbody = $("tbody");
+                  for (var i in member) {
+                    $("<tr>")
+                      .html(
+                          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
+                          "<td class=\"col-md-5\">" +member[i].name + "</td>" +
+                          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
+                      .appendTo(tbody);
+                    $(document).ready(function () {
+                        $(".img-responsive").simpleLightBox(); 
+                    });
+                  }
+              });
+            } else{
+              window.alert("참여 실패입니다!");
+            }
+    }, "json",false);
 });
 
 $('#myModal').on('shown.bs.modal', function () {

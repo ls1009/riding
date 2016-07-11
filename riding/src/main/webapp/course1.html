@@ -3,14 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+
 <link rel="stylesheet"
    href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+   
 <link rel="stylesheet"
    href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+   
 <script type="text/javascript" src="js/menu.js"></script>
+
 <title>메인</title>
 
 <link rel="stylesheet" href="css/menu.css" type="text/css">
+
 <style>
 #myCarousel{
 margin-left: 50%
@@ -30,6 +35,7 @@ font-size: 17px;
 #d3{
  font-family: Dosis;
  font-size: 50px;
+ margin-left:10%;
 
  line-height:100px; 
 }
@@ -41,29 +47,30 @@ font-size: 17px;
 }
 .carousel-inner{
  margin-left:40%;
- margin-top: -296%
+ margin-top: -420%
  }
 #cos2 {
-margin-left: 20%;
+
 }
 #cos3 {
-margin-left: 20%;
+margin-left: 10%;
+
 }
-#site {
-	margin-top: 20px;
-	margin-right: 10px;
-	margin-left: 20px;
+#d5{
+width:100%;
+height: 550px;
+margin-left: 10%
+
 }
-#user {
-	margin-top: 20px;
+#d6 {
+
 }
 </style>
 </head>
 
-<body>
+<body onload="menuinit();">
   <header>
-  <div>
-    
+  <div>   
     <div class="row">
         <a href="main.html">
           <div class="col-md-1" style="width: 300px; height: 70px;"></div>
@@ -87,59 +94,64 @@ margin-left: 20%;
   </div>
   </header>
    
-   <div id="container">
-   <button id="site" type="button" class="btn btn-info">사이트</button>
-	 <button id="user" type="button" class="btn btn-info">사용자</button>
-	   <p id="d1"><b>아라 자전거길</b></p>
-	    <hr style="border: 1px solid silver;" width="120%">
-	   <p id="d2">청라국제도시 역에 도착하면 국토종주를 시작할 수 있는 출발지를 볼 수 있다. 아라서해갑문<br>
-	              에서 부산까지 633km 자전거길이 있다. 아라 자전거길은 아라서 해갑문에서 한강 한강갑문까<br> 
-	              지 아라뱃길을 따라 총 21km이고 중간지점 계양역에서 굴포천 자전거길로 도 갈 수 있다.<br>  
-	              16개의 '이야기다리' 아라자전거길이 자랑하는 명물이다. 서해의 바다냄새와 바람을 느끼며<br>
-	              라이딩을 즐길 수 있다. 아라자전거길은 난이도가 쉽기 때문에 누구나 즐길 수가 있다.<br>
-	              4대강 국토종주 준비하는 분들은 아라서해갑문에서 만들 수 있다. 가격은 지도 포함해서 4500원<br>
-	              이다. 서해갑문 아니더라도 온라인에서도 구매할 수 있다. 자전거 길마다 스탬프 모으는 재미도<br>
-	              쏠쏠하다. 아라 자전거길은 자전거로는 1~2시간 걸리고 도보로는 2~3시간 정도 걸린다.</p><br>
-	   
-	     <p id="d3"><b>코스 안내</b></p>
-	    <hr style="border: 1px solid silver;" width="120%">
-	  
-	     <img id="cos2" src="img/코스사진6.jpg">
-	     
-	     
-	      <p id="d4"><b>교통편 안내</b></p>
-	    <hr style="border: 1px solid silver;" width="120%">
-	  
-	    <img id="cos3" src="img/코스사진7.jpg">
+     <div id="container">
+  <center> <img id="d1" src="img/courseImg/추천코스1.jpg"> </center>
+   
+   
+       <hr style="border: 1px solid silver;" width="120%">
+      <p id="d2">청라국제도시 역에 도착하면 국토종주를 시작할 수 있는 출발지를 볼 수 있다. 아라서해갑문<br>
+                 에서 부산까지 633km 자전거길이 있다. 아라 자전거길은 아라서 해갑문에서 한강 한강갑문까<br> 
+                 지 아라뱃길을 따라 총 21km이고 중간지점 계양역에서 굴포천 자전거길로 도 갈 수 있다.<br>  
+                 16개의 '이야기다리' 아라자전거길이 자랑하는 명물이다. 서해의 바다냄새와 바람을 느끼며<br>
+                 라이딩을 즐길 수 있다. 아라자전거길은 난이도가 쉽기 때문에 누구나 즐길 수가 있다.<br>
+                 4대강 국토종주 준비하는 분들은 아라서해갑문에서 만들 수 있다. 가격은 지도 포함해서<br>
+                 4500원이다. 서해갑문 아니더라도 온라인에서도 구매할 수 있다. 자전거 길마다 스탬프 <br>
+                 모으는 재미도 쏠쏠하다. 아라 자전거길은 자전거로는 1~2시간 걸리고 도보로는 2~3시간<br>
+                 정도 걸린다.</p><br>
+        
+    <img id="d3" src="img/courseImg/코스안내1.jpg"> 
     
-	    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-		    <!-- Indicators -->
-		    <ol class="carousel-indicators">
-		      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		      <li data-target="#myCarousel" data-slide-to="1"></li>
-		      <li data-target="#myCarousel" data-slide-to="2"></li>
-		      <li data-target="#myCarousel" data-slide-to="3"></li>
-		      <li data-target="#myCarousel" data-slide-to="4"></li>
-		    </ol>
-		      <!-- Wrapper for slides -->
-		    <div class="carousel-inner" role="listbox" >
-		
-		      <div class="item active">
-		        <img src="img/코스사진1.jpg" id="cos1">
-		      </div>
-		      <div class="item">
-		        <img src="img/코스사진2.jpg" id="cos1">
-		      </div>
-		      <div class="item">
-		        <img src="img/코스사진3.jpg" id="cos1">
-		      </div>
-		        <div class="item">
-		        <img src="img/코스사진4.jpg" id="cos1">
-		      </div>
-		        <div class="item">
-		        <img src="img/코스사진5.jpg" id="cos1">
-		      </div>
-	      </div>
+    <hr style="border: 1px solid silver;" width="120%">
+  
+    <img id="cos2" src="img/courseImg/서해-한강코스1.jpg">
+  
+  
+     <img id="cos3" src="img/courseImg/교통편안내1.jpg">
+   <hr style="border: 1px solid silver;" width="120%">
+    
+    <object id="d5" data="img/courseImg/가는길1.swf"></object>
+     <hr style="border: 1px solid silver;" width="120%">
+    <img id="d6" src="img/courseImg/찾아가는길1.jpg">
+    
+    
+       <div id="myCarousel" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+          </ol>
+            <!-- Wrapper for slides -->
+          <div class="carousel-inner" role="listbox" >
+      
+            <div class="item active">
+              <img src="img/코스사진1.jpg" id="cos1">
+            </div>
+            <div class="item">
+              <img src="img/코스사진2.jpg" id="cos1">
+            </div>
+            <div class="item">
+              <img src="img/코스사진3.jpg" id="cos1">
+            </div>
+              <div class="item">
+              <img src="img/코스사진4.jpg" id="cos1">
+            </div>
+              <div class="item">
+              <img src="img/코스사진5.jpg" id="cos1">
+            </div>
+         </div>
      </div>
     </div>
 
@@ -154,14 +166,6 @@ margin-left: 20%;
       $('.carousel').carousel({
          interval : 1700
       })
-   </script>
-   <script type="text/javascript">
-   $("#site").click(function(event) {
-		location.href = "course.html";
-	});
-	$("#user").click(function(event) {
-		location.href = "course2.html";
-	});
    </script>
 </body>
 </html>
