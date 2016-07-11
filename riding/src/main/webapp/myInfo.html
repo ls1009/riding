@@ -113,7 +113,7 @@ button {width:70px;heignt:20px;}
         <button id="guide" type="button" class="btn btn-info">Guide</button>
 
         <h3>Schedule</h3>
-            <table class="table table-hover" id="boardTable1">
+            <table class="table table-hover" id="boardTable1" style="table-layout:fixed;">
               <thead>
                 <tr>
                   <th>제목</th>
@@ -127,7 +127,7 @@ button {width:70px;heignt:20px;}
         <br><br><br><br><br><br><br><br>
         
         <h3>History</h3>
-            <table class="table table-hover" id="boardTable2">
+            <table class="table table-hover" id="boardTable2" style="table-layout:fixed;">
               <thead>
                 <tr>
                   <th>제목</th>
@@ -205,7 +205,7 @@ function readURL(input) {
                     "&loca="+ list[i].loca + "&rbtype=" + list[i].rbtype +"'\""+
                     "style=\"cursor:pointer\">" + list[i].title + "</td>" +
                 "<td class=\"col-md-3\" >" + moment(list[i].mday, 'MM/DD/YYYY').format().substr(0,10) + "</td>" +
-                "<td class=\"col-md-1\" >"+"<img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' >"+"</td>")
+                "<td class=\"col-md-3\" >"+"<center><img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' ></center>"+"</td>")
               .appendTo(tbody);
             $(document).ready(function () {
                 $("#map").simpleLightBox(); 
@@ -224,7 +224,7 @@ function readURL(input) {
                       "&loca="+ list[i].loca + "&rbtype=" + list[i].rbtype +"'\""+
                       "style=\"cursor:pointer\">" + list[i].title + "</td>" +
                   "<td class=\"col-md-3\" >" + moment(list[i].mday, 'MM/DD/YYYY').format().substr(0,10) + "</td>" +
-                  "<td class=\"col-md-1\" >"+"<img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' >"+"</td>")
+                  "<td class=\"col-md-3\" >"+"<center><img width=30 height=30 id='map' src='"+list[i].imglo+"' class='img-responsive' ></center>"+"</td>")
                 .appendTo(tbody);
               $(document).ready(function () {
                   $("#map").simpleLightBox(); 
