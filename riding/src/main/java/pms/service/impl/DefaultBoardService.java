@@ -145,6 +145,12 @@ public class DefaultBoardService implements BoardService {
 	  paramMap.put("bno", bno);
 	  return boardDao.getImg(paramMap);
   }
+  
+  
+  @Override
+  public Board getLast (int bno) {
+    return boardDao.getLast(1);
+  }
 
 }//
 

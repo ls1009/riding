@@ -28,4 +28,5 @@ public interface BoardService {
   void join(int bno, int mno);
   void joinCancel(int bno, int mno);
   int isJoin(int bno, int mno);
+  Board getLast(int bno);
 }

@@ -213,7 +213,6 @@ td {
                   <tr>
                     <th>이름</th>
                     <th>성별</th>
-                    <th>포지션</th>
                   </tr>
                 </thead>
       
@@ -295,6 +294,8 @@ $.getJSON("ajax/board/detail.do?bno=" + bno, function(result) {
         $("#changeBtn").css("display","none");
         $("#photoBtn").css("display","none");
         $("#photoLabel").css("display","none");
+     } else {
+    	 $("#joinBtn").css("display","none");
      }
 });
 $.getJSON("ajax/board/isJoin.do?bno=" + bno, function(result) {
@@ -311,11 +312,12 @@ $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
       $("<tr>")
         .html(
           "<td>" + member[i].name + "</td>" +
-          "<td>" + member[i].gender + "</td>" +
-          "<td>" + member[i].position +"</td>")
+          "<td>" + member[i].gender + "</td>")
         .appendTo(tbody);
     }
 });
+
+
 
 $("#deleteBtn").click(function(event) {
     $.getJSON("ajax/board/delete.do?bno=" + bno, function(result) {

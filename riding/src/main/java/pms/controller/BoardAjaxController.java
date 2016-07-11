@@ -61,9 +61,11 @@ public class BoardAjaxController {
     board.setRbtype(rbtype);
     board.setMno(member.getNo());
     board.setLoca(loca);
+    
     HashMap<String,Object> result = new HashMap<>();
     try {
       boardService.add(board);
+      boardService.join(boardService.getLast(1).getBno(), member.getNo());
       result.put("status", "success");
     } catch (Exception e) {
       e.printStackTrace();
