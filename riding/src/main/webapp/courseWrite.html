@@ -43,6 +43,16 @@
 	margin-left: 160px;
 	margin-bottom: 30px;
 }
+.input-group-addon {
+	background-color: #47a3da;
+	color: white;
+}
+.photoForm{
+  position:absolute;
+  color: white;
+  z-index: 1000;
+  margin-left: 890px;
+}
 </style>
 </head>
 <body>
@@ -102,23 +112,28 @@
     	</div><br>
     	<label class="col-md-4 control-label" for="textarea">상세 설명</label>
 			<textarea class="form-control" id="des" name="textarea"></textarea><br>
-			<form action="ajax/member/memberImg.do" method="post" enctype="multipart/form-data">
-				<div id="photowrapper">
-		      <!-- <img id="UploadedImg" class="img-circle" src="BasicImg.jpg" width="200" height="200"><br> -->
-		      <label for="ex_file">&nbsp;&nbsp;&nbsp;사진 등록</label>
-		      <input type='file' id="ex_file" accept="image/*" onchange="readURL(this)" name="myPhoto"/>
-		      <button class="buttonStyle">저장</button>
+			<!-- <form class="photoForm" action="ajax/course/putImg.do" method="post" enctype="multipart/form-data">
+              <button id="photoBtn"  style="background-color: rgba( 0, 0, 0, 0.7 ); border:0;">저장</button>
+              <label id="photoLabel" style="background-color: rgba( 0, 0, 0, 0.7 ); border:0; cursor: pointer;">
+                  사진 선택 <input type="file" name="img" style="display: none;" >
+              </label>
+      </form> 
+			
+			<div id="slide">
+				<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:650px; height:300px;">
+					<ol id="dotList" class="carousel-indicators"></ol>
+					<div id="photoList" class="carousel-inner" role="listbox"></div>
 				</div>
-			</form>
+			</div> -->
 			<label class="col-md-4 control-label" for="textarea">코스 안내</label>
 			<div id="map" style="width:650px;height:300px;">
 				<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
 			</div><br>
 			<div>
-				<button id="register" type="button" class="btn btn-primary btn pull-right">REGISTER</button>
+				<button id="register" type="button" class="btn btn-info btn pull-right">REGISTER</button>
 			</div>
 			<div>
-				<button id="cancel" type="button" class="btn btn-primary btn pull-right">CANCEL</button>
+				<button id="cancel" type="button" class="btn btn-info btn pull-right">CANCEL</button>
 			</div>
 		</div>
 	</div>
@@ -171,15 +186,7 @@ $("#user").click(function(event) {
 	location.href = "course2.html";
 });
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $('#UploadedImg').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+
 </script>
 </body>
 </html>

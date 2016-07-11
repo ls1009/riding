@@ -60,6 +60,12 @@
 #cos1 {
 	width: 1000px;
 }
+.photoForm{
+  position:absolute;
+  color: white;
+  z-index: 1000;
+  margin-left: 890px;
+}
 </style>
 </head>
 <body>
@@ -117,32 +123,14 @@
 	</div><br><br><br>
 	
 	<div class="title">코스사진</div><hr width=1000px>
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-			<li data-target="#myCarousel" data-slide-to="3"></li>
-			<li data-target="#myCarousel" data-slide-to="4"></li>
-		</ol>
-	<!-- Wrapper for slides -->
-		<div class="carousel-inner" role="listbox" >
-			<div class="item active">
-				<img src="img/코스사진1.jpg" id="cos1">
-			</div>
-			<div class="item">
-				<img src="img/코스사진2.jpg" id="cos1">
-			</div>
-			<div class="item">
-				<img src="img/코스사진3.jpg" id="cos1">
-			</div>
-			<div class="item">
-				<img src="img/코스사진4.jpg" id="cos1">
-			</div>
-			<div class="item">
-				<img src="img/코스사진5.jpg" id="cos1">
-			</div>
+	<form class="photoForm" action="ajax/course/putImg.do" method="post" enctype="multipart/form-data">
+		<button id="photoBtn"  style="background-color: rgba( 0, 0, 0, 0.7 ); border:0;">저장</button>
+		<label id="photoLabel" style="background-color: rgba( 0, 0, 0, 0.7 ); border:0; cursor: pointer;">사진 선택 <input type="file" name="img" style="display: none;"></label>
+	</form>
+	<div id="slide">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:900px; height:400px;">
+			<ol id="dotList" class="carousel-indicators"></ol>
+			<div id="photoList" class="carousel-inner" role="listbox"></div>
 		</div>
 	</div>
 	
@@ -277,6 +265,29 @@ $.getJSON("ajax/course/getMap.do?no="+no, function(result) {
 				} else if (result.status == "failure") {
 					window.alert("불러오기 실패입니다!");
 					}
+});
+
+$.post("ajax/course/courseNo.do?no="+no, {
+}, function(result) {
+}, "json", false);
+
+$.getJSON("ajax/course/getImg.do?no=" + no, function(result) {
+    if (result.status == "success") {
+      $("#dotList").empty();
+      $("#photoList").empty();
+          var path = result.list;
+          var ol = $("#dotList");
+          var div = $("#photoList");
+          
+     		  $("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\">").appendTo(ol);
+          $("<div class=\"item active\">").html("<img src=\"\">").appendTo(div);
+          for (var i in path) {
+             $("<li data-target=\"#myCarousel\" data-slide-to='"+(i+1)+"' class=''>").appendTo(ol);
+             $("<div class=\"item\">").html("<img src=\""+path[i]+"\">").appendTo(div);
+          }
+    }else{
+      window.alert("사진을 불러오지 못하였습니다");
+    }
 });
 </script>
 </body>
