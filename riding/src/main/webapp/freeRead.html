@@ -12,6 +12,10 @@
 
 <title>Free Riding</title>
 <style>
+.col-md-3 {
+  margin-left: 5%;
+  margin-top: 1%;
+}
 #map {
   margin-top: 20px;
 }
@@ -35,7 +39,7 @@ td {
 }
 #slide {
   color: gray;
-  margin-left: 7%;
+  margin-left: 5%;
   padding-bottom: 10px;
 }
 .photoForm{
@@ -107,7 +111,7 @@ td {
       <center>
         <!-- photo -->
         <div id="slide">
-          <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:1150px; height:600px;">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:1180px; height:600px;">
             <!-- Indicators -->
             <ol id="dotList" class="carousel-indicators">
             </ol>
@@ -272,10 +276,10 @@ $.getJSON("ajax/board/getImg.do?bno=" + bno, function(result) {
           var div = $("#photoList");
           
           $("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\">").appendTo(ol);
-          $("<div class=\"item active\">").html("<img src=\"img/boardImg/main1.jpg\" style=\"width:1150px; height:600px;\">").appendTo(div);
+          $("<div class=\"item active\">").html("<img src=\"img/boardImg/main1.jpg\" style=\"width:1180px; height:600px;\">").appendTo(div);
           for (var i in path) {
              $("<li data-target=\"#myCarousel\" data-slide-to='"+(i+1)+"' class=''>").appendTo(ol);
-             $("<div class=\"item\">").html("<img src=\""+path[i]+"\"style=\"width:1150px; height:600px;\">").appendTo(div);
+             $("<div class=\"item\">").html("<img src=\""+path[i]+"\"style=\"width:1180px; height:600px;\">").appendTo(div);
           }
     }else{
       window.alert("사진을 불러오지 못하였습니다");
