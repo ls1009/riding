@@ -65,7 +65,7 @@
   <select id="selectList" resultMap="BoardMap" parameterType="map">
     select  b.BNO,b.TITLE,b.MLOCA,b.MTIME,b.MDAY,b.DISTANCE,b.TIME,b.PNUM,
             b.PH,b.CDT,b.RBTYPE,b.MNO,b.LOCA,m.MNM 
-    from RIDINGBOARD b inner join MEMBERS m
+    from RIDINGBOARD b INNER join MEMBERS m on m.MNO = b.MNO
     where RBTYPE=#{rbtype} and loca=#{loca}
     order by BNO DESC
     limit #{startIndex}, #{length}

@@ -181,7 +181,9 @@ public class BoardAjaxController {
     String loca = request.getParameter("loca");
     String rbtype = request.getParameter("rbtype");
     List<Board> list = boardService.List(pageNo, pageSize, loca, rbtype);
-    
+    for(Board b : list) {
+      System.out.println(b.getMnm());
+    }
     HashMap<String,Object> result = new HashMap<>();
     result.put("pageNo", pageNo);
     result.put("pageSize", pageSize);
@@ -223,6 +225,7 @@ public class BoardAjaxController {
 	}
     
     List<Board> list = boardService.ListSchedule(pageNo, pageSize, member.getNo(), rbtype);
+    
     HashMap<String,Object> result = new HashMap<>();
     result.put("pageNo", pageNo);
     result.put("pageSize", pageSize);

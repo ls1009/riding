@@ -23,10 +23,10 @@ public class Board {
 	
 	
 	
-	public String getWriter() {
+	public String getMnm() {
 		return mnm;
 	}
-	public void setWriter(String mnm) {
+	public void setMnm(String mnm) {
 		this.mnm = mnm;
 	}
 	public int getBno() {
