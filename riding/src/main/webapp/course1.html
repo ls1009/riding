@@ -60,13 +60,18 @@ height: 550px;
 margin-left: 10%
 
 }
-#d6 {
-
+#site {
+	margin-top: 20px;
+	margin-right: 10px;
+	margin-left: 20px;
+}
+#user {
+	margin-top: 20px;
 }
 </style>
 </head>
 
-<body onload="menuinit();">
+<body>
   <header>
   <div>   
     <div class="row">
@@ -93,6 +98,9 @@ margin-left: 10%
   </header>
    
      <div id="container">
+     <button id="site" type="button" class="btn btn-info">사이트</button>
+		 <button id="user" type="button" class="btn btn-info">사용자</button>
+     
   <center> <img id="d1" src="img/courseImg/추천코스1.jpg"> </center>
    
    
@@ -164,6 +172,14 @@ margin-left: 10%
       $('.carousel').carousel({
          interval : 1700
       })
+   </script>
+   <script type="text/javascript">
+   $("#site").click(function(event) {
+		 location.href = "course.html";
+	 });
+	 $("#user").click(function(event) {
+	 	 location.href = "course2.html";
+ 	});
    </script>
 </body>
 </html>
