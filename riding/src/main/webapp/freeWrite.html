@@ -14,9 +14,8 @@
 #container {width: 1280px !important;}
 .col-xs-3 {
   margin-left: 80px;
-  z-index: 1000;
+  z-index: 200;
 }
-
 .profile {
 	border-radius: 80%;
 	width: 40px;
@@ -28,12 +27,10 @@
 	margin-left: 50px;
 }
 
-
 #addBtn {
   margin-right: 20px;
   margin-top: 20px;
 }
-
 #cancel {
 	margin-right: 20px;
 	margin-top: 20px;
@@ -48,6 +45,12 @@
 .input-group-addon {
 	background-color: #47a3da;
 	color: white;
+}
+#pnum {
+  z-index: 300;
+}
+option {
+  text-align: center;
 }
 </style>
 </head>
@@ -100,7 +103,7 @@
 				<input id="ph" type="text" class="form-control" placeholder="연락처"><br>
 			</div> -->
 			
-				<div class="form-group">
+	<div class="form-group">
 		<div class="col-md-3">
     	<div class="input-group">
      	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;</span>
@@ -127,9 +130,18 @@
      	 <input id="time" class="form-control" placeholder="예) 약 2시간" type="text">
     	</div><br><br>
     	<div class="input-group">
-     	 <span class="input-group-addon">모집인원</span>
-     	 <input id="pnum" class="form-control" placeholder="예) 5 ~ 6인" type="text">
-    	</div><br><br>
+	     	 <span class="input-group-addon">모집인원</span>
+	     	 <!-- <input id="pnum" class="form-control" placeholder="예) 5 ~ 6인" type="text"> -->
+	    	
+	    	 <span class="pnum">
+	    	 <select id="pnum" class="form-control" style="height:34px;width:209px;">
+	        <option value="2">2명</option>
+	        <option value="3">3명</option>
+	        <option value="4">4명</option>
+	        <option value="5">5명</option>
+	       </select>
+         </span>
+    	</div><br><br><br><br>
 		</div>
 	</div>
 			

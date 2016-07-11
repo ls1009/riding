@@ -262,6 +262,7 @@ $.extend({
 var bno = $.getUrlVar('bno');
 var ploca = $.getUrlVar('loca');
 var prbtype = $.getUrlVar('rbtype');
+var listNum;
 
 $.post("ajax/board/boardNo.do?bno="+bno, {
 }, function(result) {
@@ -298,6 +299,7 @@ $.getJSON("ajax/board/detail.do?bno=" + bno, function(result) {
     $("#time").val(board.time);
     $("#pnum").val(board.pnum);
     $("#ph").val(board.ph);
+    listNum=board.pnum;
     if (result.status == "fail") {
         $("#deleteBtn").css("display","none");
         $("#changeBtn").css("display","none");
@@ -345,51 +347,57 @@ $("#changeBtn").click(function(event) {
     location.href = "freeUpdate.html?bno="+bno+"&loca="+ploca+"&rbtype="+prbtype;
 });
 $("#joinBtn").click(function(event) {
-  $.post("ajax/board/join.do", {
-      bno:bno
-    }, function(result) {
-      if (result.status == "success") {
-              window.alert("참여 하였습니다!");
-              document.getElementById("j").textContent="DISJOIN";
-              $("tbody").empty();
-              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
-                  var member = result.list;
-                  var tbody = $("tbody");
-                  for (var i in member) {
-                    $("<tr>")
-                      .html(
-                          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
-                          "<td class=\"col-md-5\">" +member[i].name + "</td>" +
-                          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
-                      .appendTo(tbody);
-                    $(document).ready(function () {
-                        $(".img-responsive").simpleLightBox(); 
-                    });
-                  }
-              });
-            } else if (result.status == "cancel") {
-              window.alert("참여 취소했습니다!");
-              document.getElementById("j").textContent="JOIN";
-              $("tbody").empty();
-              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
-                  var member = result.list;
-                  var tbody = $("tbody");
-                  for (var i in member) {
-                    $("<tr>")
-                      .html(
-                          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
-                          "<td class=\"col-md-5\">" +member[i].name + "</td>" +
-                          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
-                      .appendTo(tbody);
-                    $(document).ready(function () {
-                        $(".img-responsive").simpleLightBox(); 
-                    });
-                  }
-              });
-            } else{
-              window.alert("참여 실패입니다!");
-            }
-    }, "json",false);
+	$.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+		if (listNum <= result.list.length) {
+			window.alert("참여 인원이 초과 되었습니다.");
+		} else {
+		  $.post("ajax/board/join.do", {
+		      bno:bno
+		    }, function(result) {
+		      if (result.status == "success") {
+		              window.alert("참여 하였습니다!");
+		              document.getElementById("j").textContent="DISJOIN";
+		              $("tbody").empty();
+		              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+		                  var member = result.list;
+		                  var tbody = $("tbody");
+		                  for (var i in member) {
+		                    $("<tr>")
+		                      .html(
+		                          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
+		                          "<td class=\"col-md-5\">" +member[i].name + "</td>" +
+		                          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
+		                      .appendTo(tbody);
+		                    $(document).ready(function () {
+		                        $(".img-responsive").simpleLightBox(); 
+		                    });
+		                  }
+		              });
+		            } else if (result.status == "cancel") {
+		              window.alert("참여 취소했습니다!");
+		              document.getElementById("j").textContent="JOIN";
+		              $("tbody").empty();
+		              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+		                  var member = result.list;
+		                  var tbody = $("tbody");
+		                  for (var i in member) {
+		                    $("<tr>")
+		                      .html(
+		                          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
+		                          "<td class=\"col-md-5\">" +member[i].name + "</td>" +
+		                          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
+		                      .appendTo(tbody);
+		                    $(document).ready(function () {
+		                        $(".img-responsive").simpleLightBox(); 
+		                    });
+		                  }
+		              });
+		            } else{
+		              window.alert("참여 실패입니다!");
+		            }
+		    }, "json",false);
+		}
+	});
 });
 
 $('#myModal').on('shown.bs.modal', function () {
