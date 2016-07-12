@@ -54,7 +54,8 @@ button {width:70px;heignt:20px;}
 
     <div id="container">
     
-    <br><h2 style="margin-left:40%;">기본 정보 수정</h2><br>
+    <br><h2 style="margin-left:35%;"><img src="img/back.png" style="width:50px; cursor:pointer; " onclick="location.href='myInfo.html'"
+      />기본 정보 수정</h2><br>
     <div id="box1">
       <div id="myInfoUpdate">
           <div id="table">
@@ -85,12 +86,19 @@ button {width:70px;heignt:20px;}
             </select> <br>
           </div>
           <div id="buttonGroup">
-            <a id="updateButton">확인</a>
-            <a id="cancleButton" onclick="cancel_event()">취소</a>
+            <button id="updateButton" class="btn btn-default" type="submit">확인</button>
+            <button id="cancleButton" onclick="cancel_event()">취소</button>
           </div>
       </div>
    </div>
   </div>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Jquery -->
+    <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+
+    <!-- Confirm Modal -->
+    <script type="text/javascript" src="js/confirm.js"></script>
     
 
 	<script src="bower_components/jquery/dist/jquery.js"></script>
@@ -143,27 +151,40 @@ button {width:70px;heignt:20px;}
 		
 		
 		
-		$("#updateButton").click(function(event) {
+		$(function()
+			{
+				Confirm.init('sm');
+
+				$('#updateButton').unbind();
+				$('#updateButton').bind('click', function(e)
+				{
 					if ($('#pwd').val()!=$('#confirm_pwd').val()){
-						window.alert("비밀번호가 맞지 않습니다!");
+						Confirm.show("수정 실패", "비밀번호가 맞지 않습니다.");
 					} else {
-    					$.post("ajax/member/update.do", {
-    						no : mno,
-    						name : $("#usr").val(),
-    						pw : $("#pwd").val(),
-    						ph : $("#tel").val(),
-    						gender : $("#gender").val()
-    					}, function(result) {
-      						if (result.status == "success") {
-      							window.alert("수정했습니다!");
-      							location.href = "myInfo.html";
-      						} else {
-      							window.alert("수정에 실패했습니다!");
-      						}
-    					
-    					}, "json");
+						
+  						e.preventDefault();
+  						$.post("ajax/member/update.do", {
+      						no : mno,
+      						name : $("#usr").val(),
+      						pw : $("#pwd").val(),
+      						ph : $("#tel").val(),
+      						gender : $("#gender").val()
+      					}, function(result) {
+        						if (result.status == "success") {
+        							Confirm.show('수정', '수정하시겠습니까?', {
+          							'예' : {
+          								'primary' : true,
+          								'callback' : function()
+          								{
+          									location.href = "myInfo.html";
+          								}
+          							}
+          						});
+        						} 
+      					}, "json");
 					}
 				});
+			}); 
 		
 		function cancel_event() {
 			if (confirm("정말 취소하시겠습니까?") == true) {
