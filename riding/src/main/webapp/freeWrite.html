@@ -8,6 +8,7 @@
 	href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/menu.css" type="text/css">
 <link rel="stylesheet" href="css/mapApi.css" type="text/css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 <title>Free Riding Write</title>
 <style>
@@ -16,17 +17,6 @@
   margin-left: 80px;
   z-index: 200;
 }
-.profile {
-	border-radius: 80%;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
-}
-
-.profilename {
-	margin-left: 50px;
-}
-
 #addBtn {
   margin-right: 20px;
   margin-top: 20px;
@@ -37,6 +27,7 @@
 }
 #map{
   float: right;
+  z-index: 2;
 }
 .col-md-3 {
 	margin-top: 20px;
@@ -48,9 +39,6 @@
 }
 #pnum {
   z-index: 300;
-}
-option {
-  text-align: center;
 }
 </style>
 </head>
@@ -83,25 +71,10 @@ option {
   </header> 
 
   <div id="container">
-			<center>
-				<img class="profile" src="img/4.jpg" align="left">
-				<p class="profilename" align="left">KyeongHun-Min</p>
-			</center>
 
 			<h2 align="center">Free Riding Write</h2>
-			<hr width=100px margin-top=0px>
+			<hr width=100px>
       <br>
-
-			<!-- <div class="col-xs-3" id="signForm">
-				<input id="title" type="text" class="form-control"	placeholder="제목"><br> 
-				<input id="mloca" type="text" class="form-control" placeholder="장소"><br> 
-				<input id="mday" type="text" class="form-control" placeholder="날짜(2016-01-01)"><br> 
-				<input id="mtime" type="text" class="form-control" placeholder="시간"><br>
-				<input id="distance" type="text" class="form-control" placeholder="총거리"><br>
-				<input id="time" type="text" class="form-control" placeholder="예상소요시간"><br>
-				<input id="pnum" type="text" class="form-control" placeholder="모집인원"><br>
-				<input id="ph" type="text" class="form-control" placeholder="연락처"><br>
-			</div> -->
 			
 	<div class="form-group">
 		<div class="col-md-3">
@@ -131,7 +104,6 @@ option {
     	</div><br><br>
     	<div class="input-group">
 	     	 <span class="input-group-addon">모집인원</span>
-	     	 <!-- <input id="pnum" class="form-control" placeholder="예) 5 ~ 6인" type="text"> -->
 	    	
 	    	 <span class="pnum">
 	    	 <select id="pnum" class="form-control" style="height:34px;width:209px;">
@@ -144,42 +116,50 @@ option {
     	</div><br><br><br><br>
 		</div>
 	</div>
-			
-	<div class="map_wrap">
-		<div id="map" style="width:875px;height:560px;">
-	</div><br>
-			
-				
-				<div id="menu_wrap" class="bg_white">
-	        <div class="option">
-	            <div>
-	                <form onsubmit="searchPlaces(); return false;">
-	                    키워드 : <input type="text" placeholder="장소 검색" id="keyword" size="15"> 
-	                    <button type="submit">검색하기</button> 
-	                </form>
-	            </div>
-	        </div>
-	        <hr>
-	        <ul id="placesList"></ul>
-	        <div id="pagination"></div>
-        </div> 
-      </div>
-				
-				<div>
-	        <button id="addBtn" type="button" class="btn btn-info btn pull-right" style="width: 100px;">REGISTER</button>
-        </div>
-        <div>
-	        <button id="cancel" type="button" class="btn btn-info btn pull-right" style="width: 100px;">CANCEL</button>
-		    </div>
-		    <br><br><br>
-  </div>
+
+		<div class="map_wrap">
+			<div id="map" style="width: 875px; height: 560px;"></div>
+			<br>
+			<div id="menu_wrap" class="bg_white">
+				<div class="option">
+					<div>
+						<form onsubmit="searchPlaces(); return false;">
+							키워드 : <input type="text" placeholder="장소 검색" id="keyword"
+								size="15">
+							<button type="submit">검색하기</button>
+						</form>
+					</div>
+				</div>
+				<hr>
+				<ul id="placesList"></ul>
+				<div id="pagination"></div>
+			</div>
+		</div>
+
+		<div>
+			<button id="addBtn" type="button" class="btn btn-info btn pull-right"
+				style="width: 100px;">REGISTER</button>
+		</div>
+		<div>
+			<button id="cancel" type="button" class="btn btn-info btn pull-right"
+				style="width: 100px;">CANCEL</button>
+		</div>
+		<br> <br> <br>
+</div>
 
 <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b&libraries=services"></script>  
 <script src="bower_components/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="js/mapApi.js" ></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/handlebars/handlebars.min.js"></script>
+<script type="text/javascript" src="js/mapApi.js" ></script>
 <script type="text/javascript" src="js/menu.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script>
+$(function() {
+  $( "#mday" ).datepicker({
+    dateFormat: 'yy-mm-dd'
+  });
+});
+</script>
 <script type="text/javascript">
 var places = new daum.maps.services.Places();
 $.extend({
