@@ -152,39 +152,36 @@ button {width:70px;heignt:20px;}
 		
 		
 		$(function()
-			{
-				Confirm.init('sm');
-
-				$('#updateButton').unbind();
-				$('#updateButton').bind('click', function(e)
 				{
-					if ($('#pwd').val()!=$('#confirm_pwd').val()){
-						Confirm.show("수정 실패", "비밀번호가 맞지 않습니다.");
-					} else {
-						
-  						e.preventDefault();
-  						$.post("ajax/member/update.do", {
-      						no : mno,
-      						name : $("#usr").val(),
-      						pw : $("#pwd").val(),
-      						ph : $("#tel").val(),
-      						gender : $("#gender").val()
-      					}, function(result) {
-        						if (result.status == "success") {
-        							Confirm.show('수정', '수정하시겠습니까?', {
-          							'예' : {
-          								'primary' : true,
-          								'callback' : function()
-          								{
-          									location.href = "myInfo.html";
-          								}
-          							}
-          						});
-        						} 
-      					}, "json");
-					}
-				});
-			}); 
+					Confirm.init('sm');
+
+					$('#updateButton').unbind();
+					$('#updateButton').bind('click', function(e)
+					{
+						if ($('#pwd').val()!=$('#confirm_pwd').val()){
+							Confirm.show("수정 실패", "비밀번호가 맞지 않습니다.");
+						} else {
+							Confirm.show('수정', '수정하시겠습니까?', {
+    							'예' : {
+    								'primary' : true,
+    								'callback' : function() {
+    									$.post("ajax/member/update.do", {
+    		        						no : mno,
+    		        						name : $("#usr").val(),
+    		        						pw : $("#pwd").val(),
+    		        						ph : $("#tel").val(),
+    		        						gender : $("#gender").val()
+    		        					}, function(result) {
+    		          						if (result.status == "success") {
+    											location.href = "myInfo.html";
+    		          						} 
+    		        					}, "json");
+    								}
+    							}
+    						});
+						}
+					});
+				}); 
 		
 		function cancel_event() {
 			if (confirm("정말 취소하시겠습니까?") == true) {

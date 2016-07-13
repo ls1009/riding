@@ -102,8 +102,14 @@
       </div>
    </div>
 
- 
-        
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Jquery -->
+<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+
+<!-- Confirm Modal -->
+<script type="text/javascript" src="js/confirm.js"></script>
+    
  <script src="bower_components/jquery/dist/jquery.js"></script>
  <script src="js/introjs/introrAF.js"></script>
  <script src="js/introjs/introdemo-2.js"></script>
@@ -112,22 +118,36 @@
  
  
  <script type="text/javascript">
- $("#addBtn").click(function(event) {
-     $.post("ajax/member/add.do", {
-         name: $("#name").val(),
-         email: $("#email").val(),
-         pw: $("#password").val(),
-         ph: $("#ph").val(),
-         gender: $("#gender").val()
-       }, function(result) {
-         if (result.status == "success") {
-           location.href = "intro.html";
-         } else {
-           window.alert("등록 실패입니다!");
-         }
-       }, "json"
+ 
+$(function() {
+  	Confirm.init('sm');
+    $('#addBtn').unbind();
+    $('#addBtn').bind('click', function(e) {
+    	 $.post("ajax/member/add.do", {
+           name: $("#name").val(),
+           email: $("#email").val(),
+           pw: $("#password").val(),
+           ph: $("#ph").val(),
+           gender: $("#gender").val()
+         }, function(result) {
+         	if (result.status == "success") {
+            	Confirm.show("가입 확인", "입력한 정보가 맞습니까?", {
+            		'예' : {
+    						'primary' : true,
+    						'callback' : function()
+    						{
+    							location.href = "intro.html";
+    						}
+    					}
+            	});
+           } else {
+          	Confirm.show("등록 실패", "등록에 실패했습니다.") 
+           } location.href = "intro.html";
+         }, "json"
      );
-   });
+ });
+});  
+  
  
  $("#login").click(function(event) {
      $.post("auth/login.do", {
