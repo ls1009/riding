@@ -338,16 +338,30 @@ $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
 
 
 $("#deleteBtn").click(function(event) {
-    $.getJSON("ajax/board/delete.do?bno=" + bno, function(result) {
-        if (result.status == "success") {
-          location.href = "freeLocation.html?loca="+ploca+"&rbtype="+prbtype;
-        } else{
-          $.dialog({
-      		autoClose : 2500,
-      		contentHtml : '<center>삭제 실패입니다.</center>'
-       	 });
-        }
-    });
+	
+	
+	$.dialog({
+		type : 'confirm',
+		onClickOk : function(){
+			$.getJSON("ajax/board/delete.do?bno=" + bno, function(result) {
+		        if (result.status == "success") {
+		          location.href = "freeLocation.html?loca="+ploca+"&rbtype="+prbtype;
+		        } else{
+		          $.dialog({
+		      		autoClose : 2500,
+		      		contentHtml : '<center>삭제 실패입니다.</center>'
+		       	 });
+		        }
+		    });
+		},
+	  	onClickCancel : function(){        		
+	  	},
+		contentHtml : '<center>정말 삭제하시겠습니까?</center>'
+		});
+	
+	
+	
+    
 });  
 $("#changeBtn").click(function(event) {
     location.href = "freeUpdate.html?bno="+bno+"&loca="+ploca+"&rbtype="+prbtype;
