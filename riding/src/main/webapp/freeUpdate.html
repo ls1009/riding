@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/menu.css" type="text/css">
 <link rel="stylesheet" href="css/mapApi.css" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="css/dialog.css">
 
 <title>Free Riding Update</title>
 <style>
@@ -151,6 +152,7 @@
 <script type="text/javascript" src="js/menu.js"></script>
 <script src="bower_components/moment/moment.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="js/dialog.js"></script>
 <script>
 $(function() {
   $( "#mday" ).datepicker({
@@ -242,60 +244,75 @@ $.getJSON("ajax/board/getMap.do?bno="+bno, function(result) {
       updateclickLine.setPath(linepath);
       updateclickLine.setMap(map);
     } else if (result.status == "failure") {
-      window.alert("불러오기 실패입니다!");
-      }
+      $.dialog({
+    	autoClose : 2500,
+    	contentHtml : '<center>경로를 불러오는데 실패입니다. </center>'
+  	   });
+    }
 }); 
 
 $("#changeBtn").click(function(event) {
-    $.post("ajax/board/update.do", {
-    	  bno: bno, 
-        title: $("#title").val(),
-        mloca: $("#mloca").val(),
-        mday: $("#mday").val(),
-        mtime: $("#mtime").val(),
-        distance: $("#distance").val(),
-        time: $("#time").val(),
-        pnum: $("#pnum").val(),
-        ph: $("#ph").val()
-      }, function(result) {
-        if (result.status == "success") {
-        	if (clickLine == null) {
-        		location.href = "freeRead.html?bno="+bno+"&loca=" + ploca
-                + "&rbtype=" + prbtype;
-        	} else{
-	            var path = clickLine.getPath();
-	            $.ajax({
-	                url: 'ajax/board/deleteMap.do',
-	                global: false,
-	                type: 'POST',
-	                data: {bno : bno},
-	                async: false, //blocks window close
-	                success: function() {
-	                  console.log("old map delete");
-	                  for ( var i in path) {
-	                      $.ajax({
-	                          url: 'ajax/board/changeMap.do',
-	                          global: false,
-	                          type: 'POST',
-	                          data: {bno : bno,
-	                        	       ab : path[i].ab,
-	                                 bb : path[i].bb},
-	                          async: false, //blocks window close
-	                          success: function() {
-	                            console.log("dot insert");
-	                          }
-	                      });
-	                  }
-	               }
-	            });
-	        	}
-            location.href = "freeRead.html?bno="+bno+"&loca=" + ploca
-                + "&rbtype=" + prbtype;
-       } else {
-         window.alert("등록 실패입니다!");
-       }
-    }, "json",false);
-
+	$.dialog({
+	type : 'confirm',
+	onClickOk : function(){
+		$.post("ajax/board/update.do", {
+	    	  bno: bno, 
+	        title: $("#title").val(),
+	        mloca: $("#mloca").val(),
+	        mday: $("#mday").val(),
+	        mtime: $("#mtime").val(),
+	        distance: $("#distance").val(),
+	        time: $("#time").val(),
+	        pnum: $("#pnum").val(),
+	        ph: $("#ph").val()
+	      }, function(result) {
+	        if (result.status == "success") {
+	        	if (clickLine == null) {
+	        		location.href = "freeRead.html?bno="+bno+"&loca=" + ploca
+	                + "&rbtype=" + prbtype;
+	        	} else{
+		            var path = clickLine.getPath();
+		            $.ajax({
+		                url: 'ajax/board/deleteMap.do',
+		                global: false,
+		                type: 'POST',
+		                data: {bno : bno},
+		                async: false, //blocks window close
+		                success: function() {
+		                  console.log("old map delete");
+		                  for ( var i in path) {
+		                      $.ajax({
+		                          url: 'ajax/board/changeMap.do',
+		                          global: false,
+		                          type: 'POST',
+		                          data: {bno : bno,
+		                        	       ab : path[i].ab,
+		                                 bb : path[i].bb},
+		                          async: false, //blocks window close
+		                          success: function() {
+		                            console.log("dot insert");
+		                          }
+		                      });
+		                  }
+		               }
+		            });
+		        	}
+	            location.href = "freeRead.html?bno="+bno+"&loca=" + ploca
+	                + "&rbtype=" + prbtype;
+	       } else {
+	         $.dialog({
+	         	autoClose : 2500,
+	         	contentHtml : '<center>수정 실패 했습니다. </center>'
+	   	     });
+	       }
+	    }, "json",false);
+	},
+  	onClickCancel : function(){        		
+  		location.href = "freeRead.html?bno="+bno+"&loca=" + ploca
+        + "&rbtype=" + prbtype;
+  	},
+	contentHtml : '<center>수정 하시겠습니까?</center>'
+	});
   });
   
   $("#cancel").click(function(event) {    

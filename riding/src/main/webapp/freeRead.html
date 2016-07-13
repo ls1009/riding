@@ -8,6 +8,7 @@
   href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="css/menu.css" type="text/css">
 <link rel="stylesheet" href="css/simple-lightbox.min.css" type="text/css">
+<link rel="stylesheet" href="css/dialog.css">
 
 <title>Free Riding</title>
 <style>
@@ -138,7 +139,7 @@ td {
       <div class="form-group">
     <div class="col-md-3">
       <div class="input-group">
-       <span class="input-group-addon">&nbsp;&nbsp;작성자&nbsp;&nbsp;&nbsp;</span>
+       <span class="input-group-addon">&nbsp;&nbsp;작성자&nbsp;</span>
        <input id="writer" class="form-control" type="text" disabled>
       </div><br><br>
       <div class="input-group">
@@ -241,7 +242,7 @@ td {
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
 <script type="text/javascript" src="js/simple-lightbox.min.js"></script> 
-</script>
+<script src="js/dialog.js"></script>
 <script type="text/javascript">
 $.extend({
     getUrlVars: function(){
@@ -282,7 +283,10 @@ $.getJSON("ajax/board/getImg.do?bno=" + bno, function(result) {
              $("<div class=\"item\">").html("<img src=\""+path[i]+"\"style=\"width:1180px; height:600px;\">").appendTo(div);
           }
     }else{
-      window.alert("사진을 불러오지 못하였습니다");
+      $.dialog({
+		autoClose : 2500,
+		contentHtml : '<center>사진을 불러오지 못하였습니다</center>'
+   	 });
     }
 });
 
@@ -338,7 +342,10 @@ $("#deleteBtn").click(function(event) {
         if (result.status == "success") {
           location.href = "freeLocation.html?loca="+ploca+"&rbtype="+prbtype;
         } else{
-          window.alert("삭제 실패입니다!");
+          $.dialog({
+      		autoClose : 2500,
+      		contentHtml : '<center>삭제 실패입니다.</center>'
+       	 });
         }
     });
 });  
@@ -348,13 +355,19 @@ $("#changeBtn").click(function(event) {
 $("#joinBtn").click(function(event) {
 	$.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
 		if (listNum <= result.list.length) {
-			window.alert("참여 인원이 초과 되었습니다.");
+			$.dialog({
+	      		autoClose : 2500,
+	      		contentHtml : '<center>참여 인원이 초과 되었습니다.</center>'
+	       	 });
 		} else {
 		  $.post("ajax/board/join.do", {
 		      bno:bno
 		    }, function(result) {
 		      if (result.status == "success") {
-		              window.alert("참여 하였습니다!");
+		              $.dialog({
+		  	      		autoClose : 2500,
+		  	      		contentHtml : '<center>참여 하였습니다.</center>'
+		  	       	  });
 		              document.getElementById("j").textContent="DISJOIN";
 		              $("tbody").empty();
 		              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
@@ -373,7 +386,10 @@ $("#joinBtn").click(function(event) {
 		                  }
 		              });
 		            } else if (result.status == "cancel") {
-		              window.alert("참여 취소했습니다!");
+		              $.dialog({
+		  	      		autoClose : 2500,
+		  	      		contentHtml : '<center>참여 취소 하였습니다.</center>'
+		  	       	  });
 		              document.getElementById("j").textContent="JOIN";
 		              $("tbody").empty();
 		              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
@@ -392,7 +408,10 @@ $("#joinBtn").click(function(event) {
 		                  }
 		              });
 		            } else{
-		              window.alert("참여 실패입니다!");
+		              $.dialog({
+		  	      		autoClose : 2500,
+		  	      		contentHtml : '<center>참여 실패입니다.</center>'
+		  	       	  });
 		            }
 		    }, "json",false);
 		}
@@ -492,8 +511,11 @@ $.getJSON("ajax/board/getMap.do?bno="+bno, function(result) {
           map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
           map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
         } else if (result.status == "failure") {
-          window.alert("불러오기 실패입니다!");
-          }
+          $.dialog({
+      		autoClose : 2500,
+      		contentHtml : '<center>불러오기 실패 하였습니다.</center>'
+       	  });
+        }
 });
 </script>
 </body>

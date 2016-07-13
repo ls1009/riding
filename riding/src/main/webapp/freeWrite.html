@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="css/menu.css" type="text/css">
 <link rel="stylesheet" href="css/mapApi.css" type="text/css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="css/dialog.css">
 
 <title>Free Riding Write</title>
 <style>
@@ -153,6 +154,7 @@
 <script type="text/javascript" src="js/mapApi.js" ></script>
 <script type="text/javascript" src="js/menu.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="js/dialog.js"></script>
 <script>
 $(function() {
   $( "#mday" ).datepicker({
@@ -209,7 +211,10 @@ $("#addBtn").click(function(event) {
 							location.href = "freeLocation.html?loca=" + ploca
 									+ "&rbtype=" + prbtype;
 			} else {
-				window.alert("등록 실패입니다!");
+				$.dialog({
+       				autoClose : 2500,
+       				contentHtml : '<center>등록에 실패했습니다. </center>'
+   			    });
 			}
 		}, "json",false);
 

@@ -9,6 +9,7 @@
   <link href='http://fonts.googleapis.com/css?family=Raleway:200,400,800|Clicker+Script' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="css/introcss/loginComponent.css" />
   <link rel="stylesheet" type="text/css" href="css/introcss/loginContent.css" />
+  <link rel="stylesheet" href="css/dialog.css">
   
   <script src="js/introjs/modernizr.custom.js"></script>
   
@@ -102,51 +103,42 @@
       </div>
    </div>
 
-<link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Jquery -->
-<script type="text/javascript" src="js/jquery-2.1.4.js"></script>
-
-<!-- Confirm Modal -->
-<script type="text/javascript" src="js/confirm.js"></script>
-    
  <script src="bower_components/jquery/dist/jquery.js"></script>
  <script src="js/introjs/introrAF.js"></script>
  <script src="js/introjs/introdemo-2.js"></script>
  <script src="js/introjs/classie.js"></script>
  <script src="js/introjs/uiMorphingButton_fixed.js"></script>
- 
+ <script src="js/dialog.js"></script>
  
  <script type="text/javascript">
  
-$(function() {
-  	Confirm.init('sm');
-    $('#addBtn').unbind();
-    $('#addBtn').bind('click', function(e) {
-    	 $.post("ajax/member/add.do", {
-           name: $("#name").val(),
-           email: $("#email").val(),
-           pw: $("#password").val(),
-           ph: $("#ph").val(),
-           gender: $("#gender").val()
-         }, function(result) {
-         	if (result.status == "success") {
-            	Confirm.show("가입 확인", "입력한 정보가 맞습니까?", {
-            		'예' : {
-    						'primary' : true,
-    						'callback' : function()
-    						{
-    							location.href = "intro.html";
-    						}
-    					}
-            	});
-           } else {
-          	Confirm.show("등록 실패", "등록에 실패했습니다.") 
-           } location.href = "intro.html";
-         }, "json"
-     );
- });
-});  
+$('#addBtn').click(function(event) {
+	$.dialog({
+	type : 'confirm',
+	onClickOk : function(){
+		$.post("ajax/member/add.do", {
+	           name: $("#name").val(),
+	           email: $("#email").val(),
+	           pw: $("#password").val(),
+	           ph: $("#ph").val(),
+	           gender: $("#gender").val()
+	         }, function(result) {
+	         	if (result.status == "success") {
+				 location.href = "intro.html";
+	           } else {
+	        	   $.dialog({
+	       			autoClose : 2500,
+	       			contentHtml : '<center>등록에 실패했습니다. </center>'
+       			   });
+	           } 
+	         }, "json");
+	},
+  	onClickCancel : function(){        		
+  		location.href = "intro.html";
+  	},
+	contentHtml : '<center>입력한 정보가 맞습니까?</center>'
+	});
+});
   
  
  $("#login").click(function(event) {
@@ -157,7 +149,10 @@ $(function() {
          if (result.status == "success") {
            location.href = "main.html";
          } else {
-           window.alert("로그인 실패입니다!");
+        	 $.dialog({
+       			autoClose : 2500,
+       			contentHtml : '<center>로그인에 실패했습니다. </center>'
+   			});
          }
        }, "json"
      );
