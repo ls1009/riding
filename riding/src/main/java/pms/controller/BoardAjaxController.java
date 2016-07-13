@@ -1,8 +1,13 @@
 package pms.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -423,6 +428,52 @@ public class BoardAjaxController {
 	  HashMap<String,Object> result = new HashMap<>();
 	  try {
 		result.put("bno", bno);
+	    result.put("status", "success");
+	}catch(Exception e) {
+		result.put("status", "failure");
+	}
+    return new Gson().toJson(result);
+  }
+  
+  @RequestMapping(value="weather", produces="application/json;charset=UTF-8", method=RequestMethod.GET)
+  @ResponseBody
+  public String weather(HttpSession session) 
+      throws ServletException, IOException {
+	  HashMap<String,Object> result = new HashMap<>();
+	  List<String> list = new ArrayList<>();
+  try {
+	  
+	  String[] urlStr = new String[10];
+	  
+	  urlStr[0] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=1159068000"; //서울
+	  urlStr[1] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=2814064000"; //인천
+	  urlStr[2] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4111159100"; //수원
+	  urlStr[3] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=4215061500"; //강릉
+	  urlStr[4] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=3023052000"; //대전
+	  urlStr[5] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=2720065000"; //대구
+	  urlStr[6] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=2644058000"; //부산
+	  urlStr[7] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=2920054000"; //광주
+	  urlStr[8] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=3114056000"; //울산
+	  urlStr[9] = "http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=5013025300"; //제주
+	  
+	  for(int i=0; i < urlStr.length; i++) {
+		  URL url = new URL(urlStr[i]);
+		  URLConnection connection = url.openConnection();
+		  connection.setDoOutput(true);
+		  // 타입 설정
+		  connection.setRequestProperty("CONTENT-TYPE","text/xml"); 
+		  //openStream() : URL페이지 정보를 읽어온다.
+		  BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(),"utf-8"));
+		  String inputLine;
+		  String buffer = "";
+		  // 페이지의 정보를 저장한다.
+		   while ((inputLine = in.readLine()) != null){
+		        buffer += inputLine.trim();
+		  }
+		  in.close();
+		  list.add(buffer);
+	  }
+	  	result.put("list", list);
 	    result.put("status", "success");
 	}catch(Exception e) {
 		result.put("status", "failure");

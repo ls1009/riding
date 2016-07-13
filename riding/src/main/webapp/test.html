@@ -1,13 +1,45 @@
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    
-<script>
-$(function() {
-  $( "#datepicker1" ).datepicker({
-    dateFormat: 'yy-mm-dd'
-  });
-});
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/menu.css" type="text/css">
+
+<title></title>
+<style>
+</style>
+</head>
+
+<body>
+  
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript">
+loadBoardList();
+function loadBoardList() {
+	var weather;
+  $.getJSON("ajax/board/weather.do", function(result) {
+	  var list = result.list;
+	  for(var i in list) {
+      weather = result.weather;
+		  parser=new DOMParser();
+		  
+		  xmlDoc=parser.parseFromString(list[i],"text/xml");
+		  // 특정 테그를 기준으로 변수에 담는다
+		  var location = xmlDoc.getElementsByTagName('category');
+		  console.log(location[0].childNodes[0].nodeValue.split(" ")[0]);
+		  
+		  var data = xmlDoc.getElementsByTagName('data');
+		  console.log(data[0].getElementsByTagName('hour')[0].childNodes[0].nodeValue);
+		  console.log(data[0].getElementsByTagName('temp')[0].childNodes[0].nodeValue);
+		  console.log(data[0].getElementsByTagName('wfKor')[0].childNodes[0].nodeValue);
+		  console.log(data[0].getElementsByTagName('pop')[0].childNodes[0].nodeValue);
+	  }
+		
+  }); 
+}
+
 </script>
-    
-생년월일: <input type="text" id="datepicker1">
+
+</body>
+</html>
+
