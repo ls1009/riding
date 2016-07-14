@@ -81,6 +81,12 @@ public class DefaultCourseService implements CourseService {
   @Override
   public void putImg(String dbpath, int mcno) {
     HashMap<String,Object> paramMap = new HashMap<>();
+    
+    if (mcno == -1) {
+      Course course = courseDao.getLast(1);
+      mcno = course.getMcno();
+    }
+    
     paramMap.put("mcno", mcno);
     paramMap.put("dbpath", dbpath);
     courseDao.putImg(paramMap);
