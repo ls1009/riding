@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.google.gson.Gson;
 
@@ -31,36 +32,49 @@ public class CourseAjaxController {
   @Autowired CourseService courseService;
   
   int currentMcno = 0;
-  
-  @RequestMapping(value="Add", method=RequestMethod.POST, produces="application/json;charset=UTF-8")
-  @ResponseBody
-  public String add
-  (String title, String des, String distance, String time, String loca, HttpSession session, Member sessionMember)
-  throws ServletException, IOException {
+
+  @RequestMapping(value = "upload", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+  public String insert(MultipartHttpServletRequest request,HttpSession session, String title, String des, String distance, String time, String loca, Member sessionMember){
     Member member = null;
-	if((Member)session.getAttribute("loginUser") == null) {
-		member = sessionMember;
-	} else {
-		member = (Member)session.getAttribute("loginUser");
-	}
-    Course course = new Course();
-    course.setTitle(title);
-    course.setDes(des);
-    course.setDistance(distance);
-    course.setTime(time);
-    course.setLoca(loca);
-    course.setMno(member.getNo());
-    
-    HashMap<String,Object> result = new HashMap<>();
-    try {
-      courseService.add(course);
-      result.put("status", "success");
-    } catch (Exception e) {
-      e.printStackTrace();
-      result.put("status", "failure");
+    if((Member)session.getAttribute("loginUser") == null) {
+      member = sessionMember;
+    } else {
+      member = (Member)session.getAttribute("loginUser");
     }
     
-    return new Gson().toJson(result);
+    try {
+      Course course = new Course();
+      course.setTitle(title);
+      course.setDes(des);
+      course.setDistance(distance);
+      course.setTime(time);
+      course.setLoca(loca);
+      course.setMno(member.getNo());
+    
+      courseService.add(course);
+      
+      /*Map<String, MultipartFile> files = request.getFileMap();
+      CommonsMultipartFile cmf = (CommonsMultipartFile) files.get("uploadFile");*/
+      List<MultipartFile> cmf = request.getFiles("uploadFile");
+      if (cmf.size() == 1 && cmf.get(0).getOriginalFilename().equals("")) {
+      } else {
+        for (int i = 0; i < cmf.size(); i++) {
+          int extPoint = cmf.get(i).getOriginalFilename().lastIndexOf(".");
+          System.out.println(extPoint);
+          
+          String filename="";
+          filename =  System.currentTimeMillis() + cmf.get(i).getOriginalFilename().substring(extPoint);
+          PicturePath pp = new PicturePath();
+          String path = pp.getCoursePicPath() + filename;
+          String dbpath = "img/courseImg/" + filename;
+          courseService.putImg(dbpath, -1);
+          cmf.get(i).transferTo(new File(path));
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return "redirect:../../courseRead.html";
   }
   
   @RequestMapping(value="delete", produces="application/json;charset=UTF-8")
@@ -69,24 +83,24 @@ public class CourseAjaxController {
       throws ServletException, IOException {
     HashMap<String,Object> result = new HashMap<>();
     try {
-	      courseService.delete(no);
-	      result.put("status", "success");
-	      return new Gson().toJson(result);
+      courseService.delete(no);
+      result.put("status", "success");
+      return new Gson().toJson(result);
     } catch (Exception e) {
       result.put("status", "failure");
     }
     return new Gson().toJson(result);
   }
   
- @RequestMapping(value="deleteMap", produces="application/json;charset=UTF-8")
+  @RequestMapping(value="deleteMap", produces="application/json;charset=UTF-8")
   @ResponseBody
   public String deleteMap(int mcno) 
       throws ServletException, IOException {
     HashMap<String,Object> result = new HashMap<>();
     try {
-	      courseService.deleteMap(mcno);
-	      result.put("status", "success");
-	      return new Gson().toJson(result);
+      courseService.deleteMap(mcno);
+      result.put("status", "success");
+      return new Gson().toJson(result);
     } catch (Exception e) {
       result.put("status", "failure");
       return new Gson().toJson(result);
@@ -103,17 +117,17 @@ public class CourseAjaxController {
 			member = (Member)session.getAttribute("loginUser");
 		}
 	
-	System.out.println(member);
-	Course course = courseService.retrieve(no);
-	System.out.println(course);
-	HashMap<String,Object> result = new HashMap<>();
+		System.out.println(member);
+		Course course = courseService.retrieve(no);
+		System.out.println(course);
+		HashMap<String,Object> result = new HashMap<>();
 
-	if(course.getMno() == member.getNo()) {
-		result.put("status", "success");
-	}else {
-		result.put("status", "fail");
-	}
-	result.put("course", course);
+		if(course.getMno() == member.getNo()) {
+		  result.put("status", "success");
+		} else {
+		  result.put("status", "fail");
+		}
+		result.put("course", course);
     return new Gson().toJson(result);
   }
   
@@ -182,12 +196,12 @@ public class CourseAjaxController {
       throws ServletException, IOException {
 
 	  HashMap<String,Object> result = new HashMap<>();
-	try {
+	  try {
 	    courseService.putMap(ab, bb, -1);
 	    result.put("status", "success");
-	}catch(Exception e) {
-		result.put("status", "failure");
-	}
+	  } catch(Exception e) {
+	    result.put("status", "failure");
+	  }
     return new Gson().toJson(result);
   }
   
@@ -199,12 +213,12 @@ public class CourseAjaxController {
 	  HashMap<String,Object> result = new HashMap<>();
 	  List<MapDot> list = courseService.getMap(no);
 	  result.put("list", list);
-	try {
+	  try {
 	    result.put("status", "success");
-	}catch(Exception e) {
-		result.put("status", "failure");
-	}
-    return new Gson().toJson(result);
+	  } catch(Exception e) {
+	    result.put("status", "failure");
+	  }
+	  return new Gson().toJson(result);
   }
   
   @RequestMapping(value="changeMap", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
@@ -213,57 +227,27 @@ public class CourseAjaxController {
       throws ServletException, IOException {
 
 	  HashMap<String,Object> result = new HashMap<>();
-	try {
+	  try {
 	    courseService.putMap(ab, bb, mcno);
 	    result.put("status", "success");
-	}catch(Exception e) {
-		result.put("status", "failure");
-	}
-    return new Gson().toJson(result);
-  }
-
-  @RequestMapping(value="putImg", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
-  public String putImg(MultipartFile img, HttpSession session) 
-      throws ServletException, IOException {
-    
-    int mcno = currentMcno;
-    int extPoint = img.getOriginalFilename().lastIndexOf(".");
-      String filename = System.currentTimeMillis() + img.getOriginalFilename().substring(extPoint);  
-     
-      PicturePath pp = new PicturePath();
-    
-      String path =pp.getCoursePicPath()+filename;
-      
-      String dbpath ="img/courseImg/"+filename;
-    
-      HashMap<String,Object> result = new HashMap<>();
-      try {
-        courseService.putImg(dbpath, mcno);
-        List<String> imgPath = courseService.getImg(mcno);
-        img.transferTo(new File(path)); 
-        
-        result.put("list", imgPath);
-        result.put("status", "success");
-      
-      }catch(Exception e) {
-       result.put("status", "failure");
-      }
-      return "redirect:../../courseRead.html?no="+mcno;
+	  } catch(Exception e) {
+	    result.put("status", "failure");
+	  }
+	  return new Gson().toJson(result);
   }
   
   @RequestMapping(value="getImg", produces="application/json;charset=UTF-8", method=RequestMethod.GET)
   @ResponseBody
-  public String getImg(int no, HttpSession session) 
-      throws ServletException, IOException {
+  public String getImg(int no, HttpSession session) throws ServletException, IOException {
     HashMap<String,Object> result = new HashMap<>();
     try {
       List<String> imgPath = courseService.getImg(no);
     result.put("list", imgPath);
       result.put("status", "success");
-  }catch(Exception e) {
-    result.put("status", "failure");
-  }
-  return new Gson().toJson(result);
+    } catch(Exception e) {
+      result.put("status", "failure");
+    }
+    return new Gson().toJson(result);
   }
   
   @RequestMapping(value="courseNo", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
@@ -273,12 +257,11 @@ public class CourseAjaxController {
     currentMcno = no;
     HashMap<String,Object> result = new HashMap<>();
     try {
-    result.put("no", no);
+      result.put("no", no);
       result.put("status", "success");
-  }catch(Exception e) {
-    result.put("status", "failure");
-  }
+    } catch(Exception e) {
+      result.put("status", "failure");
+    }
     return new Gson().toJson(result);
   }
 }
-
