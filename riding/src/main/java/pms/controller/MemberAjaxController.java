@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -257,12 +258,32 @@ public class MemberAjaxController {
 		System.out.println("clientSession "+member);
 	} else {
 		tempMember = (Member)session.getAttribute("loginUser");
-    member = memberService.retrieveByNo(tempMember.getNo());
+		member = memberService.retrieveByNo(tempMember.getNo());
 		System.out.println("getAttribute "+member);
 	}
 	System.out.println(member);
 	System.out.println(sessionMember);
     return new Gson().toJson(member);
+  }
+  
+  @RequestMapping(value="getGpsTime",
+	      method=RequestMethod.GET,
+	      produces="application/json;charset=UTF-8")
+  @ResponseBody
+  public String getGpsTime(HttpSession session, Member sessionMember) throws ServletException, IOException {
+	  
+    HashMap<String,Object> result = new HashMap<>();
+    Date date = new Date();
+	Member member = null;
+	if((Member)session.getAttribute("loginUser") == null) {
+		member = sessionMember;
+	} else {
+		member = (Member)session.getAttribute("loginUser");
+	}
+	
+	result.put("time", date.getTime());
+	System.out.println(result.get("time"));
+    return new Gson().toJson(result);
   }
   
 }//

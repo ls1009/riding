@@ -338,8 +338,6 @@ $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
 
 
 $("#deleteBtn").click(function(event) {
-	
-	
 	$.dialog({
 		type : 'confirm',
 		onClickOk : function(){
@@ -358,10 +356,6 @@ $("#deleteBtn").click(function(event) {
 	  	},
 		contentHtml : '<center>정말 삭제하시겠습니까?</center>'
 		});
-	
-	
-	
-    
 });  
 $("#changeBtn").click(function(event) {
     location.href = "freeUpdate.html?bno="+bno+"&loca="+ploca+"&rbtype="+prbtype;
