@@ -286,7 +286,7 @@ $.getJSON("ajax/board/detail.do?bno=" + bno, function(result) {
     $("#mloca").val(board.mloca);
     $("#mday").val(moment(board.mday, 'MM/DD/YYYY').format().substr(0,10));
     $("#mtime").val(board.mtime);
-    $("#distance").val(board.distance);
+    $("#distance").val((board.distance/1000)+"KM");
     $("#time").val(board.time);
     $("#pnum").val(board.pnum);
     $("#ph").val(board.ph);
