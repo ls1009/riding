@@ -12,6 +12,8 @@ var zoomControl = new daum.maps.ZoomControl();
 map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 
+var resultDistance;
+
 var drawingFlag = false; // 선이 그려지고 있는 상태를 가지고 있을 변수입니다
 var moveLine; // 선이 그려지고 있을때 마우스 움직임에 따라 그려질 선 객체 입니다
 var clickLine // 마우스로 클릭한 좌표로 그려질 선 객체입니다
@@ -127,8 +129,8 @@ daum.maps.event.addListener(map, 'rightclick', function (mouseEvent) {
                 dots[dots.length-1].distance = null;    
             }
 
-            var distance = Math.round(clickLine.getLength()), // 선의 총 거리를 계산합니다
-                content = getTimeHTML(distance); // 커스텀오버레이에 추가될 내용입니다
+            resultDistance = Math.round(clickLine.getLength()), // 선의 총 거리를 계산합니다
+                content = getTimeHTML(resultDistance); // 커스텀오버레이에 추가될 내용입니다
                 
             // 그려진 선의 거리정보를 지도에 표시합니다
             showDistance(content, path[path.length-1]);  

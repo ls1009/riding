@@ -84,20 +84,16 @@
      	 <input id="title" class="form-control" placeholder="제목" type="text">
     	</div><br><br>
 			<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;장소&nbsp;&nbsp;&nbsp;</span>
+     	 <span class="input-group-addon">모임장소</span>
      	 <input id="mloca" class="form-control" placeholder="예) 오이도 빨간등대" type="text">
     	</div><br><br>
     	<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;날짜&nbsp;&nbsp;&nbsp;</span>
+     	 <span class="input-group-addon">모임날짜</span>
      	 <input id="mday" class="form-control" placeholder="예) 2016-11-11" type="text">
     	</div><br><br>
     	<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;&nbsp;&nbsp;시간&nbsp;&nbsp;&nbsp;</span>
+     	 <span class="input-group-addon">모임시간</span>
      	 <input id="mtime" class="form-control" placeholder="예) 오후 2시" type="text">
-    	</div><br><br>
-    	<div class="input-group">
-     	 <span class="input-group-addon">&nbsp;총&nbsp;거리&nbsp;</span>
-     	 <input id="distance" class="form-control" placeholder="예) 약 14km" type="text">
     	</div><br><br>
     	<div class="input-group">
      	 <span class="input-group-addon">소요시간</span>
@@ -182,12 +178,12 @@ $.extend({
 var ploca = $.getUrlVar('loca');
 var prbtype = $.getUrlVar('rbtype');
 $("#addBtn").click(function(event) {
-    $.post("ajax/board/Add.do", {
+     $.post("ajax/board/Add.do", {
         title: $("#title").val(),
         mloca: $("#mloca").val(),
         mtime: $("#mtime").val(),
         mday: $("#mday").val(),
-        distance: $("#distance").val(),
+        distance: resultDistance,
         time: $("#time").val(),
         pnum: $("#pnum").val(),
         loca: $.getUrlVar('loca'),
@@ -216,7 +212,7 @@ $("#addBtn").click(function(event) {
        				contentHtml : '<center>등록에 실패했습니다. </center>'
    			    });
 			}
-		}, "json",false);
+		}, "json",false); 
 
 	});
 			
