@@ -106,7 +106,7 @@ td {
       <form class="photoForm" action="ajax/board/putImg.do" method="post" enctype="multipart/form-data">
               <button id="photoBtn"  style="background-color: rgba( 0, 0, 0, 0.7 ); border:0;">저장</button>
               <label id="photoLabel" style="background-color: rgba( 0, 0, 0, 0.7 ); border:0; cursor: pointer;">
-                  사진 선택 <input type="file" name="img" style="display: none;" >
+                  사진 선택 <input type="file" name="img" style="display: none;" multiple data-min-file-count="1">
               </label>
               <input name="uploadFile" id="file-0a" class="file" type="file" multiple data-min-file-count="1">
       </form>

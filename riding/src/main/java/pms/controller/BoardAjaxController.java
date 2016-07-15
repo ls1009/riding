@@ -380,28 +380,32 @@ public class BoardAjaxController {
   }
   
 @RequestMapping(value="putImg", produces="application/json;charset=UTF-8", method=RequestMethod.POST)
-public String putImg(MultipartFile img, HttpSession session) 
+public String putImg(MultipartFile[] img, HttpSession session) 
     throws ServletException, IOException {
 	  int bno = currentBno;
-	  int extPoint = img.getOriginalFilename().lastIndexOf(".");
-    String filename = System.currentTimeMillis() + img.getOriginalFilename().substring(extPoint);	 
+	  PicturePath pp = new PicturePath();
+	  
+	for(int i=0; i< img.length; i++) {
+		int extPoint = img[i].getOriginalFilename().lastIndexOf(".");
+		String filename = System.currentTimeMillis() + img[i].getOriginalFilename().substring(extPoint);	 
+	
    
-    PicturePath pp = new PicturePath();
   
-    String path =pp.getBoardPicPath()+filename;
-    /*String path = servletContext.getRealPath("img/boardImg/" + filename);*/
-	  String dbpath ="img/boardImg/"+filename;	  
-  
-	  HashMap<String,Object> result = new HashMap<>();
-	  try {
-	    boardService.putImg(dbpath, bno);
-	    List<String> imgPath = boardService.getImg(bno);
-  		img.transferTo(new File(path));	
-  		result.put("list", imgPath);
-	    result.put("status", "success");
-  	} catch(Exception e) {
-  		result.put("status", "failure");
-  	}
+	    String path =pp.getBoardPicPath()+filename;
+	    /*String path = servletContext.getRealPath("img/boardImg/" + filename);*/
+		  String dbpath ="img/boardImg/"+filename;	  
+	  
+		  HashMap<String,Object> result = new HashMap<>();
+		  try {
+		    boardService.putImg(dbpath, bno);
+		    List<String> imgPath = boardService.getImg(bno);
+	  		img[i].transferTo(new File(path));	
+	  		result.put("list", imgPath);
+		    result.put("status", "success");
+	  	} catch(Exception e) {
+	  		result.put("status", "failure");
+	  	}
+	}
 	  return "redirect:../../freeRead.html?bno="+bno;
 }
   
