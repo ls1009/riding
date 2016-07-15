@@ -14,11 +14,12 @@
     <result column="DISTANCE"    property="distance"/>
     <result column="TIME"    property="time"/>
     <result column="LOCA"    property="loca"/>
+    <result column="AREA"    property="area"/>
   </resultMap>
   
   <insert id="insert" parameterType="Course">
-    insert into MCOURSE(MNO,TITLE,DES,CDT,DISTANCE,TIME,LOCA)
-    values(#{mno},#{title},#{des},now(),#{distance},#{time},#{loca})
+    insert into MCOURSE(MNO,TITLE,DES,CDT,DISTANCE,TIME,LOCA,AREA)
+    values(#{mno},#{title},#{des},now(),#{distance},#{time},#{loca},#{area})
   </insert>
   
   <update id="update" parameterType="Course">
@@ -28,7 +29,8 @@
       CDT=now(),
       DISTANCE=#{distance},
       TIME=#{time},
-      LOCA=#{loca}
+      LOCA=#{loca},
+      AREA=#{area}
     where MCNO=#{mcno}
   </update>
   
@@ -38,14 +40,14 @@
   </delete>
 
   <select id="selectList" resultMap="CourseMap" parameterType="map">
-    select  MCNO, MCTYPE, MNO, TITLE, DES, CDT, DISTANCE, TIME, LOCA 
+    select  MCNO, MCTYPE, MNO, TITLE, DES, CDT, DISTANCE, TIME, LOCA, AREA 
     from MCOURSE
     order by MCNO DESC
     limit #{startIndex}, #{length}
   </select>
   
   <select id="selectOne" resultMap="CourseMap" parameterType="int">
-    select c.MCNO,c.TITLE,c.DES,c.CDT,c.DISTANCE,c.TIME,c.LOCA,m.MNM
+    select c.MCNO,c.TITLE,c.DES,c.CDT,c.DISTANCE,c.TIME,c.LOCA,c.AREA,m.MNM
     from MCOURSE c inner join MEMBERS m 
     on c.mno=m.mno
     where MCNO=#{no}
@@ -85,4 +87,9 @@
   	from MCIMG
   	where MCNO=#{mcno}
   </select>
+  
+  <delete id="deleteImg" parameterType="int">
+  	delete from MCIMG
+  	where MCNO=#{no}
+  </delete>
 </mapper>

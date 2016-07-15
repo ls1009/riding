@@ -34,7 +34,7 @@ public class CourseAjaxController {
   int currentMcno = 0;
 
   @RequestMapping(value = "upload", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-  public String insert(MultipartHttpServletRequest request,HttpSession session, String title, String des, String distance, String time, String loca, Member sessionMember){
+  public String insert(MultipartHttpServletRequest request,HttpSession session, String title, String des, String distance, String time, String loca, String area, Member sessionMember){
     Member member = null;
     if((Member)session.getAttribute("loginUser") == null) {
       member = sessionMember;
@@ -49,6 +49,7 @@ public class CourseAjaxController {
       course.setDistance(distance);
       course.setTime(time);
       course.setLoca(loca);
+      course.setArea(area);
       course.setMno(member.getNo());
     
       courseService.add(course);
@@ -83,6 +84,8 @@ public class CourseAjaxController {
       throws ServletException, IOException {
     HashMap<String,Object> result = new HashMap<>();
     try {
+      courseService.deleteMap(no);
+      courseService.deleteImg(no);
       courseService.delete(no);
       result.put("status", "success");
       return new Gson().toJson(result);

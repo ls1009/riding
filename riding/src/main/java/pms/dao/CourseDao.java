@@ -14,6 +14,7 @@ public interface CourseDao {
   int update(Course course);
   int delete(int no);
   int deleteMap(int no);
+  int deleteImg(int no);
   int countAll();
 
   List<Course> selectListSchedule(HashMap<String, Object> paramMap);

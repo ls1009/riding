@@ -26,8 +26,8 @@ public class DefaultCourseService implements CourseService {
   }
   
   @Override
-  public void deleteMap(int mcno) {
-	  courseDao.deleteMap(mcno);
+  public void deleteMap(int no) {
+	  courseDao.deleteMap(no);
   }
   
   @Override
@@ -97,5 +97,10 @@ public class DefaultCourseService implements CourseService {
     HashMap<String,Object> paramMap = new HashMap<>();
     paramMap.put("mcno", mcno);
     return courseDao.getImg(paramMap);
+  }
+  
+  @Override
+  public void deleteImg(int no) {
+    courseDao.deleteImg(no);
   }
 }

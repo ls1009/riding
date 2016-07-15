@@ -12,6 +12,7 @@ public class Course {
   private String distance;
   private String time;
   private String loca;
+  private String area;
   
   public int getMcno() {
     return mcno;
@@ -67,5 +68,10 @@ public class Course {
   public void setLoca(String loca) {
     this.loca = loca;
   }
-  
+  public String getArea() {
+    return area;
+  }
+  public void setArea(String area) {
+    this.area = area;
+  }
 }
