@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="css/simple-lightbox.min.css" type="text/css">
 <link rel="stylesheet" href="css/dialog.css">
 
+<link rel="stylesheet" href="css/chromagallery.css">
+
 <title>Free Riding</title>
 <style>
 .col-md-3 {
@@ -106,36 +108,9 @@ td {
               <label id="photoLabel" style="background-color: rgba( 0, 0, 0, 0.7 ); border:0; cursor: pointer;">
                   사진 선택 <input type="file" name="img" style="display: none;" >
               </label>
+              <input name="uploadFile" id="file-0a" class="file" type="file" multiple data-min-file-count="1">
       </form>
-      
-      <center>
-        <!-- photo -->
-        <div id="slide">
-          <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:1180px; height:600px;">
-            <!-- Indicators -->
-            <ol id="dotList" class="carousel-indicators">
-            </ol>
-            <!-- Wrapper for slides -->
-            <div id="photoList" class="carousel-inner" role="listbox" >
-            </div>
-          </div>
-        </div>
-        </center>
-        
-      <!-- <div class="col-xs-5">
-        <p>작성자</p>
-        <input id="writer" class="form-control" type="text" placeholder=""
-          disabled>
-        <p>제목</p><input id="title" type="text" class="form-control"  disabled>
-        <p>장소</p><input id="mloca" type="text" class="form-control" disabled>
-        <p>날짜</p><input id="mday" type="text" class="form-control" disabled>
-        <p>시간</p><input id="mtime" type="text" class="form-control" disabled>
-        <p>총거리</p><input id="distance" type="text" class="form-control" disabled>
-        <p>예상 소요시간</p><input id="time" type="text" class="form-control" disabled>
-        <p>모집인원</p><input id="pnum" type="text" class="form-control" disabled>
-        <p>연락처</p><input id="ph" type="text" class="form-control" disabled>
-      </div> -->
-             
+
       <div class="form-group">
     <div class="col-md-3">
       <div class="input-group">
@@ -202,7 +177,13 @@ td {
         </div>
         
         <br><br><br>
+        <div class="content">
+          <div id="ld" class="chroma-gallery mygallery">
+          </div>
+        </div>
   </div>
+  
+  
   
   <!-- Modal -->
   <form>
@@ -243,6 +224,11 @@ td {
 <script type="text/javascript" src="js/menu.js"></script>
 <script type="text/javascript" src="js/simple-lightbox.min.js"></script> 
 <script src="js/dialog.js"></script>
+
+<script src="js/modernizr-chrg.min.js"></script>
+  <script src="js/masonry.min.js"></script>
+  <script src="js/chromagallery.js"></script>
+  
 <script type="text/javascript">
 $.extend({
     getUrlVars: function(){
@@ -275,6 +261,7 @@ $.getJSON("ajax/board/getImg.do?bno=" + bno, function(result) {
           var path = result.list;
           var ol = $("#dotList");
           var div = $("#photoList");
+          var div2 = $("#ld");
           
           $("<li data-target=\"#myCarousel\" data-slide-to=\"0\" class=\"active\">").appendTo(ol);
           $("<div class=\"item active\">").html("<img src=\"img/boardImg/main1.jpg\" style=\"width:1180px; height:600px;\">").appendTo(div);
@@ -282,6 +269,11 @@ $.getJSON("ajax/board/getImg.do?bno=" + bno, function(result) {
              $("<li data-target=\"#myCarousel\" data-slide-to='"+(i+1)+"' class=''>").appendTo(ol);
              $("<div class=\"item\">").html("<img src=\""+path[i]+"\"style=\"width:1180px; height:600px;\">").appendTo(div);
           }
+          
+          for (var j in path) {
+              $("<img src=\""+path[j]+"\">").appendTo(div2);
+           }
+          
     }else{
       $.dialog({
 		autoClose : 2500,
@@ -338,6 +330,8 @@ $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
 
 
 $("#deleteBtn").click(function(event) {
+	
+	
 	$.dialog({
 		type : 'confirm',
 		onClickOk : function(){
@@ -356,6 +350,10 @@ $("#deleteBtn").click(function(event) {
 	  	},
 		contentHtml : '<center>정말 삭제하시겠습니까?</center>'
 		});
+	
+	
+	
+    
 });  
 $("#changeBtn").click(function(event) {
     location.href = "freeUpdate.html?bno="+bno+"&loca="+ploca+"&rbtype="+prbtype;
@@ -432,7 +430,10 @@ $('#myModal').on('shown.bs.modal', function () {
 $('.carousel').carousel({
     interval : 2000
 })
-
+$(document).ready(function() 
+		{
+		    $(".mygallery").chromaGallery();
+		});
 /* $("#photoBtn").click(function(event){
   $.getJSON("ajax/board/putImg.do?bno="+no, function(result) {
        var list = result.list;
