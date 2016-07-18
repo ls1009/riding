@@ -135,8 +135,8 @@ public class CourseAjaxController {
   }
   
   @RequestMapping(value="update",
-		  method=RequestMethod.POST,
-		  produces="application/json;charset=UTF-8")
+		  method=RequestMethod.POST
+		  )
   @ResponseBody
   public String update(MultipartHttpServletRequest request, int mcno, String title, String des, String distance, String time, String loca, String area, HttpSession session, Member sessionMember) throws ServletException, IOException {
     Member member = null;
@@ -145,9 +145,10 @@ public class CourseAjaxController {
     } else {
       member = (Member)session.getAttribute("loginUser");
     }
-    System.out.println(mcno);
+
+    Course course = courseService.retrieve(mcno);
+    
     try {
-      Course course = new Course();
       course.setTitle(title);
       course.setDes(des);
       course.setDistance(distance);
