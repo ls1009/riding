@@ -40,8 +40,8 @@
   </delete>
 
   <select id="selectList" resultMap="CourseMap" parameterType="map">
-    select  MCNO, MCTYPE, MNO, TITLE, DES, CDT, DISTANCE, TIME, LOCA, AREA 
-    from MCOURSE
+    select  m.MCNO, m.MCTYPE, m.MNO, m.TITLE, m.DES, m.CDT, m.DISTANCE, m.TIME, m.LOCA, m.AREA, e.MNM 
+    from MCOURSE m INNER join MEMBERS e on m.MNO = e.MNO
     order by MCNO DESC
     limit #{startIndex}, #{length}
   </select>

@@ -138,24 +138,45 @@ public class CourseAjaxController {
 		  method=RequestMethod.POST,
 		  produces="application/json;charset=UTF-8")
   @ResponseBody
-  public String update(int mcno, String title, String des, String distance, String time, String loca, HttpSession session) throws ServletException, IOException {
-
-	  HashMap<String,Object> result = new HashMap<>();
-	  Course course = courseService.retrieve(mcno);
-
-	  course.setTitle(title);
-	  course.setDes(des);
-	  course.setDistance(distance);
-	  course.setTime(time);
-	  course.setLoca(loca);
-
-	  try {
-		  courseService.change(course);
-		  result.put("status", "success");
-	  } catch (Exception e) {
-		  result.put("status", "failure");
-	  }
-	  return new Gson().toJson(result);
+  public String update(MultipartHttpServletRequest request, int mcno, String title, String des, String distance, String time, String loca, String area, HttpSession session, Member sessionMember) throws ServletException, IOException {
+    Member member = null;
+    if((Member)session.getAttribute("loginUser") == null) {
+      member = sessionMember;
+    } else {
+      member = (Member)session.getAttribute("loginUser");
+    }
+    System.out.println(mcno);
+    try {
+      Course course = new Course();
+      course.setTitle(title);
+      course.setDes(des);
+      course.setDistance(distance);
+      course.setTime(time);
+      course.setLoca(loca);
+      course.setArea(area);
+      course.setMno(member.getNo());
+      
+      courseService.change(course);
+      
+      List<MultipartFile> cmf = request.getFiles("uploadFile");
+      if (cmf.size() == 1 && cmf.get(0).getOriginalFilename().equals("")) {
+      } else {
+        for (int i = 0; i < cmf.size(); i++) {
+          int extPoint = cmf.get(i).getOriginalFilename().lastIndexOf(".");
+          
+          String filename = "";
+          filename = System.currentTimeMillis() + cmf.get(i).getOriginalFilename().substring(extPoint);
+          PicturePath pp = new PicturePath();
+          String path = pp.getCoursePicPath() + filename;
+          String dbpath = "img/courseImg/" + filename;
+          courseService.putImg(dbpath, -1);
+          cmf.get(i).transferTo(new File(path));
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+	  return "redirect:../../courseRead.html?no" + mcno;
   }
 
   @RequestMapping(value="list", produces="application/json;charset=UTF-8")

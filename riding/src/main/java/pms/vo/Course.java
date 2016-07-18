@@ -13,7 +13,14 @@ public class Course {
   private String time;
   private String loca;
   private String area;
+  private String mnm;
   
+  public String getMnm() {
+    return mnm;
+  }
+  public void setMnm(String mnm) {
+    this.mnm = mnm;
+  }
   public int getMcno() {
     return mcno;
   }

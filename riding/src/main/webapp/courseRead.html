@@ -43,20 +43,21 @@
 	margin-top: 20px;
 }
 #des {
-	height: 300px;
+	height: 258px;
+	width: 600px;
+	position: absolute;
 }
 .title {
 	font-size: 50px;
+	margin-top: 50px;
+}
+.title2 {
+	font-size: 50px;
+	margin-top: 340px;
 }
 .sub {
 	font-size: 30px;
 }
-#inputloca {
-	margin-left: 10px;
-}
-/* .col-md-5 {
-	margin-right: 10px;
-} */
 #cos1 {
 	width: 1000px;
 }
@@ -69,6 +70,10 @@
 .input-group-addon {
 	background-color: #47a3da;
 	color: white;
+}
+.col-md-4 {
+	margin-left: 660px;
+	position: absolute;
 }
 </style>
 </head>
@@ -104,45 +109,42 @@
 	<p id="d1">Course Read</p>
 	<hr width=100px>
 
-	<div class="contents1"></div>
-	<div class="des"></div><br>
-	<div class="row">
-		<div class="col-md-5">
-			<div class="input-group" id="inputdistance">
-				<span class="input-group-addon">&nbsp;&nbsp;&nbsp;거리&nbsp;&nbsp;&nbsp;</span>
-				<input id="distance" class="form-control" type="text" disabled>
-			</div><br>
-		</div>
-		<div class="col-md-5">
-			<div class="input-group" id="inputtime">
-				<span class="input-group-addon">소요시간</span>
-				<input id="time" class="form-control" type="text" disabled>
-			</div><br>
-		</div>
-	</div><br><br><br>
-  <div class="col-md-11">
+	<div id="title"></div>
+	<div id="des"></div>
+	<div class="col-md-4">
+		<div class="input-group" id="inputarea">
+			<span class="input-group-addon">&nbsp;&nbsp;&nbsp;지&nbsp;역&nbsp;&nbsp;&nbsp;</span>
+			<input id="area" class="form-control" type="text" disabled>
+		</div><br><br>
+		<div class="input-group" id="inputdistance">
+			<span class="input-group-addon">&nbsp;&nbsp;&nbsp;거&nbsp;리&nbsp;&nbsp;&nbsp;</span>
+			<input id="distance" class="form-control" type="text" disabled>
+		</div><br><br>
+		<div class="input-group" id="inputtime">
+			<span class="input-group-addon">소요시간</span>
+			<input id="time" class="form-control" type="text" disabled>
+		</div><br><br>
 		<div class="input-group" id="inputloca">
-			<span class="input-group-addon">&nbsp;&nbsp;&nbsp;경로&nbsp;&nbsp;&nbsp;</span>
+			<span class="input-group-addon">&nbsp;&nbsp;&nbsp;경&nbsp;로&nbsp;&nbsp;&nbsp;</span>
 			<input id="loca" class="form-control" type="text" disabled>
-		</div><br>
-	</div><br><br><br>
+		</div><br><br>
+	</div>
 	
-	<div class="title">코스안내</div><hr width=1000px>
-	
-	<div id="map" style="width:1000px;height:400px;">
+	<div class="title2">코스안내</div><hr width=1280px>
+	<div id="map" style="width:1280px;height:400px;">
 		<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
 	</div><br>
 	
-	<div class="title">코스사진</div><hr width=1000px>
+	<div class="title">코스사진</div><hr width=1280px>
 	<div class="content">
 		<div id="ld" class="chroma-gallery mygallery"></div>
 	</div>
 	
 	<div>
-		<button id="update" type="button" class="btn btn-default btn pull-right">UPDATE</button>
+		<button id="update" type="button" class="btn btn-info btn pull-right">UPDATE</button>
 	</div>
 	<div>
-		<button id="delete" type="button" class="btn btn-default btn pull-right">DELETE</button>
+		<button id="delete" type="button" class="btn btn-info btn pull-right">DELETE</button>
 	</div>
 </div>
 
@@ -155,12 +157,6 @@
 <script src="js/modernizr-chrg.min.js"></script>
 <script src="js/masonry.min.js"></script>
 <script src="js/chromagallery.js"></script>
-
-<script>
-	$('.carousel').carousel({
-	   interval : 1700
-	});
-</script>
 <script type="text/javascript">
 $.extend({
     getUrlVars: function(){
@@ -182,11 +178,13 @@ var no = $.getUrlVar('no');
 
 $.getJSON("ajax/course/detail.do?no=" + no, function(result) {
 	var course = result.course;
-	$(".contents1").html("<div class=\"title\">" + course.title + "</div>" + "<hr width=1280px>"
-			              + "<div class=\"des\">" + course.des + "</div>");
+	$("#title").html("<div class=\"title\">" + course.title + "</div>" + "<hr width=1280px>");
+			              /* + "<div class=\"des\" style: \"width=800px;\">" + course.des + "</div>"); */
+	$("#des").html("<textarea id=\"des\" class=\"form-control\" disabled>" + course.des + "</textarea>");
 	$("#distance").val(course.distance);
 	$("#time").val(course.time);
 	$("#loca").val(course.loca);
+	$("#area").val(course.area);
 });
 
 $("#update").click(function(event) {
