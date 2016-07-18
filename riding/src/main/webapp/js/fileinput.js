@@ -324,7 +324,7 @@
         '   <div class="input-group-btn">\n' +
         '       {remove}\n' +
         '       {cancel}\n' +
-        /*'       {upload}\n' +*/
+        '       {upload}\n' +
         '       {browse}\n' +
         '   </div>\n' +
         '</div>';
