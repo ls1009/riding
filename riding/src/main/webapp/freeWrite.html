@@ -175,44 +175,52 @@ $.extend({
 });
 var ploca = $.getUrlVar('loca');
 var prbtype = $.getUrlVar('rbtype');
-$("#addBtn").click(function(event) {
-     $.post("ajax/board/Add.do", {
-        title: $("#title").val(),
-        mloca: $("#mloca").val(),
-        mtime: $("#mtime").val(),
-        mday: $("#mday").val(),
-        distance: resultDistance,
-        time: $("#time").val(),
-        pnum: $("#pnum").val(),
-        loca: $.getUrlVar('loca'),
-        rbtype: $.getUrlVar('rbtype')
-      }, function(result) {
-        if (result.status == "success") {
-	        	  var path = clickLine.getPath();
-							for ( var i in path) {
-								$.ajax({
-								    url: 'ajax/board/putMap.do',
-								    global: false,
-								    type: 'POST',
-								    data: {ab : path[i].ab,
-								        bb : path[i].bb},
-								    async: false, //blocks window close
-								    success: function() {
-								    	console.log("dot insert");
-								    }
-								});
-							}
-							location.href = "freeLocation.html?loca=" + ploca
-									+ "&rbtype=" + prbtype;
-			} else {
-				$.dialog({
-       				autoClose : 2500,
-       				contentHtml : '<center>등록에 실패했습니다. </center>'
-   			    });
-			}
-		}, "json",false); 
 
-	});
+$("#addBtn").click(function(event) {
+	console.log(dots[0]);
+	if (dots[0] == null) {
+		$.dialog({
+      autoClose : 2500,
+      contentHtml : '<center>자전거길을 등록해주세요. </center>'
+    });
+	} else {
+	     $.post("ajax/board/Add.do", {
+	        title: $("#title").val(),
+	        mloca: $("#mloca").val(),
+	        mtime: $("#mtime").val(),
+	        mday: $("#mday").val(),
+	        distance: resultDistance,
+	        time: $("#time").val(),
+	        pnum: $("#pnum").val(),
+	        loca: $.getUrlVar('loca'),
+	        rbtype: $.getUrlVar('rbtype')
+	      }, function(result) {
+	        if (result.status == "success") {
+		        	  var path = clickLine.getPath();
+								for ( var i in path) {
+									$.ajax({
+									    url: 'ajax/board/putMap.do',
+									    global: false,
+									    type: 'POST',
+									    data: {ab : path[i].ab,
+									        bb : path[i].bb},
+									    async: false, //blocks window close
+									    success: function() {
+									    	console.log("dot insert");
+									    }
+									});
+								}
+								location.href = "freeLocation.html?loca=" + ploca
+										+ "&rbtype=" + prbtype;
+				} else {
+					$.dialog({
+     				autoClose : 2500,
+     				contentHtml : '<center>등록에 실패했습니다. </center>'
+ 			    });
+				}
+			}, "json",false); 
+	}
+});
 			
 $("#cancel").click(function(event) {		
 	location.href= "freeLocation.html?loca=" + ploca + "&rbtype=" + prbtype;
