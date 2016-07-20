@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="css/menu.css" type="text/css">
 <link rel="stylesheet" href="css/mapApi.css" type="text/css">
 
+<link rel="stylesheet" href="css/dialog.css">
+<link rel="stylesheet" href="css/chromagallery.css">
+
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -184,11 +187,15 @@ table tr td:last-child {
 			<label class="col-md-4 control-label" for="textarea">사진 등록</label>
 			<div class="page-header"></div>
 				<input name="uploadFile" id="file-0a" class="file" type="file" multiple data-min-file-count="1">
-				<hr>
-			<br>
+				<hr><br>
+			
+			<label class="col-md-4 control-label" for="textarea">코스 사진</label>
+			<div class="content">
+				<div id="ld" class="chroma-gallery mygallery"></div>
+			</div><br>
 			
 			<div>
-				<button id="register" type="submit" class="btn btn-info btn pull-right">REGISTER</button>
+				<button id="update" type="submit" class="btn btn-info btn pull-right">UPDATE</button>
 			</div>
 			<div>
 				<button id="cancel" type="button" class="btn btn-info btn pull-right">CANCEL</button>
@@ -206,6 +213,11 @@ table tr td:last-child {
 <script src="bower_components/handlebars/handlebars.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
 <script type="text/javascript" src="js/mapApi.js" ></script>
+
+<script src="js/dialog.js"></script>
+<script src="js/modernizr-chrg.min.js"></script>
+<script src="js/masonry.min.js"></script>
+<script src="js/chromagallery.js"></script>
 <script type="text/javascript">
 $.extend({
     getUrlVars: function(){
@@ -282,7 +294,7 @@ $("#fileForm").submit(function(event) {
 	$.ajax({
 		url: 'ajax/course/update.do?mcno='+no,
 		type: 'POST',
-		data: {fd},
+		data: fd,
 		async: false,
 		cache: false,
 		contentType: false,
@@ -387,6 +399,26 @@ $.getJSON("ajax/course/getMap.do?no="+no, function(result) {
       window.alert("불러오기 실패입니다!");
       }
 }); 
+
+$.getJSON("ajax/course/getImg.do?no=" + no, function(result) {
+    if (result.status == "success") {
+          var path = result.list;
+          var div = $("#ld");
+          
+     		  for (var i in path) {
+     			  $("<img src=\"" + path[i] + "\">").appendTo(div	);
+     		  }
+    }else{
+    	$.dialog({
+    		autoClose: 2500,
+    		contentHtml: '<center>사진을 불러오지 못하였습니다</center>'
+    	});
+    }
+});
+
+$(document).ready(function() {
+	$(".mygallery").chromaGallery();
+});
 </script>
 </body>
 </html>

@@ -146,6 +146,7 @@ public class CourseAjaxController {
       member = (Member)session.getAttribute("loginUser");
     }
 
+    System.out.println(mcno);
     Course course = courseService.retrieve(mcno);
     
     try {
@@ -155,7 +156,6 @@ public class CourseAjaxController {
       course.setTime(time);
       course.setLoca(loca);
       course.setArea(area);
-      course.setMno(member.getNo());
       
       courseService.change(course);
       

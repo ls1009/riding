@@ -34,6 +34,10 @@
 	margin-right: 20px;
 	margin-bottom: 30px;
 }
+#list {
+	margin-right: 20px;
+	margin-bottom: 30px;
+}
 #site {
 	margin-top: 20px;
 	margin-right: 10px;
@@ -138,13 +142,16 @@
 	<div class="title">코스사진</div><hr width=1280px>
 	<div class="content">
 		<div id="ld" class="chroma-gallery mygallery"></div>
-	</div>
+	</div><br>
 	
 	<div>
 		<button id="update" type="button" class="btn btn-info btn pull-right">UPDATE</button>
 	</div>
 	<div>
 		<button id="delete" type="button" class="btn btn-info btn pull-right">DELETE</button>
+	</div>
+	<div>
+		<button id="list" type="button" class="btn btn-info btn pull-right">&nbsp;&nbsp;&nbsp;LIST&nbsp;&nbsp;&nbsp;</button>
 	</div>
 </div>
 
@@ -189,7 +196,7 @@ $.getJSON("ajax/course/detail.do?no=" + no, function(result) {
 
 $("#update").click(function(event) {
 	location.href = "courseUpdate.html?no=" + no;
-})
+});
 
 $("#delete").click(function(event) {
 	$.getJSON("ajax/course/delete.do?no=" + no, function(result) {
@@ -199,6 +206,10 @@ $("#delete").click(function(event) {
 			window.alert("삭제 실패입니다!");
 		}
 	});
+});
+
+$("#list").click(function(event) {
+	location.href = "course2.html";
 });
 
 $("#site").click(function(event) {

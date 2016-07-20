@@ -114,11 +114,15 @@ function courseList() {
 		$("#number").append(pageNo);
 		
 		for (var i in list) {
+			if (list[i].des.length >= 15) {
+				list[i].des = list[i].des.substr(0,15).concat("...");
+			}
+			
 			$("<tr>").html(
 				"<td class=\"col-md-3\" onclick=\"location.href='courseRead.html?no=" + list[i].mcno + 
 				"'\"" + "style=\"cursor:pointer\">" + list[i].title + "</td>" +
 				"<td class=\"col-md-3\" >" + list[i].area + "</td>" +
-				"<td class=\"col-md-3\" >" + list[i].des.substr(0,30).concat("...") + "</td>" +
+				"<td class=\"col-md-3\" >" + list[i].des + "</td>" +
 				"<td class=\"col-md-3\" >" + list[i].mnm + "</td>" +
 				"<td class=\"col-md-3\" >" + moment(list[i].cdt, 'MM/DD/YYYY').format().substr(0,10) + "</td>").appendTo(tbody);
 			}
