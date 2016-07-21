@@ -120,6 +120,7 @@
    <span id="prev" >prev</span>
    <span id="next">next</span>
    </center>
+   <br><br><br><br>
   </div>
   
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
@@ -163,10 +164,14 @@ $.extend({
 var ploca = $.getUrlVar('loca');
 var prbtype = $.getUrlVar('rbtype');
 var pageNo=1;
+var list;
+var totalPage;
+
 loadBoardList();
 function loadBoardList() {
   $.getJSON("ajax/board/list.do?loca="+ploca+"&rbtype="+prbtype+"&pageNo="+pageNo, function(result) {
       var list = result.list;
+      totalPage = result.totalPage;
       var tbody = $("#boardTable tbody");
       $("#number").empty();
       $("#number").append(pageNo);
@@ -190,17 +195,31 @@ function loadBoardList() {
 }
 $("#write").click(function(event) {location.href = 
   "freeWrite.html?loca="+ploca+"&rbtype="+prbtype});
-$("#next").click(function(event) {pageNo+=1;$("tbody").empty();
-loadBoardList();});
-$("#prev").click(function(event) {pageNo-=1;$("tbody").empty();
-loadBoardList();});
+  
+$("#next").click(function(event) {
+	console.log(totalPage);
+	if(totalPage > pageNo) {
+		pageNo+=1;
+		$("tbody").empty();
+	  loadBoardList();
+	}
+});
+
+
+$("#prev").click(function(event) {
+	if (pageNo >= 2 ) {
+		pageNo-=1;
+		$("tbody").empty();
+		loadBoardList();
+	}
+});
 
 $(".als-item").click(function(event) {
 	ploca = event.target.id; 
 	prbtype="free"; 
 	$("tbody").empty(); 
 	loadBoardList();
-	});
+});
 </script>
   
 </body>
