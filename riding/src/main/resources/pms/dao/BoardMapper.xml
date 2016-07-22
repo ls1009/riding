@@ -77,18 +77,20 @@
   </select>
   
   <select id="selectListSchedule" resultMap="BoardMap" parameterType="map">
-    select  BNO,TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
-    from RIDINGBOARD 
-    where MNO=#{no} and MDAY>=now() and RBTYPE=#{rbtype}
-    order by BNO DESC
+    select  b.BNO,b.TITLE,b.MLOCA,b.MTIME,b.MDAY,b.DISTANCE,b.TIME,b.PNUM,b.PH,
+            b.CDT,b.RBTYPE,b.MNO,b.LOCA 
+    from RIDINGBOARD b INNER join MEMBERLIST m on m.BNO = b.BNO
+    where m.MNO=#{no} and b.MDAY>=now() and b.RBTYPE=#{rbtype}
+    order by b.BNO DESC
     limit #{startIndex}, #{length}
   </select>
   
    <select id="selectListHistory" resultMap="BoardMap" parameterType="map">
-    select  BNO,TITLE,MLOCA,MTIME,MDAY,DISTANCE,TIME,PNUM,PH,CDT,RBTYPE,MNO,LOCA 
-    from RIDINGBOARD 
-    where MNO=#{no} and MDAY <![CDATA[ < ]]> now() and RBTYPE=#{rbtype}
-    order by BNO DESC
+    select  b.BNO,b.TITLE,b.MLOCA,b.MTIME,b.MDAY,b.DISTANCE,b.TIME,b.PNUM,b.PH,
+            b.CDT,b.RBTYPE,b.MNO,b.LOCA 
+    from RIDINGBOARD b INNER join MEMBERLIST m on m.BNO = b.BNO
+    where m.MNO=#{no} and b.MDAY <![CDATA[ < ]]> now() and b.RBTYPE=#{rbtype}
+    order by b.BNO DESC
     limit #{startIndex}, #{length}
   </select>
   
