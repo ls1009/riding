@@ -111,33 +111,57 @@
  <script src="js/dialog.js"></script>
  
  <script type="text/javascript">
- 
-$('#addBtn').click(function(event) {
-	$.dialog({
-	type : 'confirm',
-	onClickOk : function(){
-		$.post("ajax/member/add.do", {
-	           name: $("#name").val(),
-	           email: $("#email").val(),
-	           pw: $("#password").val(),
-	           ph: $("#ph").val(),
-	           gender: $("#gender").val()
-	         }, function(result) {
-	         	if (result.status == "success") {
-				 location.href = "intro.html";
-	           } else {
-	        	   $.dialog({
-	       			autoClose : 2500,
-	       			contentHtml : '<center>등록에 실패했습니다. </center>'
-       			   });
-	           } 
-	         }, "json");
-	},
-  	onClickCancel : function(){        		
-  		location.href = "intro.html";
-  	},
-	contentHtml : '<center>입력한 정보가 맞습니까?</center>'
+ $.extend({
+	    getUrlVars: function(){
+	        var vars = [], hash;
+	        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+	        for(var i = 0; i < hashes.length; i++) {
+	            hash = hashes[i].split('=');
+	            vars.push(hash[0]);
+	            vars[hash[0]] = hash[1];
+	        }
+	        return vars;
+	    },
+	    getUrlVar: function(name) {
+	        return $.getUrlVars()[name];
+	    }
 	});
+	var check = $.getUrlVar('check');
+	
+$('#addBtn').click(function(event) {
+	$.getJSON("http://192.168.0.62:8989/check.do?email=" + $("#email").val(), {
+  }, function(check) {
+	  if (check == 1) {
+				$.dialog({
+				type : 'confirm',
+				onClickOk : function(){
+					$.post("ajax/member/add.do", {
+				           name: $("#name").val(),
+				           email: $("#email").val(),
+				           pw: $("#password").val(),
+				           ph: $("#ph").val(),
+				           gender: $("#gender").val()
+				         }, function(result) {
+				         	if (result.status == "success") {
+				         		   location.href = "intro.html";
+				           } else {
+				        	   $.dialog({
+				       			 autoClose : 2500,
+				       			 contentHtml : '<center>등록에 실패했습니다. </center>'
+			       			   });
+				           } 
+				         }, "json");
+					},
+			  	onClickCancel : function(){        		
+			  		location.href = "intro.html";
+			  	},
+			    contentHtml : '<center>입력한 정보가 맞습니까?</center>'
+				}); 
+		  
+	  } else if (check == 2) {
+		  $('font[name=emailCheck]').html("이미 사용하고 있는 이메일 주소입니다");
+	  }
+  });
 });
   
  
@@ -168,9 +192,21 @@ $('#addBtn').click(function(event) {
     });
     $('input[id=email]').keyup(function() {
       if ($('input[id=email]').val() == '') {
+    	  $('font[name=emailCheck]').css('color','red');
         $('font[name=emailCheck]').html("필수 입력 사항입니다");
       } else {
         $('font[name=emailCheck]').html("");
+        
+        $.getJSON("http://192.168.0.62:8989/check.do?email=" + $("#email").val(), {
+        }, function(check) {
+          if (check == 1) {
+        	  $('font[name=emailCheck]').css('color','green');
+        	  $('font[name=emailCheck]').html("사용 가능한 이메일 주소입니다");
+          } else if (check == 2) {
+        	  $('font[name=emailCheck]').css('color','red');
+            $('font[name=emailCheck]').html("이미 사용하고 있는 이메일 주소입니다");
+          }
+        });
       }
     });
     $('input[id=password]').keyup(function() {

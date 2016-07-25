@@ -335,7 +335,7 @@ $("#changeBtn").click(function(event) {
 });
 $("#joinBtn").click(function(event) {
 	$.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
-		if (listNum <= result.list.length) {
+		if (listNum <= result.list.length && document.getElementById("j").textContent == "참여 신청") {
 			$.dialog({
 	      		autoClose : 2500,
 	      		contentHtml : '<center>참여 인원이 초과 되었습니다.</center>'
@@ -345,56 +345,56 @@ $("#joinBtn").click(function(event) {
 		      bno:bno
 		    }, function(result) {
 		      if (result.status == "success") {
-		              $.dialog({
-		  	      		autoClose : 2500,
-		  	      		contentHtml : '<center>참여 하였습니다.</center>'
-		  	       	  });
-		              document.getElementById("j").textContent="DISJOIN";
-		              $("tbody").empty();
-		              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
-		                  var member = result.list;
-		                  var tbody = $("tbody");
-		                  for (var i in member) {
-		                    $("<tr>")
-		                      .html(
-		                          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
-		                          "<td class=\"col-md-5\">" +member[i].name + "</td>" +
-		                          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
-		                      .appendTo(tbody);
-		                    $(document).ready(function () {
-		                        $(".img-responsive").simpleLightBox(); 
-		                    });
-		                  }
-		              });
-		            } else if (result.status == "cancel") {
-		              $.dialog({
-		  	      		autoClose : 2500,
-		  	      		contentHtml : '<center>참여 취소 하였습니다.</center>'
-		  	       	  });
-		              document.getElementById("j").textContent="JOIN";
-		              $("tbody").empty();
-		              $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
-		                  var member = result.list;
-		                  var tbody = $("tbody");
-		                  for (var i in member) {
-		                    $("<tr>")
-		                      .html(
-		                          "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
-		                          "<td class=\"col-md-5\">" +member[i].name + "</td>" +
-		                          "<td class=\"col-md-5\">" + member[i].gender + "</td>")
-		                      .appendTo(tbody);
-		                    $(document).ready(function () {
-		                        $(".img-responsive").simpleLightBox(); 
-		                    });
-		                  }
-		              });
-		            } else{
-		              $.dialog({
-		  	      		autoClose : 2500,
-		  	      		contentHtml : '<center>참여 실패입니다.</center>'
-		  	       	  });
-		            }
-		    }, "json",false);
+            $.dialog({
+	      		autoClose : 2500,
+	      		contentHtml : '<center>참여 하였습니다.</center>'
+	       	  });
+            document.getElementById("j").textContent="참여 취소";
+            $("tbody").empty();
+            $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+                var member = result.list;
+                var tbody = $("tbody");
+                for (var i in member) {
+                  $("<tr>")
+                    .html(
+                        "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
+                        "<td class=\"col-md-5\">" +member[i].name + "</td>" +
+                        "<td class=\"col-md-5\">" + member[i].gender + "</td>")
+                    .appendTo(tbody);
+                  $(document).ready(function () {
+                      $(".img-responsive").simpleLightBox(); 
+                  });
+                }
+            });
+          } else if (result.status == "cancel") {
+            $.dialog({
+	      		autoClose : 2500,
+	      		contentHtml : '<center>참여 취소 하였습니다.</center>'
+	       	  });
+            document.getElementById("j").textContent="참여 신청";
+            $("tbody").empty();
+            $.getJSON("ajax/member/memberList.do?bno=" + bno, function(result) {
+                var member = result.list;
+                var tbody = $("tbody");
+                for (var i in member) {
+                  $("<tr>")
+                    .html(
+                        "<td class=\"col-md-1\">" + "<center><img width=30 height=30 id='thum' src='"+ member[i].thumimg + "'class='img-responsive'/></center>" + "</td>" +
+                        "<td class=\"col-md-5\">" +member[i].name + "</td>" +
+                        "<td class=\"col-md-5\">" + member[i].gender + "</td>")
+                    .appendTo(tbody);
+                  $(document).ready(function () {
+                      $(".img-responsive").simpleLightBox(); 
+                  });
+                }
+            });
+          } else{
+            $.dialog({
+	      		autoClose : 2500,
+	      		contentHtml : '<center>참여 실패입니다.</center>'
+	       	  });
+          }
+	    }, "json",false);
 		}
 	});
 });
