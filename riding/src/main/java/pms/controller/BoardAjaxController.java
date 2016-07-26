@@ -178,7 +178,7 @@ public class BoardAjaxController {
     if (pageNo > totalPage) { // 가장 큰 페이지 번호를 넘지 않게 한다.
       pageNo = totalPage;
     }
-    
+    System.out.println(pageNo);
     if (pageSize < 5) { // 최소 3개
       pageSize = 5; 
     } else if (pageSize > 50) { // 최대 50개 
