@@ -110,6 +110,7 @@ table tr td:last-child {
 .image-preview-input-title {
     margin-left:2px;
 }
+
 </style>
 </head>
 <body>
@@ -131,7 +132,7 @@ table tr td:last-child {
     <div id="upmenu2">
       <nav id="nav-1">
         <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
-        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='course2.html'">Course</span>
         <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
       </nav>
     </div>  
@@ -139,8 +140,6 @@ table tr td:last-child {
 </header>
 
 <div id="container">
-	<button id="site" type="button" class="btn btn-info">사이트 추천코스</button>
-	<button id="user" type="button" class="btn btn-info">사용자 추천코스</button>
 	<p id="d1">Course Write</p>
 	<hr width=100px>
 	<br>
@@ -193,10 +192,10 @@ table tr td:last-child {
 			<br>
 				
 			<div>
-				<button id="register" type="submit" class="btn btn-info btn pull-right">REGISTER</button>
+				<button id="register" type="submit" class="btn btn-info btn pull-right">등록</button>
 			</div>
 			<div>
-				<button id="cancel" type="button" class="btn btn-info btn pull-right">CANCEL</button>
+				<button id="cancel" type="button" class="btn btn-info btn pull-right">취소</button>
 			</div>
 		</form>
 		
@@ -249,9 +248,6 @@ $("#cancel").click(function(event) {
 	location.href = "course2.html";
 });
 
-$("#site").click(function(event) {
-	location.href = "course.html";
-});
 $("#user").click(function(event) {
 	location.href = "course2.html";
 });

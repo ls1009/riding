@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="css/menu.css" type="text/css">
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-
+<link rel="stylesheet" href="slide/default.css" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
 <title>course2</title>
@@ -67,11 +67,47 @@
 </header>
 
 <div id="container">
-<button id="site" type="button" class="btn btn-info">사이트 추천코스</button>
-<button id="user" type="button" class="btn btn-info">사용자 추천코스</button>
+
+<p id="d1">사이트 추천코스</p>
+  <hr width=100px>
+  <br>
+
+  <div id="container">
+    <div class="flexslider">
+      <ul class="slides">
+        <li><img src="img/locationImg/인천.jpg"
+          onclick="location.href='course1.html'" />
+          <div class="flex-caption">
+            <h3>경인 아라 뱃길</h3>
+            <p>국토종주의 출발지이고 인천 바다냄새를 맡으며 즐길수 있는 라이딩 코스</p>
+          </div></li>
+
+        <li><img src="img/locationImg/부산.jpg" onclick='popup("mapImg/map1.JPG")' />
+          <div class="flex-caption">
+            <h3>부산 야경관람 라이딩</h3>
+            <p>부산 온천천의 강변길을따라 아름다운 야경을 보면서 즐길수 있는 라이딩 코스</p>
+          </div></li>
+
+        <li><img src="img/locationImg/제주.jpg" onclick='popup("mapImg/map1.JPG")' />
+          <div class="flex-caption">
+            <h3>제주 환상 자전거길</h3>
+            <p>총거리 234km 제주의 해안을 마주하고 달리고 관광도 할수 있는 코스</p>
+          </div></li>
+
+        <li><img src="img/locationImg/서울.jpg" onclick='popup("mapImg/map1.JPG")' />
+          <div class="flex-caption">
+            <h3>아라 한강 자전거길</h3>
+            <p>가장 많은 자전거 라이더들이 이용하는 곳이고 시민공원에서 가족과 휴식도 할수 있는 코스</p>
+          </div></li>
+      </ul>
+    </div>
+  </div>
+  <span id="responsiveFlag"></span>
+  
+  <br><br><br><br><br><br>
+
 <p id="d1">사용자 추천코스</p>
-<hr width=100px>
-<br></div>
+<hr width=100px style="color:#47a3da">
 
 <div id="container">
 	<table id="courseTable" class="table table-hover" style="table-layout:fixed;">
@@ -95,10 +131,67 @@
 	</center>
 </div>
 
+<br><br><br><br><br><br>
+</div>
+
 <script src="bower_components/moment/moment.js"></script>      
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/handlebars/handlebars.min.js"></script>
 <script type="text/javascript" src="js/menu.js"></script>
+
+<script src="slide/jquery.flexslider-min.js"></script>
+<script src="slide/css3-mediaqueries.js"></script>
+<script src="slide/kwiks.js"></script>
+  
+<script>
+
+  var Main = Main || {};
+
+  jQuery(window).load(function() {
+    window.responsiveFlag = jQuery('#responsiveFlag').css('display');
+    Main.gallery = new Gallery();
+
+    jQuery(window).resize(function() {
+      Main.gallery.update();
+    });
+  });
+
+  function Gallery() {
+    var self = this, container = jQuery('.flexslider'), clone = container
+        .clone(false);
+
+    this.init = function() {
+      if (responsiveFlag == 'block') {
+        var slides = container.find('.slides');
+
+        slides.kwicks({
+          max : 500,
+          spacing : 0
+        }).find('li > a').click(function() {
+          return false;
+        });
+      } else {
+        container.flexslider();
+      }
+    }
+    this.update = function() {
+      var currentState = jQuery('#responsiveFlag').css('display');
+
+      if (responsiveFlag != currentState) {
+
+        responsiveFlag = currentState;
+        container.replaceWith(clone);
+        container = clone;
+        clone = container.clone(false);
+
+        this.init();
+      }
+    }
+
+    this.init();
+  }
+</script>  
+  
 <script type="text/javascript">
 $("#write").click(function(event) {location.href = "courseWrite.html"});
 
@@ -147,5 +240,6 @@ $("#user").click(function(event) {
 	location.href = "course2.html";
 });
 </script>
+
 </body>
 </html>

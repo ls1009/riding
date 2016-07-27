@@ -112,6 +112,10 @@ table tr td:last-child {
 .image-preview-input-title {
     margin-left:2px;
 }
+
+#user{
+  margin-left: 14%;
+}
 </style>
 </head>
 <body>
@@ -133,7 +137,7 @@ table tr td:last-child {
     <div id="upmenu2">
       <nav id="nav-1">
         <span class="link-1" onclick="location.href='freeLocation.html'">Riding</span>
-        <span class="link-1" onclick="location.href='course.html'">Course</span>
+        <span class="link-1" onclick="location.href='course2.html'">Course</span>
         <span class="link-1" onclick="location.href='myInfo.html'">My Riding</span>
       </nav>
     </div>  
@@ -141,8 +145,7 @@ table tr td:last-child {
 </header>
 
 <div id="container">
-	<button id="site" type="button" class="btn btn-info">사이트 추천코스</button>
-	<button id="user" type="button" class="btn btn-info">사용자 추천코스</button>
+	<button id="user" type="button" class="btn btn-info">목록</button>
 	<p id="d1">Course Update</p>
 	<hr width=100px>
 	<br>
@@ -182,11 +185,10 @@ table tr td:last-child {
 			<label class="col-md-4 control-label" for="textarea">코스 안내</label>
 			<div id="map" style="width:827px;height:350px;">
 				<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=abd3c171a7ac3dd4f40ddff3e12ac79b"></script>
-			</div><br>
+			</div><br><br>
 			
 			<label class="col-md-4 control-label" for="textarea">사진 등록</label>
-			<div class="page-header"></div>
-				<input name="uploadFile" id="file-0a" class="file" type="file" multiple data-min-file-count="1">
+				<input name="uploadFile" id="file-0a" class="file" type="file" multiple >
 				<hr><br>
 			
 			<label class="col-md-4 control-label" for="textarea">코스 사진</label>
@@ -195,10 +197,10 @@ table tr td:last-child {
 			</div><br>
 			
 			<div>
-				<button id="update" type="submit" class="btn btn-info btn pull-right">UPDATE</button>
+				<button id="update" type="submit" class="btn btn-info btn pull-right">수정완료</button>
 			</div>
 			<div>
-				<button id="cancel" type="button" class="btn btn-info btn pull-right">CANCEL</button>
+				<button id="cancel" type="button" class="btn btn-info btn pull-right">취소</button>
 			</div>
 		</form>
 		
@@ -300,6 +302,14 @@ $("#fileForm").submit(function(event) {
 		contentType: false,
 		processData: false,
 		success: function(data) {
+			$.post("ajax/course/update.do", {
+			    mcno: no,
+			    title: $("#title").val(),
+			    des: $("#des").val(),
+			    distance: $("#distance").val(),
+			    time: $("#time").val(),
+			    loca: $("#loca").val()
+			  });
 			var path = clickLine.getPath();
 			for (var i in path) {
 				$.ajax({
@@ -337,9 +347,6 @@ $("#cancel").click(function(event) {
 	location.href = "course2.html";
 });
 
-$("#site").click(function(event) {
-	location.href = "course.html";
-});
 $("#user").click(function(event) {
 	location.href = "course2.html";
 });
