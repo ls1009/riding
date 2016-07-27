@@ -230,8 +230,8 @@ $("#fileForm").submit(function(event){
 						url: 'ajax/course/putMap.do',
 						global: false,
 						type: 'POST',
-						data: {ab: path[i].ab,
-									 bb: path[i].bb},
+						data: {ab: path[i].bb,
+									 bb: path[i].cb},
 						async: false,
 						success: function() {
 							console.log("dot insert");

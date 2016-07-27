@@ -202,11 +202,12 @@ $("#addBtn").click(function(event) {
 									    url: 'ajax/board/putMap.do',
 									    global: false,
 									    type: 'POST',
-									    data: {ab : path[i].ab,
-									        bb : path[i].bb},
+									    data: {ab : path[i].bb,
+									        bb : path[i].cb},
 									    async: false, //blocks window close
 									    success: function() {
 									    	console.log("dot insert");
+									    	console.log(path[i]);
 									    }
 									});
 								}
