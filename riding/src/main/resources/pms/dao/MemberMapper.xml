@@ -20,8 +20,8 @@
   </resultMap>
   
   <insert id="insert" parameterType="Member">
-    insert into MEMBERS(MNM,EMAIL,PW,PH,GEN)
-    values(#{name},#{email},#{pw},#{ph},#{gender})
+    insert into MEMBERS(MNM,EMAIL,PW,PH,GEN,IMGLO,THIMGLO)
+    values(#{name},#{email},#{pw},#{ph},#{gender},#{img},#{thumimg})
   </insert>
   
   <update id="update" parameterType="Member">

@@ -44,6 +44,8 @@ public class MemberAjaxController {
     member.setPw(pw);
     member.setPh(ph);
     member.setGender(gender);
+    member.setImg("img/memberImg/base.JPG");
+    member.setThumimg("img/memberImg/thum/base.JPG");
     HashMap<String,Object> result = new HashMap<>();
     try {
       memberService.add(member);
