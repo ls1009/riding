@@ -207,7 +207,7 @@
   width: 100%;
   border: 2px solid #ebd3bd;
   background: transparent;
-  color: #b09a86;
+  color: white;
   font-weight: 300;
   font-size: 2.2em;
 }
@@ -215,7 +215,7 @@
 .content-style-form input[type="text"]:focus,
 .content-style-form input[type="password"]:focus {
   border-color: #e75854;
-  color: #e75854;
+  color: white;
 }
 
 .content-style-form input:focus {
